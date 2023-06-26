@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.cover, name = 'cover'),
     path('registration/login/', views.login, name = 'login'),
     path('registration/signup/', views.signup, name = 'signup'),
+    path("registration/logout/", views.logout, name="logout"),
     path('calendar/<int:user_pk>', views.calendar, name='calendar'),
 ]

@@ -21,6 +21,10 @@ def login(request):
         return render(request, 'registration/login.html', {"error":error})
     return render(request, 'registration/login.html')
 
+def logout(request):
+    auth.logout(request)
+    return redirect('cover')
+
 def signup(request):
     if request.method == 'POST':
         username = request.POST['id']
