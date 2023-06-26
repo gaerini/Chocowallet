@@ -13,7 +13,7 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('home')
+            return redirect('cover')
         error = "아이디 또는 비밀번호가 틀립니다"
         return render(request, 'registration/login.html', {"error":error})
     return render(request, 'registration/login.html')
@@ -32,5 +32,8 @@ def signup(request):
         new_user = User.objects.create_user(username=username, password=password)
         auth.login(request, new_user)
 
-        return redirect('home')
+        return redirect('cover')
     return render(request, 'registration/signup.html')
+
+def cover(request):
+    return render(request, 'cover.html')

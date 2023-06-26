@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'baseStyle.css' %}"/>
 {% endblock css %}
 
-{% block content %}
+{% block container %}
 <div class='signup'>
     <form method='POST'>
         {% csrf_token %}
@@ -24,4 +24,4 @@
         </div>
     </form>
 </div>
-{% endblock content %}
+{% endblock container %}
