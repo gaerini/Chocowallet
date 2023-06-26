@@ -6,69 +6,105 @@
 {% endblock css %}
 
 {% block container %}
-<div class="calendar">
-  <div class="calendar_header">
-      <div class="calendar_nav">
-          <button class="nav-btn go-prev">&lt;</button>
-          <span class="year"></span>년
-          <span class="month"></span>월
-          <!-- <button class="nav-btn go-today">오늘로 가기</button> -->
-          <button class="nav-btn go-next">&gt;</button>
-      </div>
-  </div>
-  <div class="calendar_main">
-      <div class="days">
-          <div class="day">일</div>
-          <div class="day">월</div>
-          <div class="day">화</div>
-          <div class="day">수</div>
-          <div class="day">목</div>
-          <div class="day">금</div>
-          <div class="day">토</div>
-      </div>
-      <div class="dates"></div>
-  </div>
 
-  <!-- 예약 창 -->
-  <div class="resv-wrapper">
-      <div class="resv-bg">
-          <button class="resv-close">X</button>
-          <div class="resv_info">
-              <div class="resv_ym">
-                  <span class="resv-year">2021</span>년
-                  <span class="resv-month">05</span>월
-                  <span class="resv-day">11</span>일
-              </div>
-              <div class="resv-remain">
-                  <span>1</span>자리 남음
-              </div>
-              <h3>
-                  예약자 목록
-              </h3>
-              <div class="resv-list">  
-                  <p>Heo Sang <span>12:30</span></p>
-                  <p>Sang Won <span>12:30</span></p>
-                  <p>Heo Won <span>12:30</span></p>
-              </div>
-              <h3>
-                  프로그램 목록
-              </h3>
-              <div class="resv-event">
-                  <p>EVNET 1 <span>12:30</span></p>
-                  <p>EVNET 2 <span>14:30</span></p>
-                  <p>EVNET 3 <span>17:30</span></p>
-              </div>
-          </div>
-          <div class="resv_set">
-              <input class="resv_set time" type="time" name="" id="">
-              <button class="resv_btn purchase">예약</button>
-              <button class="resv_btn cancel">예약취소</button>
-          </div>
-      </div>
-  </div>
-  
-</div>
-<script src="{% static 'js/calendar.js' %}"></script>
-<script src="{% static 'js/reserve.js' %}"></script>
+{% for event in events.all %}
+{% if user.is_authenticated and user.pk == event.author.pk %}
+    <div class="calendar">
+    <div class="calendar_header">
+        <div class="calendar_nav">
+            <button class="nav-btn go-prev">&lt;</button>
+            <span class="year"></span>년
+            <span class="month"></span>월
+            <!-- <button class="nav-btn go-today">오늘로 가기</button> -->
+            <button class="nav-btn go-next">&gt;</button>
+        </div>
+    </div>
+    <div class="calendar_main">
+        <div class="days">
+            <div class="day">일</div>
+            <div class="day">월</div>
+            <div class="day">화</div>
+            <div class="day">수</div>
+            <div class="day">목</div>
+            <div class="day">금</div>
+            <div class="day">토</div>
+        </div>
+        <div class="dates"></div>
+    </div>
+    
+    <!-- 예약 창 -->
+    <div class="resv-wrapper">
+        <div class="resv-bg">
+            <button class="resv-close">X</button>
+            <div class="resv_info">
+                <div class="resv_ym">
+                    <span class="resv-year">2021</span>년
+                    <span class="resv-month">05</span>월
+                    <span class="resv-day">11</span>일
+                </div>
+                <div class="resv-remain">
+                    <span>1</span>자리 남음
+                </div>
+                <h3>
+                    예약자 목록
+                </h3>
+                <div class="resv-list">  
+                    <p>Heo Sang <span>12:30</span></p>
+                    <p>Sang Won <span>12:30</span></p>
+                    <p>Heo Won <span>12:30</span></p>
+                </div>
+                <h3>
+                    프로그램 목록
+                </h3>
+                <div class="resv-event">
+                    <p>EVNET 1 <span>12:30</span></p>
+                    <p>EVNET 2 <span>14:30</span></p>
+                    <p>EVNET 3 <span>17:30</span></p>
+                </div>
+            </div>
+            <div class="resv_set">
+                <input class="resv_set time" type="time" name="" id="">
+                <button class="resv_btn purchase">예약</button>
+                <button class="resv_btn cancel">예약취소</button>
+            </div>
+        </div>
+    </div>
+    <li>
+        <span>{{event.content}}</span>
+    </li>
+    
+    </div>
+    <script src="{% static 'js/calendar.js' %}"></script>
+    <script src="{% static 'js/reserve.js' %}"></script> 
+
+    {% else %}
+    <p>권한 없음</p>
+    {% endif %}
+
+{% endfor %}
+
+{% if events_cnt == 0 %}
+<form action="" method="post">
+    {% csrf_token %}
+    <div>
+        <label for="content">할일</label>
+        <input
+          type="content"
+          id="content"
+          name="content"
+          placeholder="일정을 입력해주세요."
+        />
+    </div>
+    <div>
+        <label for="cost">금액</label>
+        <input type="number" id="cost" name="cost" placeholder="금액을 입력해주세요"/>
+    </div>
+    <div>
+        <label for="date">날짜</label> <!--여기 고쳐야함-->
+        <input type="date" id="date" name="date" placeholder="날짜를 선택해주세요"/>
+    </div>
+    <button type="submit">작성하기</button>
+</form>
+{% endif %}
 
 {% endblock container %}
