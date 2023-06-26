@@ -2,7 +2,7 @@
 
 {% block css %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'loginStyle.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'baseStyle.css' %}">
 {% endblock css %}
 
 {% block container %}
@@ -20,7 +20,7 @@
         </div>
         <div class='loginBtn'>
             <button type='submit'>로그인</button>
-            <a href="{% url 'signup' %}">회원가입하러 가기</a>
+            <a href="{% url 'signup' %}">회원가입</a>
         </div>
     </form>
 </div>

@@ -51,12 +51,14 @@ def calendar(request, user_pk):
     
     if request.method == 'POST':
         Event.objects.create(
-            author=user,
+            author=request.user,
             content=request.POST['content'],
-            date=datetime(request.POST['date']),
+            date= datetime(request.POST['date']),
             cost = request.POST['cost'],
         )
     
-    events = Event.objects.get(author=user.id)
+    events = Event.objects.filter(author=user.id)
 
-    return render(request, 'calendar.html', {"events":events})
+    events_cnt = events.count
+
+    return render(request, 'calendar.html', {"events":events, "events_cnt":events_cnt})
