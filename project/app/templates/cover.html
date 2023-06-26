@@ -8,12 +8,15 @@
 {% block container %}
     <img src="{% static 'chocwallet_logo.png' %}"/>
     {% if user.is_authenticated %}
-    <div class="navbar__menu__item">안녕하세요, {{user.username}}님</div>
+    <span class="navbar__menu__item">안녕하세요, {{user.username}}님</span>
     <div class="button-container">
         <div class="button">
             <a href="{% url 'logout' %}">로그아웃</a>
         </div>
     </div>
+
+    <a href="{% url 'calendar' user.pk %}">캘린더</a>
+>>>>>>> main
     {% else %}
     <div class="button-container">
         <div class="button">
