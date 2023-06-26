@@ -6,12 +6,22 @@
 {% endblock css %}
 
 {% block container %}
+    <img src="{% static 'chocwallet_logo.png' %}"/>
     {% if user.is_authenticated %}
-    <span class="navbar__menu__item">안녕하세요, {{user.username}}님</span>
-    <a href="{% url 'logout' %}">로그아웃</a>
+    <div class="navbar__menu__item">안녕하세요, {{user.username}}님</div>
+    <div class="button-container">
+        <div class="button">
+            <a href="{% url 'logout' %}">로그아웃</a>
+        </div>
+    </div>
     {% else %}
-    <a href="{% url 'login' %}" >로그인하러 가기</a>
-    <a href="{% url 'signup' %}">회원가입하러 가기</a>
+    <div class="button-container">
+        <div class="button">
+            <a href="{% url 'login' %}">로그인</a>
+        </div>
+        <div class="button">
+            <a href="{% url 'signup' %}">회원가입</a>
+        </div>
+    </div>
     {% endif %}
-    <img src = "{% static 'chocwallet_logo.png' %}"/>
 {% endblock container %}
