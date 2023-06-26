@@ -57,6 +57,6 @@ def calendar(request, user_pk):
             cost = request.POST['cost'],
         )
     
-    events = Event.objects.get(author=user)
+    events = Event.objects.get(author=user.id)
 
     return render(request, 'calendar.html', {"events":events})

@@ -6,6 +6,7 @@
 {% endblock css %}
 
 {% block container %}
+{% comment %} {% if user.is_authenticated and user.pk == users.author.pk%} {% endcomment %}
 <div class="calendar">
   <div class="calendar_header">
       <div class="calendar_nav">
@@ -70,5 +71,5 @@
 </div>
 <script src="{% static 'calendar.js' %}"></script>
 <script src="{% static 'reserve.js' %}"></script>
-
+{% comment %} {% endif %} {% endcomment %}
 {% endblock container %}
