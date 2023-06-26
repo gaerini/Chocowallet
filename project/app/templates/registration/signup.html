@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'baseStyle.css' %}"/>
+{% endblock css %}
+
+{% block content %}
+<div class='signup'>
+    <form method='POST'>
+        {% csrf_token %}
+        {% if error %}
+        <p>{{error}}</p>
+        {% endif %}
+        <div class='idpwInput'>
+            <span>ID </span>
+            <input type='text' name='id'>
+            <span>PW </span>
+            <input type='text' name='pw'>
+        </div>
+        <div class='signupBtn'>
+            <button type='submit'>회원가입</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

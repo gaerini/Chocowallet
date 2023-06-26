@@ -1,0 +1,27 @@
+{% extends 'base.html'%}
+
+{% block css %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'loginStyle.css' %}">
+{% endblock css %}
+
+{% block container %}
+<div class='login'>
+    <form method='POST'>
+        {% csrf_token %}
+        {% if error %}
+        <p>{{error}}</p>
+        {% endif %}
+        <div class='idpwInput'>
+            <span>ID </span>
+            <input type='text' name='id'>
+            <span>PW </span>
+            <input type='text' name='pw'>
+        </div>
+        <div class='loginBtn'>
+            <button type='submit'>로그인</button>
+            <a href='http://127.0.0.1:8000/signup/'>회원가입</a>
+        </div>
+    </form>
+</div>
+{% endblock container %}
