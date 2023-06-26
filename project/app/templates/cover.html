@@ -9,6 +9,7 @@
     {% if user.is_authenticated %}
     <span class="navbar__menu__item">안녕하세요, {{user.username}}님</span>
     <a href="{% url 'logout' %}">로그아웃</a>
+    <a href="{% url 'calendar' user.pk %}">캘린더</a>
     {% else %}
     <a href="{% url 'login' %}" >로그인하러 가기</a>
     <a href="{% url 'signup' %}">회원가입하러 가기</a>

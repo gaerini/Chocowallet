@@ -53,10 +53,10 @@ def calendar(request, user_pk):
         Event.objects.create(
             author=user,
             content=request.POST['content'],
-            date=datetime(request.POST['date']),
+            date= datetime(request.POST['date']),
             cost = request.POST['cost'],
         )
     
-    events = Event.objects.get(author=user)
+    events_ = Event.objects.filter(author=user.id)
 
-    return render(request, 'calendar.html', {"events":events})
+    return render(request, 'calendar.html', {"events_":events_})
