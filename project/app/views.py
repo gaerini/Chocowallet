@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from .models import Event
+import datetime
+
 # Create your views here.
 
 def login(request):
@@ -34,3 +37,19 @@ def signup(request):
 
         return redirect('home')
     return render(request, 'registration/signup.html')
+
+@login_required(login_url='/registration/login/')
+def calendar(request, user_pk):
+    user = User.objects.get(pk=user_pk)
+    
+    if request.method == 'POST':
+        Event.objects.create(
+            author=user,
+            content=request.POST['content'],
+            date=datetime(request.POST['date']),
+            cost = request.POST['cost'],
+        )
+    
+    events = Event.objects.get(author=user)
+
+    return render(request, 'calendar.html', {"events":events})
