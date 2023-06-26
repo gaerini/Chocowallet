@@ -13,5 +13,6 @@
     <a href="{% url 'login' %}" >로그인하러 가기</a>
     <a href="{% url 'signup' %}">회원가입하러 가기</a>
     {% endif %}
+    <a href="{% url 'calendar' user.pk %}">달력</a>
     <img src = "{% static 'chocwallet_logo.png' %}"/>
 {% endblock container %}
