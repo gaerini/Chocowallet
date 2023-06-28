@@ -2,6 +2,8 @@
 
 {% block css %}
 {% load static %}
+{% load account socialaccount %}
+{% providers_media_js %}
 <link rel="stylesheet" type="text/css" href="{% static 'baseStyle.css' %}">
 {% endblock css %}
 
@@ -19,8 +21,25 @@
 >>>>>>> main
     {% else %}
     <div class="button-container">
-        <div class="button">
-            <a href="{% url 'login' %}">로그인</a>
+        <div class='login'>
+            <form method='POST'>
+                {% csrf_token %}
+                {% if error %}
+                <p>{{error}}</p>
+                {% endif %}
+                <div class='idpwInput'>
+                    <span>ID </span>
+                    <input type='text' name='id'>
+                    <span>PW </span>
+                    <input type='text' name='pw'>
+                </div>
+                <div class='loginBtn'>
+                    <button type='submit'>로그인</button>
+                </div>
+                <li class="navbar__menu__item">
+                    <a href="{% provider_login_url 'kakao' %}">카카오 로그인</a>
+                </li>
+            </form>
         </div>
         <div class="button">
             <a href="{% url 'signup' %}">회원가입</a>
