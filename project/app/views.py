@@ -7,20 +7,6 @@ import datetime
 
 # Create your views here.
 
-def login(request):
-    if request.method == 'POST':
-        username = request.POST['id']
-        password = request.POST['pw']
-
-        user = auth.authenticate(username=username, password=password)
-
-        if user is not None:
-            auth.login(request, user)
-            return redirect('cover')
-        error = "아이디 또는 비밀번호가 틀립니다"
-        return render(request, 'registration/login.html', {"error":error})
-    return render(request, 'registration/login.html')
-
 def logout(request):
     auth.logout(request)
     return redirect('cover')
@@ -43,6 +29,17 @@ def signup(request):
     return render(request, 'registration/signup.html')
 
 def cover(request):
+    if request.method == 'POST':
+        username = request.POST['id']
+        password = request.POST['pw']
+
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user, backend ="django.contrib.auth.backends.ModelBackend")
+            return redirect('cover')
+        error = "아이디 또는 비밀번호가 틀립니다"
+        return render(request, 'cover.html', {"error":error})
     return render(request, 'cover.html')
 
 @login_required(login_url='/registration/login/')

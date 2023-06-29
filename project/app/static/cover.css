@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Raleway', sans-serif;
+  font-weight: bold;
+}
+
+.container {
+  max-width: 100%;
+  height: auto;
+  text-align: center;
+}
+
+.container img {
+  max-width: 100%;
+  height: auto;
+}
+
+.navbar__menu__item, .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+  position: relative;
+  display: inline-block;
+  justify-content: center;
+  text-decoration: none;
+  transition: 0.5s;
+  overflow: hidden;
+  font-size: calc(1vw + 1vh);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  cursor: pointer;
+  display:flex;
+  align-items: center;
+}
+
+
+@media (max-width: 768px) {
+  a {
+    font-size: 4vw;
+  }
+  .line::before,
+  .line::after {
+    width: calc((100% - 768px) / 2);
+  }
+}
+
+#아이디, #비밀번호  {
+  position: relative;
+  background-color: #fff;
+  border: 2px solid #E3E4ED;
+  border-radius : 2px;
+  overflow: hidden;
+  font-size: calc(1vw + 1vh);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 8px;
+  width: 70vw;
+  margin: 5px;
+  height: 5vh;
+}
+
+#로그인, #카카오로그인, #회원가입 {
+  position: relative;
+  overflow: hidden;
+  font-size: calc(1vw + 1vh);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 70vw;
+  height: 4vh;
+  border: 0;
+  border-radius: 8px;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+#로그인 {
+    background-color: #0303FF;
+    color: white;
+    margin-bottom: 10px;
+}
+
+#카카오로그인 {
+    background-color: #FDE500;
+    color: #141603;
+}
+
+#회원가입 {
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    color: #0303FF;
+    border: 2px solid #E3E4ED;
+    border-radius: 8px;
+    
+}
+
+
+
+.line {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.line::before,
+.line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 70%;
+  height: 1px;
+  background-color: #BFB6B6; 
+  transform: translateY(-50%);
+}
+
+.line span {
+  position: relative;
+  z-index: 1;
+  background-color: white;
+  padding: 0 10px;
+  color: #BFB6B6;
+  transform-origin: left top;
+}
+
+.line::before {
+    transform-origin: left top;
+}
+
+.line::after {
+    transform-origin: right top;
+}
+  
+
