@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.db.models import Sum
 from .models import Event
 import datetime
 
@@ -46,16 +47,21 @@ def cover(request):
 def calendar(request, user_pk):
     user = User.objects.get(pk=user_pk)
     
+    events = Event.objects.filter(author=user.id)
+    events_cnt = events.count
+    first_thing = events.first()
+    
+    sum = events.aggregate(Sum('cost'))
+    expected_cost = sum['cost__sum']
+
     if request.method == 'POST':
+        day = request.POST['date']
         Event.objects.create(
             author=request.user,
             content=request.POST['content'],
-            date= datetime(request.POST['date']),
+            date = day,
             cost = request.POST['cost'],
         )
-    
-    events = Event.objects.filter(author=user.id)
+        return redirect('cover')
 
-    events_cnt = events.count
-
-    return render(request, 'calendar.html', {"events":events, "events_cnt":events_cnt})
+    return render(request, 'calendar.html', {"events":events, "events_cnt":events_cnt, "first_thing":first_thing, "expected_cost":expected_cost})
