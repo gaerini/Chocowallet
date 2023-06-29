@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import url("https://fonts.googleapis.com/css?family=Questrial&display=swap");
 
 thead {
@@ -41,6 +42,46 @@ td {
   font-family: "Questrial", sans-serif;
   font-weight: 600;
   text-align: center;
+=======
+@import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
+
+  
+.momdiv {
+    background-color : white;
+    width: 100vw;
+    margin: 0 auto;
+    border-bottom: 1px solid black;
+    margin-bottom: 2vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+    overflow: auto;
+}
+
+.Calendar {
+    position: absolute;
+    
+}
+
+.Calendar>thead {
+    font-family: 'Questrial', sans-serif;
+}
+
+.Calendar>thead>tr:first-child>td, #YearMonth > span {
+    font-size: 3vh;
+    font-weight: bold;
+    text-align: center;
+    width: 5vh;
+}
+
+.Calendar>thead>tr:last-child>td {
+    font-weight: 600;
+    text-align: center;   
+    height: 10px;
+    line-height: 3vh;  
+>>>>>>> 1853d84dba3f478a9318b8bda5272deefebcaa89
 }
 
 .Calendar > thead > tr > td > span {
@@ -48,6 +89,7 @@ td {
   font-weight: bold;
 }
 
+<<<<<<< HEAD
 .Calendar > tbody > tr > td > p {
   font-family: "Montserrat", sans-serif;
   height: 45px;
@@ -59,12 +101,41 @@ td {
   display: block;
   text-align: center;
 }
+=======
+td {
+    width: 10vw;
+    height: 8vh;
+    vertical-align:top;
+   
+}
+
+#monthmenubar > td {
+    height: 8vh;
+    width: 3vw;
+}
+
+.Calendar>tbody>tr>td>p {
+    font-family: 'Montserrat', sans-serif;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+    transition-duration: .2s;
+    line-height: 45px;
+    margin: 2.5px;
+    display: block;
+    text-align: center;
+}        
+>>>>>>> 1853d84dba3f478a9318b8bda5272deefebcaa89
+
+
+/*지난 일자, 현재 일자, 선택일자 이펙트*/
 
 .pastDay {
   color: lightgray;
 }
 
 .today {
+<<<<<<< HEAD
   background-color: #f5d042;
   color: #fff;
   font-weight: 600;
@@ -77,10 +148,16 @@ td {
 }
 .futureDay:hover {
   background: #eee;
+=======
+    background-color: #F5D042;            
+    color: #fff;
+    font-weight: 600;
+>>>>>>> 1853d84dba3f478a9318b8bda5272deefebcaa89
 }
 
 .futureDay.choiceDay,
 .today.choiceDay {
+<<<<<<< HEAD
   background: #0a174e;
   color: #fff;
   font-weight: 600;
@@ -89,6 +166,10 @@ td {
 
 #YearMonth {
   text-align: center;
+=======
+    background: #0A174E;
+    color: #fff;
+>>>>>>> 1853d84dba3f478a9318b8bda5272deefebcaa89
 }
 
 .modal {
