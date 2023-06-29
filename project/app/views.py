@@ -24,6 +24,12 @@ def signup(request):
             return render(request, 'registration/signup.html', {"error":error})
         
         new_user = User.objects.create_user(username=username, password=password)
+        first_event = Event.objects.create(
+            author= new_user,
+            content = ' ',
+            date = '1900-12-12',
+            cost = 0,
+        )
         auth.login(request, new_user, backend ="django.contrib.auth.backends.ModelBackend")
 
         return redirect('cover')
