@@ -7,8 +7,7 @@
 
 {% block container %}
 
-{% for event in events.all %}
-{% if user.is_authenticated and user.pk == event.author.pk %}
+{% if user.is_authenticated and user.pk == first_thing.author.pk %}
     <div class="calendar">
     <div class="calendar_header">
         <div class="calendar_nav">
@@ -69,19 +68,27 @@
             </div>
         </div>
     </div>
-    <li>
-        <span>{{event.content}}</span>
-    </li>
     
     </div>
     <script src="{% static 'js/calendar.js' %}"></script>
     <script src="{% static 'js/reserve.js' %}"></script> 
 
-    {% else %}
-    <p>권한 없음</p>
-    {% endif %}
+    <li>
+        <span>이번달 일정 모음</span>
+    </li>
+    {% for event in events.all %}
+    <p>
+       <span>{{event.content}}</span>
+    </p>
+    {% endfor %}
+    <li>
+        <span>이번 달 예상 지출 금액 : {{expected_cost}}</span>
+    </li>
 
-{% endfor %}
+{% else %}
+<p>권한 없음</p>
+{% endif %}
+
 
 {% if events_cnt == 0 %}
 <form action="" method="post">
@@ -100,7 +107,7 @@
         <input type="number" id="cost" name="cost" placeholder="금액을 입력해주세요"/>
     </div>
     <div>
-        <label for="date">날짜</label> <!--여기 고쳐야함-->
+        <label for="date">날짜</label> 
         <input type="date" id="date" name="date" placeholder="날짜를 선택해주세요"/>
     </div>
     <button type="submit">작성하기</button>
