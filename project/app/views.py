@@ -54,7 +54,6 @@ def calendar(request, user_pk):
     user = User.objects.get(pk=user_pk)
     
     events = Event.objects.filter(author=user.id)
-    events_cnt = events.count
     first_thing = events.first()
     
     sum = events.aggregate(Sum('cost'))
@@ -68,6 +67,6 @@ def calendar(request, user_pk):
             date = day,
             cost = request.POST['cost'],
         )
-        return redirect('cover')
+        return redirect('calendar', user_pk)
 
-    return render(request, 'calendar.html', {"events":events, "events_cnt":events_cnt, "first_thing":first_thing, "expected_cost":expected_cost})
+    return render(request, 'calendar.html', {"events":events, "first_thing":first_thing, "expected_cost":expected_cost})

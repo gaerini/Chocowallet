@@ -1,96 +1,126 @@
-@import url('https://fonts.googleapis.com/css?family=Questrial&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css?family=Questrial&display=swap");
 
 thead {
-    border-bottom: 1px solid skyblue;
+  border-bottom: 1px solid skyblue;
 }
 
 td {
-    width: 10vw;
-    height: 8vh;
-    vertical-align:top;
+  width: 10vw;
+  height: 8vh;
+  vertical-align: top;
 }
 
 .momdiv {
-    background-color : white;
-    height: auto;
-    width: 99vw;
-    margin: 0 auto;
-    border-radius:5px;
-    border-bottom: 1px solid skyblue;
-    margin-bottom: 5vh;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 65vh;
+  background-color: white;
+  height: auto;
+  width: 99vw;
+  margin: 0 auto;
+  border-radius: 5px;
+  border-bottom: 1px solid skyblue;
+  margin-bottom: 5vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 65vh;
 }
 
 .Calendar {
-    position: absolute;
-    margin: 0px;
+  position: absolute;
+  margin: 0px;
 }
 
-.Calendar>thead>tr:first-child>td {
-    font-family: 'Questrial', sans-serif;
-    font-size: 6vw;
-    font-weight: bold;
-    text-align: center;
+.Calendar > thead > tr:first-child > td {
+  font-family: "Questrial", sans-serif;
+  font-size: 6vw;
+  font-weight: bold;
+  text-align: center;
 }
 
-.Calendar>thead>tr:last-child>td {
-    font-family: 'Questrial', sans-serif;
-    font-weight: 600;
-    text-align: center;     
+.Calendar > thead > tr:last-child > td {
+  font-family: "Questrial", sans-serif;
+  font-weight: 600;
+  text-align: center;
 }
 
-.Calendar>thead>tr>td>span {
-    font-size: 6vw;
-    font-weight: bold;
+.Calendar > thead > tr > td > span {
+  font-size: 6vw;
+  font-weight: bold;
 }
 
-
-.Calendar>tbody>tr>td>p {
-    font-family: 'Montserrat', sans-serif;
-    height: 45px;
-    width: 45px;
-    border-radius: 45px;
-    transition-duration: .2s;
-    line-height: 45px;
-    margin: 2.5px;
-    display: block;
-    text-align: center;
-}        
+.Calendar > tbody > tr > td > p {
+  font-family: "Montserrat", sans-serif;
+  height: 45px;
+  width: 45px;
+  border-radius: 45px;
+  transition-duration: 0.2s;
+  line-height: 45px;
+  margin: 2.5px;
+  display: block;
+  text-align: center;
+}
 
 .pastDay {
-    color: lightgray;
+  color: lightgray;
 }
 
 .today {
-    background-color: #F5D042;            
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
+  background-color: #f5d042;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .futureDay {
-    background-color: #FFFFFF;
-    cursor: pointer;
+  background-color: #ffffff;
+  cursor: pointer;
 }
-.futureDay:hover{
-    background:#eee;
+.futureDay:hover {
+  background: #eee;
 }
 
 .futureDay.choiceDay,
 .today.choiceDay {
-    background: #0A174E;
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
+  background: #0a174e;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 #YearMonth {
-    text-align: center;
+  text-align: center;
 }
 
+.modal {
+  position: fixed;
+  top: 10%;
+  left: 20%;
+  width: 50%;
+  height: 30%;
+  background-color: rgb(255, 185, 185);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.addEventModal {
+  position: fixed;
+  top: 10%;
+  left: 20%;
+  width: 50%;
+  height: 10%;
+  background-color: rgb(178, 219, 255);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hidden2 {
+  display: none;
+}
