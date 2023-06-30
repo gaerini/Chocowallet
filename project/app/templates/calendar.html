@@ -38,6 +38,7 @@
 <div class="modalbox hidden">
     <div class="background"></div>
     <div class="modal">
+        <div class="modal-date"></div>
         <div class="event_modal_content">
             <button class = "addEvent">
                 일정 추가하기
@@ -90,7 +91,8 @@
     const events = [
     {% for event in events %}
         {
-            date: "{{event.date}}",
+            start_date: "{{event.start_date}}",
+            finish_date: "{{event.finish_date}}",
             detail: "{{event.content}}",
             cost: {{event.cost}},
         },
@@ -105,12 +107,14 @@
     const openBtn2 = document.querySelector(".addEvent");
     const closeBtn2 = document.querySelector(".close2");
 
+    const modalDate = document.querySelector(".modal-date");
+
+    
         events.forEach(function(idx){
-            idx.date = new Date(idx.date)
+            idx.start_date = new Date(idx.start_date);
+            idx.finish_date = new Date(idx.finish_date);
             console.log(idx);
-        });
-      
-        window.onload = function () { buildCalendar(); }    // 웹 페이지가 로드되면 buildCalendar 실행
+        });    // 웹 페이지가 로드되면 buildCalendar 실행
 
         let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
         let today = new Date();     // 페이지를 로드한 날짜를 저장
@@ -135,8 +139,9 @@
             const currentMonth = [];
             if (events.length != 0){
                 for (let j = 0;  j < events.length; j++){
-                    console.log(events[j]['date'].getMonth());
-                    if (events[j]['date'].getMonth() === month && events[j]['date'].getFullYear() == year) {
+                    console.log(events[j]['start_date'].getMonth());
+                    console.log(events[j]['finish_date'].getMonth());
+                    if ((events[j]['start_date'].getMonth() === month || events[j]['finish_date'].getMonth() === month) && events[j]['start_date'].getFullYear() == year) {
                         console.log(events[j]);
                         currentMonth.push(events[j]);
                     };
@@ -166,34 +171,85 @@
 
                 if (currentMonth.length > 0) {
                     for (let k = 0; k < currentMonth.length; k++) {
-                        if (currentMonth[k].date.getDate() == nowDay.getDate()){
-                            let newEvent = document.createElement("p");
-                            newEvent.innerHTML = currentMonth[k].detail;
-                            nowColumn.appendChild(newEvent);
+                        if (currentMonth[k].start_date == currentMonth[k].finish_date) {
+                            console.log("for 1")
+                            if (currentMonth[k].start_date.getDate() == nowDay.getDate()){
+                                let newEvent = document.createElement("p");
+                                newEvent.innerHTML = currentMonth[k].detail;
+                                nowColumn.appendChild(newEvent);
+                            }
                         }
+
+                        else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].finish_date.getMonth() == month) {
+                            console.log("for 2")
+                            for (let m = new Date(currentMonth[k].start_date); m <= currentMonth[k].finish_date; m.setDate(m.getDate() + 1)) {
+                                if (m.getDate() == nowDay.getDate()){
+                                    let newEvent = document.createElement("p");
+                                    newEvent.innerHTML = currentMonth[k].detail;
+                                    nowColumn.appendChild(newEvent);
+                                }                     
+                            }
+                        }
+
+                        else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].finish_date.getMonth() != month) {
+                            for (let m = new Date(currentMonth[k].start_date); m.getMonth() <= month; m.setDate(m.getDate() + 1)) {
+                                
+                                if (m.getDate() == nowDay.getDate()){
+                                    let newEvent = document.createElement("p");
+                                    newEvent.innerHTML = currentMonth[k].detail;
+                                    nowColumn.appendChild(newEvent);
+                                }                     
+                            }
+                        }
+
+                        else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].start_date.getMonth() != month) {
+                            for (let m = new Date(currentMonth[k].finish_date); m.getMonth() >= month; m.setDate(m.getDate() - 1)) {
+                                
+                                if (m.getDate() == nowDay.getDate()){
+                                    let newEvent = document.createElement("p");
+                                    newEvent.innerHTML = currentMonth[k].detail;
+                                    nowColumn.appendChild(newEvent);
+                                }                     
+                            }
+                        }
+
+                        
                     }
                 }
-
+                const modal_Month = nowDay.getMonth();
+                const modal_Date = nowDay.getDate();
                 if (nowDay.getDay() == 6) {                 // 토요일인 경우
                     nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
                 }
 
-            if (nowDay < today) {                       // 지난날인 경우
-                newDIV.className = "pastDay";
-                newDIV.onclick = function(){openModal();}
-            }
-            else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
-                newDIV.className = "today";
-                //newDIV.onclick = function () { choiceDate(this); }
-                newDIV.onclick = function(){openModal();}
-            }
-            else {                                      // 미래인 경우
-                newDIV.className = "futureDay";
-                //newDIV.onclick = function () { choiceDate(this); }
-                newDIV.onclick = function(){openModal();}
+                if (nowDay < today) {                       // 지난날인 경우
+                    newDIV.className = "pastDay";
+                    newDIV.onclick = function(){
+                        modalDate.innerHTML = `${modal_Month+1}월 ${modal_Date}일`;
+                        modalBox.classList.remove("hidden");
+                    }
+                }
+                else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
+                    newDIV.className = "today";
+                    //newDIV.onclick = function () { choiceDate(this); }
+                    newDIV.onclick = function(){
+                        modalDate.innerHTML = `${modal_Month+1}월 ${modal_Date}일`;
+                        modalBox.classList.remove("hidden");
+                    }
+                    console.log(nowDay);
+                }
+                else {                                      // 미래인 경우
+                    newDIV.className = "futureDay";
+                    //newDIV.onclick = function () { choiceDate(this); }
+                    newDIV.onclick = function(){
+                        modalDate.innerHTML = `${modal_Month+1}월 ${modal_Date}일`;
+                        modalBox.classList.remove("hidden");
+                    }
+                }
             }
         }
-    }
+
+        
 
         // 날짜 선택
         function choiceDate(newDIV) {
@@ -225,16 +281,22 @@
             return value;
         }
 
+    var saveMonth;
+    var saveDate;
+    
 
-    function openModal() {
-      modalBox.classList.remove("hidden")
-    }
+    {% comment %} function openModal(event, newDIV) {
+        console.log(newDIV.innerHTML);
+        modalDate.innerHTML = `${modal_Month}월 ${modal_Date}일`;
+        modalBox.classList.remove("hidden");
+        
+        return "Fuck you";
+    } {% endcomment %}
 
     function closeModal() {
       modalBox.classList.add("hidden");
     }
 
-    openBtn.addEventListener("click", openModal);
 
     closeBtn.addEventListener("click", closeModal);
 
@@ -257,5 +319,7 @@
     submitEvent.addEventListener("click", () => {
       date; //를 html에 넘겨서 form태그에,, date에 넣어야함
     });
+
+    window.onload = function () { buildCalendar(); }
 </script>
 {% endblock container %}
