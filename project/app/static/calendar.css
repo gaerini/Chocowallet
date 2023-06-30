@@ -83,10 +83,29 @@ td {
   color: #fff;
 }
 
+.modalbox {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  top: 0%;
+  bottom: 0%;
+}
+
+.background{
+  position: fixed;
+  width: 100%;
+  top: 0%;
+  bottom: 0%;
+
+  opacity: 0.5;
+  background-color: black;
+}
+
 .modal {
   position: fixed;
-  top: 10%;
-  left: 20%;
   width: 50%;
   height: 30%;
   background-color: rgb(255, 185, 185);
@@ -94,6 +113,8 @@ td {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  border-radius: 10%;
 }
 
 .hidden {

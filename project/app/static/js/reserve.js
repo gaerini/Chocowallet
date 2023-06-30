@@ -52,23 +52,25 @@ window.onload=()=>{
 }*/
 
 //일정 적는 모달 열고 닫는 코드
+// const modalBox = document.querySelector(".modalbox")
 // const modal = document.querySelector(".modal");
 // const openBtn = document.querySelector("tbody");
 // const closeBtn = document.querySelector(".close");
+// const modalBackground = document.querySelector(".background")
 
 // function openModal() {
-//   modal.classList.remove("hidden");
+//   modalBox.classList.remove("hidden")
 // }
 
 // function closeModal() {
-//   modal.classList.add("hidden");
+//   modalBox.classList.add("hidden");
 // }
 
 // openBtn.addEventListener("click", openModal);
 
 // closeBtn.addEventListener("click", closeModal);
 
-// //모달 내부
+//모달 내부
 // const modal2 = document.querySelector(".addEventModal");
 // const openBtn2 = document.querySelector(".addEvent");
 // const closeBtn2 = document.querySelector(".close2");
@@ -83,7 +85,7 @@ window.onload=()=>{
 
 // openBtn2.addEventListener("click", openAddEventModal);
 // closeBtn2.addEventListener("click", closeAddEventModal);
-// //요까지
+//요까지
 
 // const date = document.querySelector(".choiceDay");
 // const submitEvent = document.querySelector(".close2");
