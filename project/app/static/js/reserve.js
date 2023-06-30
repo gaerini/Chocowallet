@@ -52,42 +52,42 @@ window.onload=()=>{
 }*/
 
 //일정 적는 모달 열고 닫는 코드
-const modal = document.querySelector(".modal");
-const openBtn = document.querySelector("tbody");
-const closeBtn = document.querySelector(".close");
+// const modal = document.querySelector(".modal");
+// const openBtn = document.querySelector("tbody");
+// const closeBtn = document.querySelector(".close");
 
-function openModal() {
-  modal.classList.remove("hidden");
-}
+// function openModal() {
+//   modal.classList.remove("hidden");
+// }
 
-function closeModal() {
-  modal.classList.add("hidden");
-}
+// function closeModal() {
+//   modal.classList.add("hidden");
+// }
 
-openBtn.addEventListener("click", openModal);
+// openBtn.addEventListener("click", openModal);
 
-closeBtn.addEventListener("click", closeModal);
+// closeBtn.addEventListener("click", closeModal);
 
-//모달 내부
-const modal2 = document.querySelector(".addEventModal");
-const openBtn2 = document.querySelector(".addEvent");
-const closeBtn2 = document.querySelector(".close2");
+// //모달 내부
+// const modal2 = document.querySelector(".addEventModal");
+// const openBtn2 = document.querySelector(".addEvent");
+// const closeBtn2 = document.querySelector(".close2");
 
-function openAddEventModal() {
-  modal2.classList.remove("hidden2");
-}
+// function openAddEventModal() {
+//   modal2.classList.remove("hidden2");
+// }
 
-function closeAddEventModal() {
-  modal2.classList.add("hidden2");
-}
+// function closeAddEventModal() {
+//   modal2.classList.add("hidden2");
+// }
 
-openBtn2.addEventListener("click", openAddEventModal);
-closeBtn2.addEventListener("click", closeAddEventModal);
-//요까지
+// openBtn2.addEventListener("click", openAddEventModal);
+// closeBtn2.addEventListener("click", closeAddEventModal);
+// //요까지
 
-const date = document.querySelector(".choiceDay");
-const submitEvent = document.querySelector(".close2");
+// const date = document.querySelector(".choiceDay");
+// const submitEvent = document.querySelector(".close2");
 
-submitEvent.addEventListener("click", () => {
-  date; //를 html에 넘겨서 form태그에,, date에 넣어야함
-});
+// submitEvent.addEventListener("click", () => {
+//   date; //를 html에 넘겨서 form태그에,, date에 넣어야함
+// });
