@@ -84,10 +84,3 @@ function closeAddEventModal() {
 openBtn2.addEventListener("click", openAddEventModal);
 closeBtn2.addEventListener("click", closeAddEventModal);
 //요까지
-
-const date = document.querySelector(".choiceDay");
-const submitEvent = document.querySelector(".close2");
-
-submitEvent.addEventListener("click", () => {
-  date; //를 html에 넘겨서 form태그에,, date에 넣어야함
-});

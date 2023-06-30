@@ -3,7 +3,7 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
-from .models import Event
+from .models import Event, Spend
 import datetime
 
 # Create your views here.
@@ -60,13 +60,13 @@ def calendar(request, user_pk):
     expected_cost = sum['cost__sum']
 
     if request.method == 'POST':
-        day = request.POST['date']
         Event.objects.create(
             author=request.user,
             content=request.POST['content'],
-            date = day,
+            date = request.POST['date'], #수정해야함
             cost = request.POST['cost'],
         )
         return redirect('calendar', user_pk)
 
     return render(request, 'calendar.html', {"events":events, "first_thing":first_thing, "expected_cost":expected_cost})
+

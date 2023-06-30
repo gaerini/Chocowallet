@@ -7,3 +7,10 @@ class Event(models.Model):
     content = models.CharField(max_length=50)
     date = models.DateField()
     cost = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.author}-{self.content}'
+
+class Spend(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_for_spend', default='')
+    spend = models.IntegerField()
