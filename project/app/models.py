@@ -11,6 +11,13 @@ class Event(models.Model):
 
     def __str__(self):
         return f'{self.author}-{self.content}'
+    
+    def to_dict(self):
+        return {
+            'content': self.content, 
+            'start_date': self.start_date.isoformat(), 
+            'finish_date': self.finish_date.isoformat()
+        }
 
 class Spend(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_for_spend', default='')
