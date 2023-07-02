@@ -110,21 +110,23 @@
     {% endfor %} -->
     <div class="progress">
         <div class="progressbox"></div>
+        {% if ratioSpend >= 100 %}
+        <div class="progresspercent" style="width: 100%; background-color: red;"></div>
+        {% else %}
         <div class="progresspercent" style="width: {{ratioSpend}}%;"></div> 
-        <!-- {{expected_cost}}에 percent(실제총지출/이번달지출액) -->
+        {% endif %}
     </div>
     <div class="costbox">
-        <div class="expected_cost">
-            <div class="expected_color"></div>
-            <span class="span_cost">{{expected_cost}}</span>
-            <span class="span">이번 달 총 예상 지출 금액</span>
-        </div>
         <div class="spent_cost">
             <div class="spent_color"></div>
             <span class="span_cost">{{ sumForRealSpend }}</span>
             <span class="span">오늘까지 실제 총 지출 금액</span>
         </div>
-        <!-- 아래 {{expected_cost}}에 실제총지출금액 -->
+        <div class="expected_cost">
+            <div class="expected_color"></div>
+            <span class="span_cost">{{expected_cost}}</span>
+            <span class="span">이번 달 총 예상 지출 금액</span>
+        </div>
     </div>
 {% else %}
 <p>권한 없음</p>
