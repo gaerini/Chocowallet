@@ -6,27 +6,31 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+html {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   font-family: 'Raleway', sans-serif;
   font-weight: bold;
 }
 
 .container {
   max-width: 100%;
-  height: auto;
   text-align: center;
 }
 
 .container img {
-  max-width: 100%;
-  height: auto;
+  max-width: 75%;
+  max-height: 20%;
+  margin-bottom: 8%;
 }
 
 .navbar__menu__item, .button {
@@ -45,21 +49,8 @@ a {
   font-size: calc(1vw + 1vh);
   white-space: nowrap;
   text-overflow: ellipsis;
-  cursor: pointer;
   display:flex;
   align-items: center;
-  color: black;
-}
-
-
-@media (max-width: 768px) {
-  a {
-    font-size: 4vw;
-  }
-  .line::before,
-  .line::after {
-    width: calc((100% - 768px) / 2);
-  }
 }
 
 #아이디, #비밀번호  {
@@ -77,7 +68,7 @@ a {
   height: 5vh;
 }
 
-#로그인, #카카오로그인, #회원가입 {
+#로그인, #회원가입, #뒤로, #signup_회원가입 {
   position: relative;
   overflow: hidden;
   font-size: calc(1vw + 1vh);
@@ -89,30 +80,23 @@ a {
   border-radius: 8px;
   margin-top: 12px;
   font-weight: bold;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 #로그인 {
-    background-color: #0303FF;
-    color: white;
-    margin-bottom: 10px;
-}
-
-#카카오로그인 {
-    background-color: #FDE500;
-    color: #141603;
+    background-color: #FBFFCD ;
+    color: black;
+    margin-bottom: 6px;
 }
 
 #회원가입 {
     justify-content: center;
     align-items: center;
-    background-color: white;
-    color: #0303FF;
-    border: 2px solid #E3E4ED;
+    background-color: rgba(171, 227, 255, 0.75);
+    color: black;
     border-radius: 8px;
-    
+    margin-top: 6px;
 }
-
-
 
 .line {
     position: relative;
@@ -127,7 +111,8 @@ a {
   position: absolute;
   top: 50%;
   width: 70%;
-  height: 1px;
+  max-height: 1px;
+  height:50%;
   background-color: #BFB6B6; 
   transform: translateY(-50%);
 }
@@ -149,4 +134,28 @@ a {
     transform-origin: right top;
 }
   
+#비밀번호 {
+  margin-bottom: 10px;
+}
 
+#signup_회원가입 {
+  margin-top: 8px;
+  border-width: 0px;
+  border-radius: 8px;
+  background-color: rgba(171, 227, 255, 0.75);
+}
+
+#signup_회원가입로고 {
+  width: 69vw;
+  margin-bottom: 10%;
+  margin-left: 1vw;
+}
+
+#뒤로 {
+  justify-content: center;
+  align-items: center;
+  background-color: #EEEDED;
+  color: black;
+  border-radius: 8px;
+  margin-top: 6px;
+}
