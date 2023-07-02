@@ -62,7 +62,9 @@ def calendar(request, user_pk):
     
     realSpends = Spend.objects.filter(author=user) 
     spend_sum = realSpends.aggregate(Sum('spend'))
-    sumForRealSpend = spend_sum['spend__sum']
+    sumForRealSpend = spend_sum['spend__sum'] or 0
+
+    ratioSpend = (sumForRealSpend/(expected_cost or 1)) * 100
 
     if request.method == 'POST':
         start_day = request.POST['start_date']
@@ -77,7 +79,7 @@ def calendar(request, user_pk):
 
         return redirect('calendar', user_pk)
 
-    return render(request, 'calendar.html', {"events":events, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
+    return render(request, 'calendar.html', {"events":events, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend, "ratioSpend":ratioSpend})
 
 
 def spend(request):
