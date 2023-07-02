@@ -1,27 +1,28 @@
-
 {% extends 'base.html' %}
 
 {% block css %}
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'baseStyle.css' %}"/>
+<link rel="stylesheet" type="text/css" href="{% static 'cover.css' %}"/>
 {% endblock css %}
 
 {% block container %}
 <div class='signup'>
     <form method='POST'>
+        <img id="signup_회원가입로고" src="{% static 'chocwallet_signuplogo.png' %}"/>
         {% csrf_token %}
         {% if error %}
         <p>{{error}}</p>
         {% endif %}
         <div class='idpwInput'>
-            <span>ID </span>
-            <input type='text' name='id'>
-            <span>PW </span>
-            <input type='text' name='pw'>
+            <input type='text' name='id' id="아이디" placeholder="아이디">
+            <input type='text' name='pw' id="비밀번호" placeholder="비밀번호">
         </div>
-        <div class='signupBtn'>
-            <button type='submit'>회원가입</button>
+        <div class='SignBtn'>
+            <button type='submit' id="signup_회원가입">회원가입</button>
         </div>
     </form>
+</div>
+<div class="button">
+    <a href="{% url 'cover' %}" id="뒤로">뒤로가기</a>
 </div>
 {% endblock container %}
