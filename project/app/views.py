@@ -27,7 +27,8 @@ def signup(request):
         first_event = Event.objects.create(
             author= new_user,
             content = ' ',
-            date = '1900-12-12',
+            start_date = '1900-12-12',
+            finish_date = '1900-12-13',
             cost = 0,
         )
         auth.login(request, new_user, backend ="django.contrib.auth.backends.ModelBackend")
@@ -64,10 +65,13 @@ def calendar(request, user_pk):
     sumForRealSpend = spend_sum['spend__sum']
 
     if request.method == 'POST':
+        start_day = request.POST['start_date']
+        finish_day = request.POST['finish_date']
         Event.objects.create(
             author=request.user,
             content=request.POST['content'],
-            date = request.POST['date'],
+            start_date = start_day,
+            finish_date = finish_day,
             cost = request.POST['cost'],
         )
 

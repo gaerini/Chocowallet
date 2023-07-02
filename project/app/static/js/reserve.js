@@ -52,16 +52,18 @@ window.onload=()=>{
 }*/
 
 //일정 적는 모달 열고 닫는 코드
+// const modalBox = document.querySelector(".modalbox")
 // const modal = document.querySelector(".modal");
 // const openBtn = document.querySelector("tbody");
 // const closeBtn = document.querySelector(".close");
+// const modalBackground = document.querySelector(".background")
 
 // function openModal() {
-//   modal.classList.remove("hidden");
+//   modalBox.classList.remove("hidden")
 // }
 
 // function closeModal() {
-//   modal.classList.add("hidden");
+//   modalBox.classList.add("hidden");
 // }
 
 // openBtn.addEventListener("click", openModal);
