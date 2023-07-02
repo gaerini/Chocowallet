@@ -83,6 +83,68 @@ td {
   color: #fff;
 }
 
+/* 게이지 박스 */
+.progress {
+  margin: 5%;
+  height: 6vh;
+
+  position: relative;
+}
+
+.progressbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: beige;
+}
+
+.progresspercent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: antiquewhite;
+}
+
+/* costbox */
+.costbox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.expected_cost, .spent_cost {
+  margin-top: 1%;
+  margin-bottom: 1%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.expected_color {
+  width: 7%;
+  background-color: beige;
+}
+
+.spent_color {
+  width: 7%;
+  background-color: antiquewhite;
+}
+
+.costbox .span_cost {
+  width: 20%;
+  text-align: center;
+  margin-top: 1%;
+}
+
+.costbox .span{
+  width: 40%;
+  text-align: center;
+  margin-top: 1%;
+}
+
+/* 모달 */
 .modalbox {
   position: fixed;
   display: flex;
@@ -136,4 +198,10 @@ td {
 
 .hidden2 {
   display: none;
+}
+
+#로그아웃 {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

@@ -9,6 +9,9 @@
 
 {% if user.is_authenticated and user.pk == first_thing.author.pk %}
 <div class="momdiv">
+    <div class="button">
+        <a href="{% url 'logout' %}" id="로그아웃">로그아웃</a>
+    </div>
     <table class="Calendar">
         <thead>
             <tr id="monthmenubar">
@@ -88,21 +91,34 @@
     일정 추가하기
 </button>
 
-    <li>
+    <!-- <li>
         <span>이번달 일정 모음</span>
     </li>
     {% for event in events.all %}
     <p>
        <span>{{event.content}}</span>
     </p>
-    {% endfor %}
-    <li>
-        <span>이번 달 예상 지출 금액 : {{expected_cost}}</span>
-    </li>
-    <li>
-        <span>실제 지출 금액 : {{ sumForRealSpend }}</span>
-    </li>
-
+    {% endfor %} -->
+    <div class="progress">
+        <div class="progressbox"></div>
+        {% if ratioSpend >= 100 %}
+        <div class="progresspercent" style="width: 100%; background-color: red;"></div>
+        {% else %}
+        <div class="progresspercent" style="width: {{ratioSpend}}%;"></div> 
+        {% endif %}
+    </div>
+    <div class="costbox">
+        <div class="spent_cost">
+            <div class="spent_color"></div>
+            <span class="span_cost">{{ sumForRealSpend }}</span>
+            <span class="span">오늘까지 실제 총 지출 금액</span>
+        </div>
+        <div class="expected_cost">
+            <div class="expected_color"></div>
+            <span class="span_cost">{{expected_cost}}</span>
+            <span class="span">이번 달 총 예상 지출 금액</span>
+        </div>
+    </div>
 {% else %}
 <p>권한 없음</p>
 {% endif %}
@@ -393,6 +409,6 @@
 </script>
 
 
-<script src="{% static 'js/calendar.js' %}"></script> 
-<script src="{% static 'js/reserve.js' %}"></script> 
+<!-- <script src="{% static 'js/calendar.js' %}"></script> 
+<script src="{% static 'js/reserve.js' %}"></script>  -->
 {% endblock container %}

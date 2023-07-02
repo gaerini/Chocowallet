@@ -45,12 +45,19 @@ def cover(request):
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
-            auth.login(request, user, backend ="django.contrib.auth.backends.ModelBackend")
-            return redirect('cover')
-        error = "아이디 또는 비밀번호가 틀립니다"
-        return render(request, 'cover.html', {"error":error})
-    
+            auth.login(request, user, backend="django.contrib.auth.backends.ModelBackend")
+
+            if 'user_pk' in request.POST:
+                user_pk = request.POST['user_pk']
+                return redirect('calendar', user_pk)
+            else:
+                return redirect('calendar', user.pk)
+        else:
+            error = "아이디 또는 비밀번호가 틀립니다"
+            return render(request, 'cover.html', {"error":error})
+
     return render(request, 'cover.html')
+
 
 @login_required(login_url='/registration/login/')
 def calendar(request, user_pk):
@@ -64,7 +71,11 @@ def calendar(request, user_pk):
     
     realSpends = Spend.objects.filter(author=user) 
     spend_sum = realSpends.aggregate(Sum('spend'))
-    sumForRealSpend = spend_sum['spend__sum']
+    sumForRealSpend = spend_sum['spend__sum'] or 0
+
+    ratioSpend = (sumForRealSpend/(expected_cost or 1)) * 100
+    if ratioSpend >= 100:
+        ratioSpend = 100
 
     if request.method == 'POST':
         Event.objects.create(
