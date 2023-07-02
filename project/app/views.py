@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from .models import Event, Spend
 import datetime
+import json
 
 # Create your views here.
 
@@ -48,6 +49,7 @@ def cover(request):
             return redirect('cover')
         error = "아이디 또는 비밀번호가 틀립니다"
         return render(request, 'cover.html', {"error":error})
+    
     return render(request, 'cover.html')
 
 @login_required(login_url='/registration/login/')
@@ -65,19 +67,21 @@ def calendar(request, user_pk):
     sumForRealSpend = spend_sum['spend__sum']
 
     if request.method == 'POST':
-        start_day = request.POST['start_date']
-        finish_day = request.POST['finish_date']
         Event.objects.create(
             author=request.user,
             content=request.POST['content'],
-            start_date = start_day,
-            finish_date = finish_day,
+            start_date = request.POST['start_date'],
+            finish_date = request.POST['finish_date'],
             cost = request.POST['cost'],
         )
 
         return redirect('calendar', user_pk)
+    
+    events_list_ = [event.to_dict() for event in events]
+    events_list = json.dumps(events_list_) 
+    print(events_list)
 
-    return render(request, 'calendar.html', {"events":events, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
+    return render(request, 'calendar.html', {"events":events, "events_list":events_list, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
 
 
 def spend(request):

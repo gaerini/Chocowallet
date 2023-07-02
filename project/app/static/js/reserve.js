@@ -71,17 +71,17 @@ window.onload=()=>{
 // closeBtn.addEventListener("click", closeModal);
 
 // event write Modal open and close
-const modal2 = document.querySelector(".addEventModal");
-const openBtn2 = document.querySelector(".addEvent");
-const closeBtn2 = document.querySelector(".close2");
+// const modal2 = document.querySelector(".addEventModal");
+// const openBtn2 = document.querySelector(".addEvent");
+// const closeBtn2 = document.querySelector(".close2");
 
-function openAddEventModal() {
-  modal2.classList.remove("hidden2");
-}
+// function openAddEventModal() {
+//   modal2.classList.remove("hidden2");
+// }
 
-function closeAddEventModal() {
-  modal2.classList.add("hidden2");
-}
+// function closeAddEventModal() {
+//   modal2.classList.add("hidden2");
+// }
 
-openBtn2.addEventListener("click", openAddEventModal);
-closeBtn2.addEventListener("click", closeAddEventModal);
+// openBtn2.addEventListener("click", openAddEventModal);
+// closeBtn2.addEventListener("click", closeAddEventModal);
