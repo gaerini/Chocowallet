@@ -137,3 +137,9 @@ td {
 .hidden2 {
   display: none;
 }
+
+#로그아웃 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

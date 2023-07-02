@@ -44,11 +44,19 @@ def cover(request):
         user = auth.authenticate(username=username, password=password)
 
         if user is not None:
-            auth.login(request, user, backend ="django.contrib.auth.backends.ModelBackend")
-            return redirect('cover')
-        error = "아이디 또는 비밀번호가 틀립니다"
-        return render(request, 'cover.html', {"error":error})
+            auth.login(request, user, backend="django.contrib.auth.backends.ModelBackend")
+
+            if 'user_pk' in request.POST:
+                user_pk = request.POST['user_pk']
+                return redirect('calendar', user_pk)
+            else:
+                return redirect('calendar', user.pk)
+        else:
+            error = "아이디 또는 비밀번호가 틀립니다"
+            return render(request, 'cover.html', {"error":error})
+
     return render(request, 'cover.html')
+
 
 @login_required(login_url='/registration/login/')
 def calendar(request, user_pk):

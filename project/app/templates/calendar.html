@@ -9,6 +9,9 @@
 
 {% if user.is_authenticated and user.pk == first_thing.author.pk %}
 <div class="momdiv">
+    <div class="button">
+        <a href="{% url 'logout' %}" id="로그아웃">로그아웃</a>
+    </div>
     <table class="Calendar">
         <thead>
             <tr id="monthmenubar">

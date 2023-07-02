@@ -9,16 +9,6 @@
 
 {% block container %}
     <img src="{% static 'chocwallet_logo.png' %}"/>
-    {% if user.is_authenticated %}
-    <span class="navbar__menu__item">안녕하세요, {{user.username}}님</span>
-    <div class="button-container">
-        <div class="button">
-            <a href="{% url 'logout' %}">로그아웃</a>
-        </div>
-    </div>
-
-    <a href="{% url 'calendar' user.pk %}">캘린더</a>
-    {% else %}
     <div class="button-container">
         <div class='login'>
             <form method='POST'>
@@ -36,14 +26,10 @@
                 <div class="line">
                     <span> 또는 </span>
                 </div>
-                <li class="navbar__menu__item">
-                    <a href="{% provider_login_url 'kakao' %}" id="카카오로그인">카카오 로그인</a>
-                </li>
             </form>
         </div>
         <div class="button">
-            <a href="{% url 'signup' %}" id="회원가입">회원가입</a>
+            <a href="{% url 'signup' %}" id="회원가입">회원가입하러 가기</a>
         </div>
     </div>
-    {% endif %}
 {% endblock container %}
