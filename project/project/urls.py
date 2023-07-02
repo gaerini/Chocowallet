@@ -25,4 +25,5 @@ urlpatterns = [
     path("registration/logout/", views.logout, name="logout"),
     path('calendar/<int:user_pk>', views.calendar, name='calendar'),
     path('accounts/', include('allauth.urls')),
+    path('spend/', views.spend, name='spend'),
 ]

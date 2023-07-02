@@ -52,21 +52,45 @@ def cover(request):
 @login_required(login_url='/registration/login/')
 def calendar(request, user_pk):
     user = User.objects.get(pk=user_pk)
-    
+
     events = Event.objects.filter(author=user.id)
     first_thing = events.first()
     
-    sum = events.aggregate(Sum('cost'))
-    expected_cost = sum['cost__sum']
+    cost_sum = events.aggregate(Sum('cost'))
+    expected_cost = cost_sum['cost__sum']
+    
+    realSpends = Spend.objects.filter(author=user) 
+    spend_sum = realSpends.aggregate(Sum('spend'))
+    sumForRealSpend = spend_sum['spend__sum']
 
     if request.method == 'POST':
         Event.objects.create(
             author=request.user,
             content=request.POST['content'],
-            date = request.POST['date'], #수정해야함
+            date = request.POST['date'],
             cost = request.POST['cost'],
         )
+
         return redirect('calendar', user_pk)
 
-    return render(request, 'calendar.html', {"events":events, "first_thing":first_thing, "expected_cost":expected_cost})
+    return render(request, 'calendar.html', {"events":events, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
 
+
+def spend(request):
+    user = request.user
+    user_pk = user.pk
+
+    realSpends = Spend.objects.filter(author=user) 
+
+    spend_sum = realSpends.aggregate(Sum('spend'))
+    sumForRealSpend = spend_sum['spend__sum']
+
+    if request.method == "POST":
+        Spend.objects.create(
+            author=request.user,
+            spend = request.POST['spend'],
+        )
+
+        return redirect('calendar', user_pk)
+    
+    return render(request, 'calendar.html', {"sumForRealSpend":sumForRealSpend})
