@@ -12,12 +12,10 @@
     <table class="Calendar">
         <thead>
             <tr id="monthmenubar">
-                <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
                 <td colspan="5" id="YearMonth">
                     <span id="calYear"></span>년
                     <span id="calMonth"></span>월
                 </td>
-                <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
             </tr>
             <tr id="weekday">
                 <td>일</td>
@@ -113,7 +111,7 @@
     <div class="costbox">
         <div class="expected_cost">
             <div class="expected_color"></div>
-            <span class="span_cost">{{expected_cost}}</span>
+            <span class="span_cost"></span>
             <span class="span">이번 달 총 예상 지출 금액</span>
         </div>
         <div class="spent_cost">
@@ -276,6 +274,7 @@
                     }
                 }
             }
+            const makeSum = costSum();
         }
 
         
@@ -368,6 +367,7 @@
 </script>
 
 
-<!-- <script src="{% static 'js/calendar.js' %}"></script> 
-<script src="{% static 'js/reserve.js' %}"></script>  -->
+<!-- <script src="{% static 'js/calendar.js' %}"></script> -->
+<script src="{% static 'js/touchMove.js' %}"></script>
+<script src="{% static 'js/eventSum.js' %}"></script>  
 {% endblock container %}
