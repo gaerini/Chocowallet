@@ -65,6 +65,8 @@ def calendar(request, user_pk):
     sumForRealSpend = spend_sum['spend__sum'] or 0
 
     ratioSpend = (sumForRealSpend/(expected_cost or 1)) * 100
+    if ratioSpend >= 100:
+        ratioSpend = 100
 
     if request.method == 'POST':
         start_day = request.POST['start_date']

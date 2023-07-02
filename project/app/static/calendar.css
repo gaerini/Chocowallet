@@ -88,17 +88,22 @@ td {
   margin: 5%;
   height: 6vh;
 
-  display: flex;
-  justify-content: flex-start;
+  position: relative;
 }
 
 .progressbox {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background-color: beige;
 }
 
 .progresspercent {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 100%;
   background-color: antiquewhite;
 }
