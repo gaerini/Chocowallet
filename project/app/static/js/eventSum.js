@@ -12,7 +12,7 @@ function costSum () {
         }
     });
     
-    const expectedCost = document.querySelector(".span_cost");
+    const expectedCost = document.querySelector("#expected_cost");
     
     expectedCost.innerText = sum;
 }
