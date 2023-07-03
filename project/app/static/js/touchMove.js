@@ -1,3 +1,26 @@
+const calendar = document.querySelector('.Calendar');
+console.log(calendar);
+let positoin = 0;
+var start_x, end_x;
+
+function start_x(e) {
+    start_x = e.touches[0].pageX;
+}
+
+function end_x(e) {
+    end_x = e.changedTouches[0].pageX;
+    if (start_x < end_x) {
+        prevCalendar();
+    }
+    else {
+        nextCalendar();
+    }
+}
+
+calendar.addEventListener('touchstart', start_x);
+
+calendar.addEventListener('touchend', end_x);
+
 /*const resvTab = document.querySelector('.resv-wrapper');
 const exitBtn = document.querySelector('.resv-close');
 exitBtn.addEventListener('click', ()=>{resvTab.classList.remove('open');});

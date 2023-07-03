@@ -134,12 +134,6 @@ a {
   border-radius: 3px;
 }
 
-.spent_color {
-  width: 7%;
-  background-color: antiquewhite;
-  border-radius: 3px;
-}
-
 .costbox .span_cost {
   width: 20%;
   text-align: center;
