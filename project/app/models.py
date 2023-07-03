@@ -17,9 +17,17 @@ class Event(models.Model):
         return {
             'content': self.content, 
             'start_date': self.start_date.isoformat(), 
-            'finish_date': self.finish_date.isoformat()
+            'finish_date': self.finish_date.isoformat(),
+            'cost' : self.cost
         }
 
 class Spend(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_for_spend', default='')
+    date = models.IntegerField(default=1)
     spend = models.IntegerField()
+
+    def toDict(self):
+        return {
+            'date': self.date, 
+            'spend': self.spend 
+        }
