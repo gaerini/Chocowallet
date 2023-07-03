@@ -9,6 +9,7 @@
 
 {% if user.is_authenticated and user.pk == first_thing.author.pk %}
 <div class="momdiv">
+    <div class="calendar">
     <div class="button">
         <a href="{% url 'logout' %}" id="로그아웃">로그아웃</a>
     </div>
@@ -101,18 +102,10 @@
     </button>
 </div>
 
-<button class = "addEvent">
-    일정 추가하기
-</button>
-
-    <!-- <li>
-        <span>이번달 일정 모음</span>
-    </li>
-    {% for event in events.all %}
-    <p>
-       <span>{{event.content}}</span>
-    </p>
-    {% endfor %} -->
+<div class="momdiv2">    
+    <button class = "addEvent">
+        일정 추가하기
+    </button>
     <div class="progress">
         <div class="progressbox"></div>
         {% if ratioSpend >= 100 %}
@@ -133,6 +126,7 @@
             <span class="span">이번 달 총 예상 지출 금액</span>
         </div>
     </div>
+</div>
 {% else %}
 <p>권한 없음</p>
 {% endif %}
