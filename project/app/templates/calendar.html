@@ -9,18 +9,17 @@
 
 {% if user.is_authenticated and user.pk == first_thing.author.pk %}
 <div class="momdiv">
+    <div class="calendar">
     <div class="button">
         <a href="{% url 'logout' %}" id="로그아웃">로그아웃</a>
     </div>
     <table class="Calendar">
         <thead>
             <tr id="monthmenubar">
-                <td onClick="prevCalendar();" style="cursor:pointer;">&#60;</td>
                 <td colspan="5" id="YearMonth">
                     <span id="calYear"></span>년
                     <span id="calMonth"></span>월
                 </td>
-                <td onClick="nextCalendar();" style="cursor:pointer;">&#62;</td>
             </tr>
             <tr id="weekday">
                 <td>일</td>
@@ -93,18 +92,10 @@
     </button>
 </div>
 
-<button class = "addEvent">
-    일정 추가하기
-</button>
-
-    <!-- <li>
-        <span>이번달 일정 모음</span>
-    </li>
-    {% for event in events.all %}
-    <p>
-       <span>{{event.content}}</span>
-    </p>
-    {% endfor %} -->
+<div class="momdiv2">    
+    <button class = "addEvent">
+        일정 추가하기
+    </button>
     <div class="progress">
         <div class="progressbox"></div>
         {% if ratioSpend >= 100 %}
@@ -121,10 +112,11 @@
         </div>
         <div class="expected_cost">
             <div class="expected_color"></div>
-            <span class="span_cost">{{expected_cost}}</span>
+            <span class="span_cost" id="expected_cost"></span>
             <span class="span">이번 달 총 예상 지출 금액</span>
         </div>
     </div>
+</div>
 {% else %}
 <p>권한 없음</p>
 {% endif %}
@@ -285,8 +277,7 @@
                     }
                 }
             }
-            
-
+            const makeSum = costSum();
         }
 
         
@@ -468,6 +459,7 @@
 </script>
 
 
-<!-- <script src="{% static 'js/calendar.js' %}"></script> 
-<script src="{% static 'js/reserve.js' %}"></script>  -->
+<!-- <script src="{% static 'js/calendar.js' %}"></script> -->
+<script src="{% static 'js/touchMove.js' %}"></script>
+<script src="{% static 'js/eventSum.js' %}"></script>  
 {% endblock container %}
