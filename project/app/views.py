@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from .models import Event, Spend
 import datetime
+import json
 
 # Create your views here.
 
@@ -77,19 +78,21 @@ def calendar(request, user_pk):
         ratioSpend = 100
 
     if request.method == 'POST':
-        start_day = request.POST['start_date']
-        finish_day = request.POST['finish_date']
         Event.objects.create(
             author=request.user,
             content=request.POST['content'],
-            start_date = start_day,
-            finish_date = finish_day,
+            start_date = request.POST['start_date'],
+            finish_date = request.POST['finish_date'],
             cost = request.POST['cost'],
         )
 
         return redirect('calendar', user_pk)
+    
+    events_list_ = [event.to_dict() for event in events]
+    events_list = json.dumps(events_list_) 
+    print(events_list)
 
-    return render(request, 'calendar.html', {"events":events, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend, "ratioSpend":ratioSpend})
+    return render(request, 'calendar.html', {"events":events, "events_list":events_list, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
 
 
 def spend(request):

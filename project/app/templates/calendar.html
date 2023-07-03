@@ -13,47 +13,36 @@
     <div class="button">
         <a href="{% url 'logout' %}" id="로그아웃">로그아웃</a>
     </div>
-        <table class="Calendar">
-            <thead>
-                <tr id="monthmenubar">
-                    <td colspan="5" id="YearMonth">
-                        <span id="calYear"></span>년
-                        <span id="calMonth"></span>월
-                    </td>
-                </tr>
-                <tr id="weekday">
-                    <td>일</td>
-                    <td>월</td>
-                    <td>화</td>
-                    <td>수</td>
-                    <td>목</td>
-                    <td>금</td>
-                    <td>토</td>
-                </tr>
-            </thead>
+    <table class="Calendar">
+        <thead>
+            <tr id="monthmenubar">
+                <td colspan="5" id="YearMonth">
+                    <span id="calYear"></span>년
+                    <span id="calMonth"></span>월
+                </td>
+            </tr>
+            <tr id="weekday">
+                <td>일</td>
+                <td>월</td>
+                <td>화</td>
+                <td>수</td>
+                <td>목</td>
+                <td>금</td>
+                <td>토</td>
+            </tr>
+        </thead>
 
-            <tbody>
-                
-            </tbody>
-        </table>
-    </div>
+        <tbody class="tt">
+        </tbody>
+    </table>
 </div>
 
 <div class="modalbox hidden">
     <div class="background"></div>
     <div class="modal">
         <div class="modal-date"></div>
-        <div class="event_modal_content">
-            <div>
-                {% for event in events.all %}
-                {% if event.date == date.now %} 
-                <!-- have to change date.now into choiceDay-->
-                <p>
-                <span>{{event.content}}</span>
-                </p>
-                {% endif %}
-                {% endfor %}
-            </div>
+        <div class="event_modal">
+            <div class="event_modal_content"></div>
             <form action="http://127.0.0.1:8000/spend/" method="post">
                 {% csrf_token %}
                 <div>
@@ -117,7 +106,7 @@
         </div>
         <div class="expected_cost">
             <div class="expected_color"></div>
-            <span class="span_cost">{{expected_cost}}</span>
+            <span class="span_cost" id="expected_cost"></span>
             <span class="span">이번 달 총 예상 지출 금액</span>
         </div>
     </div>
@@ -127,6 +116,14 @@
 {% endif %}
 
 <script>
+    const modalBox = document.querySelector(".modalbox");
+    const openBtn = document.querySelector("tbody");
+    const closeBtn = document.querySelector(".close");
+
+    const modal2 = document.querySelector(".addEventModal");
+    const openBtn2 = document.querySelector(".addEvent");
+    const closeBtn2 = document.querySelector(".close2");
+
     const events = [
     {% for event in events %}
         {
@@ -141,7 +138,7 @@
         events.forEach(function(idx){
             idx.start_date = new Date(idx.start_date);
             idx.finish_date = new Date(idx.finish_date);
-            console.log(idx);
+            //console.log(idx);
         });    // 웹 페이지가 로드되면 buildCalendar 실행
 
         let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
@@ -159,18 +156,18 @@
 
             //현재 달력 연 월 정보
             const month = nowMonth.getMonth();
-            console.log(month);
+            //console.log(month);
             const year = nowMonth.getFullYear();
-            console.log(year);
+            //console.log(year);
 
             //현재 연 월 해당하는 이벤트만 넣기
             const currentMonth = [];
             if (events.length != 0){
                 for (let j = 0;  j < events.length; j++){
-                    console.log(events[j]['start_date'].getMonth());
-                    console.log(events[j]['finish_date'].getMonth());
+                    //console.log(events[j]['start_date'].getMonth());
+                    //console.log(events[j]['finish_date'].getMonth());
                     if ((events[j]['start_date'].getMonth() === month || events[j]['finish_date'].getMonth() === month) && events[j]['start_date'].getFullYear() == year) {
-                        console.log(events[j]);
+                        //console.log(events[j]);
                         currentMonth.push(events[j]);
                     };
     
@@ -200,7 +197,6 @@
                 if (currentMonth.length > 0) {
                     for (let k = 0; k < currentMonth.length; k++) {
                         if (currentMonth[k].start_date == currentMonth[k].finish_date) {
-                            console.log("for 1")
                             if (currentMonth[k].start_date.getDate() == nowDay.getDate()){
                                 let newEvent = document.createElement("p");
                                 newEvent.innerHTML = currentMonth[k].detail;
@@ -209,7 +205,6 @@
                         }
 
                         else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].finish_date.getMonth() == month) {
-                            console.log("for 2")
                             for (let m = new Date(currentMonth[k].start_date); m <= currentMonth[k].finish_date; m.setDate(m.getDate() + 1)) {
                                 if (m.getDate() == nowDay.getDate()){
                                     let newEvent = document.createElement("p");
@@ -246,6 +241,7 @@
                 }
                 const modal_Month = nowDay.getMonth();
                 const modal_Date = nowDay.getDate();
+                const modalDate = document.querySelector(".modal-date");
                 if (nowDay.getDay() == 6) {                 // 토요일인 경우
                     nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
                 }
@@ -253,7 +249,7 @@
                 if (nowDay < today) {                       // 지난날인 경우
                     newDIV.className = "pastDay";
                     newDIV.onclick = function(){
-                        modalDate.innerHTML = `${modal_Month+1}월 ${modal_Date}일`;
+                        modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
                         modalBox.classList.remove("hidden");
                     }
                 }
@@ -261,20 +257,21 @@
                     newDIV.className = "today";
                     //newDIV.onclick = function () { choiceDate(this); }
                     newDIV.onclick = function(){
-                        modalDate.innerHTML = `${modal_Month+1}월 ${modal_Date}일`;
+                        modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
                         modalBox.classList.remove("hidden");
                     }
-                    console.log(nowDay);
+                    //console.log(nowDay);
                 }
                 else {                                      // 미래인 경우
                     newDIV.className = "futureDay";
                     //newDIV.onclick = function () { choiceDate(this); }
                     newDIV.onclick = function(){
-                        modalDate.innerHTML = `${modal_Month+1}월 ${modal_Date}일`;
+                        modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
                         modalBox.classList.remove("hidden");
                     }
                 }
             }
+            const makeSum = costSum();
         }
 
         
@@ -295,9 +292,11 @@
             buildCalendar();    // 달력 다시 생성
         }
         // 다음달 버튼 클릭
+        const emc = document.querySelector(".event_modal_content");
         function nextCalendar() {
             nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, nowMonth.getDate());   // 현재 달을 1 증가
             buildCalendar();    // 달력 다시 생성
+            emc.innerHTML = '';
         }
 
         // input값이 한자리 숫자인 경우 앞에 '0' 붙혀주는 함수
@@ -314,29 +313,21 @@
     
 
     {% comment %} function openModal(event, newDIV) {
-        console.log(newDIV.innerHTML);
+        //console.log(newDIV.innerHTML);
         modalDate.innerHTML = `${modal_Month}월 ${modal_Date}일`;
         modalBox.classList.remove("hidden");
         
         return "Fuck you";
     } {% endcomment %}
 
+
     //모달 여닫기
-    const modalBox = document.querySelector(".modalbox")
-    const openBtn = document.querySelector("tbody");
-    const closeBtn = document.querySelector(".close");
 
-    const modal2 = document.querySelector(".addEventModal");
-    const openBtn2 = document.querySelector(".addEvent");
-    const closeBtn2 = document.querySelector(".close2");
-
-    const modalDate = document.querySelector(".modal-date");
-
-
+    const e_m_c = document.querySelector(".event_modal_content");
     function closeModal() {
       modalBox.classList.add("hidden");
+      e_m_c.innerHTML = '';
     }
-
 
     closeBtn.addEventListener("click", closeModal);
 
@@ -365,30 +356,51 @@
     const addEvent = document.querySelector(".addEvent")
     addEvent.addEventListener("click", openAddEventModal);
 
-    window.addEventListener('resize', adjustTableSize);
-
-    function adjustCalendarSize() {
-        var calendarContainer = document.getElementById('calendar-container');
-        var calendar = document.getElementById('calendar');
-        var elementWidth = calendarContainer.offsetWidth;
-
-        // Set the width of the calendar table
-        calendar.style.width = elementWidth + 'px';
-
-        // Calculate the height based on the width
-        var elementHeight = elementWidth;
-        calendar.style.height = elementHeight + 'px';
+    
+    //모달 창 열면 그날에 해당하는 이벤트만 보여주기!!!!!!!!
+    const tbody_ = document.querySelector(".tt");
+             
+    function showEvent () {
+    const month_for_choice = document.querySelector(".modal-date").innerText; //modal-date div의 innertext를 가져옴
+    const month_ = month_for_choice.split('-');  // 하이픈을 기준으로 끊어서 배열에 저장
+                
+    // let e_list = JSON.stringify('{{ events_list|escapejs }}');
+    let events_lists = JSON.parse('{{ events_list|escapejs }}');
+    let event_modal_content = document.querySelector('.event_modal_content');
+                
+    
+    for (let i = 1; i < events.length; i++) {
+        let start_month = new Date (events_lists[i]['start_date']); 
+        let finish_month = new Date (events_lists[i]['finish_date']);
+        let s_month = start_month.getMonth()+1; //내가 작성한 일정의 시작 month
+        let f_month = finish_month.getMonth()+1;
+        console.log(f_month);
+    
+        let st_day = new Date (events_lists[i]['start_date']);
+        let fi_day = new Date(events_lists[i]['finish_date']);
+        let s_day = st_day.getDate(); //내가 작성한 일정의 시작 날짜
+        let f_day = fi_day.getDate();
+    
+        if (s_month <= Number(month_[1]) && Number(month_[1]) <= f_month ) {
+            if (s_day <= Number(month_[2]) && Number(month_[2]) <= f_day) {
+                let p_ = document.createElement('p');
+                let span_ = document.createElement('span');
+                span_.innerText = events_lists[i].content;
+                p_.appendChild(span_);
+                event_modal_content.appendChild(p_);
+                // event_modal_content.innerHTML = `${events_lists[i].content}`;
+            }
+        }
     }
+}
 
-    // 페이지 로드 후 크기 조정
-    window.addEventListener('load', adjustCalendarSize);
-
-
+    tbody_.addEventListener("click", showEvent);
 
 
 </script>
 
 
-<!-- <script src="{% static 'js/calendar.js' %}"></script> 
-<script src="{% static 'js/reserve.js' %}"></script>  -->
+<!-- <script src="{% static 'js/calendar.js' %}"></script> -->
+<script src="{% static 'js/touchMove.js' %}"></script>
+<script src="{% static 'js/eventSum.js' %}"></script>  
 {% endblock container %}
