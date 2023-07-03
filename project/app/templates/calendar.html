@@ -87,6 +87,15 @@
             <label for="cost">금액</label>
             <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액을 입력해주세요"/>
         </div>
+        <div>
+            <label for="category">색상</label>
+            <input type="color" name="category" id="event_category" list="colorOptions">
+            <datalist id="colorOptions">
+                <option>#ABE3FF</option>
+                <option>#FFBBB4</option>
+                <option>#C4BEFF</option>
+            </datalist>
+        </div>
         <button type="submit">
             작성하기
         </button>
@@ -119,12 +128,12 @@
     <div class="costbox">
         <div class="spent_cost">
             <div class="spent_color"></div>
-            <span class="span_cost">{{ sumForRealSpend }}</span>
+            <span class="span_cost">{{ sumForRealSpend }} 원</span>
             <span class="span">오늘까지 실제 총 지출 금액</span>
         </div>
         <div class="expected_cost">
             <div class="expected_color"></div>
-            <span class="span_cost">{{expected_cost}}</span>
+            <span class="span_cost">{{expected_cost}} 원</span>
             <span class="span">이번 달 총 예상 지출 금액</span>
         </div>
     </div>
