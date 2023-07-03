@@ -115,7 +115,8 @@ td {
   width: 100%;
 }
 
-.expected_cost, .spent_cost {
+.expected_cost,
+.spent_cost {
   margin-top: 1%;
   margin-bottom: 1%;
   display: flex;
@@ -138,7 +139,7 @@ td {
   margin-top: 1%;
 }
 
-.costbox .span{
+.costbox .span {
   width: 40%;
   text-align: center;
   margin-top: 1%;
@@ -156,7 +157,7 @@ td {
   bottom: 0%;
 }
 
-.background{
+.background {
   position: fixed;
   width: 100%;
   top: 0%;
@@ -204,4 +205,12 @@ td {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.hidden3 {
+  display: none;
+}
+
+.hidden4 {
+  display: none;
 }

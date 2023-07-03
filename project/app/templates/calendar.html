@@ -44,14 +44,20 @@
         <div class="modal-date"></div>
         <div class="event_modal">
             <div class="event_modal_content"></div>
-            <form action="http://127.0.0.1:8000/spend/" method="post">
-                {% csrf_token %}
-                <div>
-                    <label for="spend">실제지출액</label>
-                    <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
-                </div>
-                <button type="submit">작성하기</button>
-            </form>
+            <div class="spendFormAndShow">
+                <div class="show_real_spend"></div>
+                <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
+                    {% csrf_token %}
+                    <div>
+                        <label for="spend">실제지출액</label>
+                        <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
+                    </div>
+                    <div class="hidden3">
+                        <input type="number" name="date" value="" id="date_spend"/>
+                    </div>
+                    <button type="submit" class="real_spend_submit">작성하기</button>
+                </form>
+            </div>
             <button class="close">
                 X
             </button>
@@ -332,10 +338,12 @@
 
     //모달 여닫기
 
-    const e_m_c = document.querySelector(".event_modal_content");
+    const e_m_c = document.querySelector(".event_modal_content"); //모달 내용 비우기
+    const s_r_s = document.querySelector(".show_real_spend");
     function closeModal() {
       modalBox.classList.add("hidden");
       e_m_c.innerHTML = '';
+      s_r_s.innerHTML = '';
     }
 
     closeBtn.addEventListener("click", closeModal);
@@ -362,18 +370,15 @@
 
     window.onload = function () { buildCalendar(); }
 
-    const addEvent = document.querySelector(".addEvent")
-    addEvent.addEventListener("click", openAddEventModal);
 
     
-    //모달 창 열면 그날에 해당하는 이벤트만 보여주기!!!!!!!!
+    //모달 창 열면 그날에 해당하는 이벤트(+예상 지출 금액)만 보여주기!!!!!!!!
     const tbody_ = document.querySelector(".tt");
              
     function showEvent () {
-    const month_for_choice = document.querySelector(".modal-date").innerText; //modal-date div의 innertext를 가져옴
-    const month_ = month_for_choice.split('-');  // 하이픈을 기준으로 끊어서 배열에 저장
+    const month_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
+    const month_ = month_for_choice.split('-');  // 하이픈을 기준으로 끊어서 배열로 저장 (["2023","12","23"])
                 
-    // let e_list = JSON.stringify('{{ events_list|escapejs }}');
     let events_lists = JSON.parse('{{ events_list|escapejs }}');
     let event_modal_content = document.querySelector('.event_modal_content');
                 
@@ -383,7 +388,6 @@
         let finish_month = new Date (events_lists[i]['finish_date']);
         let s_month = start_month.getMonth()+1; //내가 작성한 일정의 시작 month
         let f_month = finish_month.getMonth()+1;
-        console.log(f_month);
     
         let st_day = new Date (events_lists[i]['start_date']);
         let fi_day = new Date(events_lists[i]['finish_date']);
@@ -394,17 +398,72 @@
             if (s_day <= Number(month_[2]) && Number(month_[2]) <= f_day) {
                 let p_ = document.createElement('p');
                 let span_ = document.createElement('span');
+                let span__ = document.createElement('p');
                 span_.innerText = events_lists[i].content;
+                span__.innerText = "예상 지출 금액: " + events_lists[i].cost;
                 p_.appendChild(span_);
+                span_.appendChild(span__);
                 event_modal_content.appendChild(p_);
                 // event_modal_content.innerHTML = `${events_lists[i].content}`;
             }
         }
     }
+
+    //모달에 그날의 실제 지출액 보여주기
+     // 내가 누른 날짜 받아오기
+    const clickyear = month_[0];
+    const clickmonth = month_[1];
+    const clickdt = month_[2];
+    const clickdate_ = clickyear+clickmonth+clickdt;
+   
+    // 실제 지출액 적을 모달
+    const show_real_spend = document.querySelector(".show_real_spend");
+                    
+    let spends_lists = JSON.parse('{{ spends_list|escapejs }}');
+    let countSpend = JSON.parse('{{ spendCount|escapejs }}');
+
+    for (i = 0; i < countSpend; i++) {
+        console.log(i);
+        if (spends_lists[i].date == clickdate_) {
+            let pForSpend = document.createElement('p');
+            pForSpend.classList.add("pForSpend");
+            let spanForSpend = document.createElement('span');
+
+            spanForSpend.innerText = "실제 지출 금액: "+spends_lists[i].spend;
+            pForSpend.appendChild(spanForSpend);
+            show_real_spend.appendChild(pForSpend);
+            console.log(spends_lists[i].spend);
+        }
+    }
+
+
+    //실제지출액 작성 폼 없애기
+    const spendForm = document.querySelector(".spend_form");
+
+    if ($("p").hasClass("pForSpend") === true) {
+        spendForm.classList.add("hidden4");
+    }         
 }
 
     tbody_.addEventListener("click", showEvent);
 
+    //실제 지출액 칸 누르면 date_spend 에 저절로 날짜 값이 들어가게 (finish_date == list)
+    const realSpend = document.querySelector("#real_spend");
+    
+    function fillDate() {
+        const date_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
+        const date_ = date_for_choice.split('-');
+
+        const spendYear = date_[0];
+        const spendMonth = date_[1];
+        const spendDate = date_[2];
+        const spend_date = spendYear+spendMonth+spendDate;
+
+        const spendDateInputBox = document.querySelector("#date_spend");
+        spendDateInputBox.value = spend_date;
+    }
+
+    realSpend.addEventListener("click", fillDate)    
 
 </script>
 
