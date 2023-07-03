@@ -83,6 +83,22 @@
             <label for="cost">금액</label>
             <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액을 입력해주세요"/>
         </div>
+        <div>
+            <label for="category">색상</label>
+            <input type="color" name="category" id="event_category" list="colorOptions">
+            <datalist id="colorOptions">
+                <option>#ABE3FF</option>
+                <option>#FFBBB4</option>
+                <option>#C4BEFF</option>
+                <option>#FDD3FF</option>
+                <option>#D8FFCD</option>
+                <option>#FFF1D0</option>
+                <option>#FBFFCD</option>
+                <option>#D0E1FF</option>
+                <option>#FFDCD6</option>
+                <option>#E5E8BA</option>
+            </datalist>
+        </div>
         <button type="submit">
             작성하기
         </button>
@@ -107,7 +123,7 @@
     <div class="costbox">
         <div class="spent_cost">
             <div class="spent_color"></div>
-            <span class="span_cost">{{ sumForRealSpend }}</span>
+            <span class="span_cost">{{sumForRealSpend}} 원</span>
             <span class="span">오늘까지 실제 총 지출 금액</span>
         </div>
         <div class="expected_cost">
@@ -120,7 +136,8 @@
 {% else %}
 <p>권한 없음</p>
 {% endif %}
-
+<script src="{% static 'js/touchMove.js' %}"></script>
+<script src="{% static 'js/eventSum.js' %}"></script>
 <script>
     const modalBox = document.querySelector(".modalbox");
     const openBtn = document.querySelector("tbody");
@@ -137,6 +154,7 @@
             finish_date: "{{event.finish_date}}",
             detail: "{{event.content}}",
             cost: {{event.cost}},
+            category: "{{event.category}}",
         },
     {%endfor%}
     ];
@@ -206,6 +224,7 @@
                             if (currentMonth[k].start_date.getDate() == nowDay.getDate()){
                                 let newEvent = document.createElement("p");
                                 newEvent.innerHTML = currentMonth[k].detail;
+                                newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
                                 nowColumn.appendChild(newEvent);
                             }
                         }
@@ -215,6 +234,7 @@
                                 if (m.getDate() == nowDay.getDate()){
                                     let newEvent = document.createElement("p");
                                     newEvent.innerHTML = currentMonth[k].detail;
+                                    newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
                                     nowColumn.appendChild(newEvent);
                                 }                     
                             }
@@ -226,6 +246,7 @@
                                 if (m.getDate() == nowDay.getDate()){
                                     let newEvent = document.createElement("p");
                                     newEvent.innerHTML = currentMonth[k].detail;
+                                    newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
                                     nowColumn.appendChild(newEvent);
                                 }                     
                             }
@@ -237,6 +258,7 @@
                                 if (m.getDate() == nowDay.getDate()){
                                     let newEvent = document.createElement("p");
                                     newEvent.innerHTML = currentMonth[k].detail;
+                                    newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
                                     nowColumn.appendChild(newEvent);
                                 }                     
                             }
@@ -457,9 +479,4 @@
     realSpend.addEventListener("click", fillDate)    
 
 </script>
-
-
-<!-- <script src="{% static 'js/calendar.js' %}"></script> -->
-<script src="{% static 'js/touchMove.js' %}"></script>
-<script src="{% static 'js/eventSum.js' %}"></script>  
 {% endblock container %}

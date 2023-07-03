@@ -84,6 +84,7 @@ def calendar(request, user_pk):
             start_date = request.POST['start_date'],
             finish_date = request.POST['finish_date'],
             cost = request.POST['cost'],
+            category = request.POST['category'],
         )
 
         return redirect('calendar', user_pk)

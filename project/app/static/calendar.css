@@ -105,6 +105,10 @@ tbody td {
   vertical-align: top;
 }
 
+a {
+  color: black;
+}
+
 /*지난 일자, 현재 일자, 선택일자 이펙트*/
 
 .pastDay {
@@ -136,6 +140,7 @@ tbody td {
   width: 100%;
   height: 100%;
   background-color: beige;
+  border-radius: 8px;
 }
 
 .progresspercent {
@@ -144,6 +149,7 @@ tbody td {
   left: 0;
   height: 100%;
   background-color: antiquewhite;
+  border-radius: 8px;
 }
 
 /* costbox */
@@ -164,11 +170,7 @@ tbody td {
 .expected_color {
   width: 7%;
   background-color: beige;
-}
-
-.spent_color {
-  width: 7%;
-  background-color: antiquewhite;
+  border-radius: 3px;
 }
 
 .costbox .span_cost {

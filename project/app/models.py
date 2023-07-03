@@ -8,6 +8,7 @@ class Event(models.Model):
     start_date = models.DateField()
     finish_date = models.DateField()
     cost = models.IntegerField()
+    category = models.CharField(max_length=50, default='')
 
     def __str__(self):
         return f'{self.author}-{self.content}'
