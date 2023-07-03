@@ -106,11 +106,6 @@
         {% endif %}
     </div>
     <div class="costbox">
-        <div class="expected_cost">
-            <div class="expected_color"></div>
-            <span class="span_cost"></span>
-            <span class="span">이번 달 총 예상 지출 금액</span>
-        </div>
         <div class="spent_cost">
             <div class="spent_color"></div>
             <span class="span_cost">{{ sumForRealSpend }}</span>
@@ -118,7 +113,7 @@
         </div>
         <div class="expected_cost">
             <div class="expected_color"></div>
-            <span class="span_cost"></span>
+            <span class="span_cost" id="expected_cost"></span>
             <span class="span">이번 달 총 예상 지출 금액</span>
         </div>
     </div>
