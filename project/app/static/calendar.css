@@ -171,6 +171,12 @@ a {
   border-radius: 3px;
 }
 
+.spent_color {
+  width: 7%;
+  background-color: antiquewhite;
+  border-radius: 3px;
+}
+
 .costbox .span_cost {
   width: 20%;
   text-align: center;
@@ -239,3 +245,16 @@ a {
   display: none;
 }
 
+#로그아웃 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.hidden3 {
+  display: none;
+}
+
+.hidden4 {
+  display: none;
+}

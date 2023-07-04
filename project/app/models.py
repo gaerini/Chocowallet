@@ -23,7 +23,7 @@ class Event(models.Model):
 
 class Spend(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_for_spend', default='')
-    date = models.IntegerField(default=1)
+    date = models.IntegerField(default=00000000)
     spend = models.IntegerField()
 
     def toDict(self):

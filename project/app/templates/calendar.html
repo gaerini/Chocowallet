@@ -114,16 +114,12 @@
     </button>
     <div class="progress">
         <div class="progressbox"></div>
-        {% if ratioSpend >= 100 %}
-        <div class="progresspercent" style="width: 100%; background-color: red;"></div>
-        {% else %}
-        <div class="progresspercent" style="width: {{ratioSpend}}%;"></div> 
-        {% endif %}
+        <div class="progresspercent"></div> 
     </div>
     <div class="costbox">
         <div class="spent_cost">
             <div class="spent_color"></div>
-            <span class="span_cost">{{sumForRealSpend}} 원</span>
+            <span class="span_cost" id="spent_cost">{{sumForRealSpend}} 원</span>
             <span class="span">오늘까지 실제 총 지출 금액</span>
         </div>
         <div class="expected_cost">
@@ -134,12 +130,10 @@
     </div>
 </div>
 
-
 {% else %}
 <p>권한 없음</p>
 {% endif %}
-<script src="{% static 'js/touchMove.js' %}"></script>
-<script src="{% static 'js/eventSum.js' %}"></script>
+
 <script>
     const modalBox = document.querySelector(".modalbox");
     const openBtn = document.querySelector("tbody");
@@ -159,6 +153,15 @@
             category: "{{event.category}}",
         },
     {%endfor%}
+    ];
+
+    const realspends = [
+    {% for realspend in realSpends %}
+        {
+            date: "{{realspend.date}}",
+            spend: {{realspend.spend}},
+        },
+    {% endfor %}
     ];
     
         events.forEach(function(idx){
@@ -302,6 +305,8 @@
                 }
             }
             const makeSum = costSum();
+            const makeRealSum = costRealSum();
+            const makeRatio = costRatio();
         }
 
         
@@ -470,8 +475,8 @@
         const date_ = date_for_choice.split('-');
 
         const spendYear = date_[0];
-        const spendMonth = date_[1];
-        const spendDate = date_[2];
+        const spendMonth = date_[1].padStart(2, '0');
+        const spendDate = date_[2].padStart(2, '0');
         const spend_date = spendYear+spendMonth+spendDate;
 
         const spendDateInputBox = document.querySelector("#date_spend");
@@ -481,4 +486,6 @@
     realSpend.addEventListener("click", fillDate)    
 
 </script>
+<script src="{% static 'js/touchMove.js' %}"></script>
+<script src="{% static 'js/eventSum.js' %}"></script>
 {% endblock container %}
