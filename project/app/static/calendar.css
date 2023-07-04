@@ -22,21 +22,19 @@ body, .viewport, .container, .calendar {
   
 }
 
-.container {
-  overflow: auto;
-}
-
 .momdiv {
   height: auto;
   width: 100%;
   position: relative;
   display: flex;
+  flex-direction: column;
 }
 
 .momdiv2 {
   width: 100%;
-  height: 30%;
+  height: auto;
   position: relative;
+  display: flex;
 }
 
 #monthmenubar {
@@ -241,19 +239,3 @@ a {
   display: none;
 }
 
-<<<<<<< HEAD
-#로그아웃 {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-.hidden3 {
-  display: none;
-}
-
-.hidden4 {
-  display: none;
-}
-=======
->>>>>>> 285bb5bb2dba371bc9650cf3712626d1d1ca3d05
