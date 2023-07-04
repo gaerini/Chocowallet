@@ -13,6 +13,7 @@
         <a href="{% url 'logout' %}" id="로그아웃">로그아웃</a>
     </div>
     <div class="calendar">
+        <div class="line"></div>
         <table class="Calendar">
             <thead>
                 <tr id="monthmenubar">
@@ -36,7 +37,6 @@
             </tbody>
         </table>
     </div>
-
     <div class="modalbox hidden">
         <div class="background"></div>
         <div class="modal">
@@ -110,9 +110,6 @@
 </div>
 
 <div class="momdiv2">    
-    <button class = "addEvent">
-        일정 추가하기
-    </button>
     <div class="progress">
         <div class="progressbox"></div>
         <div class="progresspercent"></div> 
@@ -131,6 +128,11 @@
     </div>
 </div>
 
+<div class="momdiv3">
+    <button class = "addEvent">
+        일정 추가하기
+    </button>
+</div>
 {% else %}
 <p>권한 없음</p>
 {% endif %}
