@@ -127,9 +127,9 @@
         </div>
     </div>
 
-    <!-- 이벤트 수정
-    <div class="eventUpdateModal hidden5">
-        <form action="http://127.0.0.1:8000/update" method="post">
+    <!--이벤트 수정-->
+    <div class="eventEditModal hidden5">
+        <form action="http://127.0.0.1:8000/edit/" method="post">
             {% csrf_token %}
             <div>
                 <label for="date">시작날짜</label>
@@ -170,7 +170,7 @@
         <button class="close3">
             X
         </button>
-    </div> -->
+    </div> 
 </div>
 
 <div class="momdiv3">
@@ -472,7 +472,6 @@
         }
     }
 
-
     //모달에 그날의 실제 지출액 보여주기
      // 내가 누른 날짜 받아오기
     const clickyear = Number(month_[0]);
@@ -525,10 +524,12 @@
 
     //모달에서 이벤트 누르면 수정할 수 있게 하는 코드 (p태그의 클래스 = event의 pk값)
     const todoEvent = document.querySelector(".todoEvent");
+    const eventEditModal = document.querySelector(".eventEditModal");
 
     function edit() {
         for (let i = 1; i < events.length; i++) {
             let updateEventPk = getElementsByClassName("{{i}}");
+            
         }
     }
 

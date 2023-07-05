@@ -119,3 +119,23 @@ def spend(request):
     print(spends_list)
     
     return render(request, 'calendar.html', {"sumForRealSpend":sumForRealSpend, "spends_list":spends_list})
+
+def edit(request, event_pk):
+    user = request.user
+    user_pk = user.pk
+
+    forEdit = Event.objects.get(pk=event_pk)
+
+    if request.method == "POST":
+        Event.objects.filter(pk = event_pk).update(  
+            author = request.user,
+            content = request.POST['content'],
+            start_date = request.POST['start_date'],
+            finish_date = request.POST['finish_date'],
+            cost = request.POST['cost'],
+            category = request.POST['category'],
+        )
+        return redirect('calendar', user_pk)
+    
+    return render(request, 'calendar.html', {'forEdit':forEdit})
+        
