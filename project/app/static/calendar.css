@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Questrial&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap");
 
 /* 캘린더 위쪽 */
 
@@ -26,26 +27,25 @@ tbody {
   height: auto;
 }
 
-.container {
-  overflow: auto;
-}
-
 .momdiv {
   height: auto;
   width: 100%;
   position: relative;
   display: flex;
+  flex-direction: column;
 }
 
 .momdiv2 {
   width: 100%;
-  height: 30%;
+  height: auto;
   position: relative;
+  display: flex;
+  margin-top: 1 vh;
 }
 
 #monthmenubar {
   position: relative;
-  width: 100vw;
+  width: 93vw;
   height: 10vh;
   font-size: calc(2vw + 2vh);
   font-weight: bold;
@@ -53,13 +53,15 @@ tbody {
   justify-content: flex-start;
   align-items: center;
   white-space: nowrap; /* 한 줄로 표시 */
-  padding-left: 7vw;
+  padding-left: 6vw;
   padding-top: 1vh;
 }
 
 #YearMonth {
   width: 10vw;
   height: 10vh;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
 }
 
 thead > #monthmenubar > td {
@@ -73,13 +75,17 @@ thead > #monthmenubar > td {
   justify-content: space-around;
   align-items: center;
   text-align: center;
-  width: 100vw;
+  width: 99vw;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  padding-bottom: 0.5vh;
+  margin-bottom: 0.5vh;
 }
 
 thead > #weekday > td {
   font-size: calc(1.25vw + 1.25vh);
   width: 10vw;
-  min-height: 4vh;
+  min-height: 3vh;
 }
 
 .Calendar > tbody > tr > td > p {
@@ -107,10 +113,32 @@ tbody td {
   min-height: 9vh;
   height: auto;
   vertical-align: top;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: calc(1vw + 1vh);
 }
 
 a {
   color: black;
+}
+
+.line {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 15.2vh;
+  background-color: rgb(48, 47, 47);
+  transform: translateY(-50%);
+  height: 2px;
+  width: 92vw;
+  left: 4vw;
+  right: 4vw;
+}
+
+.Calendar tbody tr:last-child {
+  padding-bottom: 1vh;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 /*지난 일자, 현재 일자, 선택일자 이펙트*/
@@ -174,6 +202,12 @@ a {
 .expected_color {
   width: 7%;
   background-color: beige;
+  border-radius: 3px;
+}
+
+.spent_color {
+  width: 7%;
+  background-color: antiquewhite;
   border-radius: 3px;
 }
 
