@@ -1,25 +1,31 @@
 const calendar = document.querySelector('.Calendar');
 console.log(calendar);
-let positoin = 0;
-var start_x, end_x;
+let position = 0;
+var startX, endX;
 
-function start_x(e) {
-    start_x = e.touches[0].pageX;
+function handleStartX(e) {
+    startX = e.touches[0].pageX;
 }
 
-function end_x(e) {
-    end_x = e.changedTouches[0].pageX;
-    if (start_x < end_x) {
+function handleEndX(e) {
+    endX = e.changedTouches[0].pageX;
+
+    if ((startX - endX) < -180) {
         prevCalendar();
+        console.log(startX);
+        console.log(endX);
     }
-    else {
+    else if ((startX - endX) > 180) {
         nextCalendar();
+        console.log(startX);
+        console.log(endX);
     }
 }
 
-calendar.addEventListener('touchstart', start_x);
+calendar.addEventListener('touchstart', handleStartX);
 
-calendar.addEventListener('touchend', end_x);
+calendar.addEventListener('touchend', handleEndX);
+
 
 /*const resvTab = document.querySelector('.resv-wrapper');
 const exitBtn = document.querySelector('.resv-close');

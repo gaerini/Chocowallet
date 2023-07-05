@@ -62,7 +62,7 @@ function buildCalendar() {
         nowColumn.appendChild(newDIV);
         if (lastDayOfMonth <= 6 && nowDay.getDate() == lastDate.getDate()) {
             console.log('go!');
-            for (let fillDay = 0; fillDay <= 6-lastDayOfMonth ;fillDay++){
+            for (let fillDay = 0; fillDay < 6-lastDayOfMonth ;fillDay++){
                 let newColumn = nowRow.insertCell();
                 let newDIV = document.createElement("p");       // 추가한 열에 날짜 입력
                 nowColumn.appendChild(newDIV);
