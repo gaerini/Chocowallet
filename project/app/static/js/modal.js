@@ -56,7 +56,7 @@ const eventEditModal_ = document.querySelector(".eventEditModal");
 
 function eventEditModalValue() {
   const todoEvent = document.querySelector(".todoEvent").innerText.split("\n");
-
+  console.log(todoEvent[0]);
   document.querySelector("#event_content_update").value = todoEvent[0];
   document.querySelector("#event_cost_update").value =
     todoEvent[2].substring(10);

@@ -59,6 +59,7 @@
             </div>
         </div>
     </div>
+
     <div class="addEventModal hidden2">
         <form action="" method="post">
             {% csrf_token %}
@@ -103,10 +104,11 @@
         </button>
     </div>
 </div>
-<div class="momdiv2">
+
+<div class="momdiv2">    
     <div class="progress">
         <div class="progressbox"></div>
-        <div class="progresspercent"></div>
+        <div class="progresspercent"></div> 
     </div>
     <div class="costbox">
         <div class="spent_cost">
@@ -120,6 +122,7 @@
             <span class="span">이번 달 총 예상 지출 금액</span>
         </div>
     </div>
+
     <!-- 이벤트 수정 -->
     <div class="eventEditModal hidden5">
         <form action="http://127.0.0.1:8000/edit/" method="post">
@@ -163,8 +166,9 @@
         <button class="close3">
             X
         </button>
-    </div>
+    </div> 
 </div>
+
 <div class="momdiv3">
     <button class = "addEvent">
         일정 추가하기
@@ -180,6 +184,7 @@
     const modal2 = document.querySelector(".addEventModal");
     const openBtn2 = document.querySelector(".addEvent");
     const closeBtn2 = document.querySelector(".close2");
+    
     const events = [
     {% for event in events %}
         {
@@ -199,7 +204,6 @@
         },
     {% endfor %}
     ];
-
     function showEvent () {
         //그날의 이벤트 보여주기
         const month_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
