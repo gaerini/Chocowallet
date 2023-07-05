@@ -3,6 +3,7 @@ var realsum = 0;
 const monthSpan = document.querySelector("#calMonth");
 
 function costSum () {
+    sum = 0
     events.forEach(function(obj){
         const month = Number(monthSpan.innerText);
         const eventDate = new Date(obj.finish_date);
@@ -19,6 +20,7 @@ function costSum () {
 }
 
 function costRealSum () {
+    realsum = 0
     realspends.forEach(function(i){
         const mon = Number(monthSpan.innerText);
         const spenddate = i.date.substring(4, 6);
