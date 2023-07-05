@@ -6,6 +6,8 @@ from django.db.models import Sum
 from .models import Event, Spend
 import datetime
 import json
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -91,7 +93,7 @@ def calendar(request, user_pk):
     spend_list_ = [spend.toDict() for spend in realSpends]
     spends_list = json.dumps(spend_list_)
     spendCount = json.dumps(realSpends.count())
-    print(spends_list)
+    print(events_list)
 
     return render(request, 'calendar.html', {"events":events, "events_list":events_list, "realSpends":realSpends, "spends_list":spends_list, "spendCount":spendCount, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
 
@@ -119,3 +121,24 @@ def spend(request):
     print(spends_list)
     
     return render(request, 'calendar.html', {"sumForRealSpend":sumForRealSpend, "spends_list":spends_list})
+
+@csrf_exempt
+def edit(request, event_pk):
+    user = request.user
+    user_pk = user.pk
+
+    forEdit = Event.objects.filter(pk=user)
+
+    if request.method == "POST":
+        Event.objects.filter(pk = event_pk).update(  
+            author = request.user,
+            content = request.POST['content'],
+            start_date = request.POST['start_date'],
+            finish_date = request.POST['finish_date'],
+            cost = request.POST['cost'],
+            category = request.POST['category'],
+        )
+        return redirect('calendar', user_pk)
+    print(event_pk)
+    return render(request, 'calendar.html', {'forEdit':forEdit})
+        
