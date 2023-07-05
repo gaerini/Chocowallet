@@ -33,77 +33,10 @@
             </tbody>
         </table>
     </div>
-    <div class="modalbox hidden">
-        <div class="background"></div>
-        <div class="modal">
-            <div class="modal-date"></div>
-            <div class="event_modal">
-                <div class="event_modal_content"></div>
-                <div class="spendFormAndShow">
-                    <div class="show_real_spend"></div>
-                    <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
-                        {% csrf_token %}
-                        <div>
-                            <label for="spend">실제지출액</label>
-                            <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
-                        </div>
-                        <div class="hidden3">
-                            <input type="number" name="date" value="" id="date_spend"/>
-                        </div>
-                        <button type="submit" class="real_spend_submit">작성하기</button>
-                    </form>
-                </div>
-                <button class="close">
-                    X
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="addEventModal hidden2">
-        <form action="" method="post">
-            {% csrf_token %}
-            <div>
-                <label for="date">시작날짜</label>
-                <input type="date" name="start_date" id="event_date"/>
-            </div>
-            <div>
-                <label for="date">끝 날짜</label>
-                <input type="date" name="finish_date" id="event_finist_date"/>
-            </div>
-            <div>
-                <label for="content">내용</label>
-                <input type="text" name="content" id="event_content" placeholder="이벤트를 입력해주세요"/>
-            </div>
-            <div>
-                <label for="cost">금액</label>
-                <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액을 입력해주세요"/>
-            </div>
-            <div>
-                <label for="category">색상</label>
-                <input type="color" name="category" id="event_category" list="colorOptions">
-                <datalist id="colorOptions">
-                    <option>#ABE3FF</option>
-                    <option>#FFBBB4</option>
-                    <option>#C4BEFF</option>
-                    <option>#FDD3FF</option>
-                    <option>#D8FFCD</option>
-                    <option>#FFF1D0</option>
-                    <option>#FBFFCD</option>
-                    <option>#D0E1FF</option>
-                    <option>#FFDCD6</option>
-                    <option>#E5E8BA</option>
-                </datalist>
-            </div>
-            <button type="submit">
-                작성하기
-            </button>
-        </form>
-        <button class="close2">
-            X
-        </button>
-    </div>
+    
 </div>
-<div class="momdiv2">
+
+<div class="momdiv2"> 
     <div class="progress">
         <div class="progressbox"></div>
         <div class="progresspercent"></div>
@@ -165,11 +98,84 @@
         </button>
     </div> -->
 </div>
+
 <div class="momdiv3">
     <button class = "addEvent">
         일정 추가하기
     </button>
 </div>
+
+<div class="modalbox hidden">
+    <div class="background"></div>
+    <div class="modal">
+        <div class="modal-date"></div>
+        <div class="event_modal">
+            <div class="event_modal_content"></div>
+            <div class="spendFormAndShow">
+                <div class="show_real_spend"></div>
+                <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
+                    {% csrf_token %}
+                    <div>
+                        <label for="spend">실제지출액</label>
+                        <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
+                    </div>
+                    <div class="hidden3">
+                        <input type="number" name="date" value="" id="date_spend"/>
+                    </div>
+                    <button type="submit" class="real_spend_submit">작성하기</button>
+                </form>
+            </div>
+            <button class="close">
+                X
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="addEventModal hidden2">
+    <form action="" method="post">
+        {% csrf_token %}
+        <div>
+            <label for="date">시작날짜</label>
+            <input type="date" name="start_date" id="event_date"/>
+        </div>
+        <div>
+            <label for="date">끝 날짜</label>
+            <input type="date" name="finish_date" id="event_finist_date"/>
+        </div>
+        <div>
+            <label for="content">내용</label>
+            <input type="text" name="content" id="event_content" placeholder="이벤트를 입력해주세요"/>
+        </div>
+        <div>
+            <label for="cost">금액</label>
+            <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액을 입력해주세요"/>
+        </div>
+        <div>
+            <label for="category">색상</label>
+            <input type="color" name="category" id="event_category" list="colorOptions">
+            <datalist id="colorOptions">
+                <option>#ABE3FF</option>
+                <option>#FFBBB4</option>
+                <option>#C4BEFF</option>
+                <option>#FDD3FF</option>
+                <option>#D8FFCD</option>
+                <option>#FFF1D0</option>
+                <option>#FBFFCD</option>
+                <option>#D0E1FF</option>
+                <option>#FFDCD6</option>
+                <option>#E5E8BA</option>
+            </datalist>
+        </div>
+        <button type="submit">
+            작성하기
+        </button>
+    </form>
+    <button class="close2">
+        X
+    </button>
+</div>
+
 {% else %}
 <p>권한 없음</p>
 {% endif %}
@@ -180,6 +186,7 @@
     const modal2 = document.querySelector(".addEventModal");
     const openBtn2 = document.querySelector(".addEvent");
     const closeBtn2 = document.querySelector(".close2");
+    
     const events = [
     {% for event in events %}
         {
