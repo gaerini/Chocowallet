@@ -212,344 +212,71 @@
     {% endfor %}
     ];
     
-        events.forEach(function(idx){
-            idx.start_date = new Date(idx.start_date);
-            idx.finish_date = new Date(idx.finish_date);
-            //console.log(idx);
-        });    // 웹 페이지가 로드되면 buildCalendar 실행
-
-        let nowMonth = new Date();  // 현재 달을 페이지를 로드한 날의 달로 초기화
-        let today = new Date();     // 페이지를 로드한 날짜를 저장
-        today.setHours(0, 0, 0, 0);    // 비교 편의를 위해 today의 시간을 초기화
-
-        // 달력 생성 : 해당 달에 맞춰 테이블을 만들고, 날짜를 채워 넣는다.
-        function buildCalendar() {
-            let firstDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth(), 1);     // 이번달 1일
-            let lastDate = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, 0);  // 이번달 마지막날
-
-            let tbody_Calendar = document.querySelector(".Calendar > tbody");
-            document.getElementById("calYear").innerText = nowMonth.getFullYear();             // 연도 숫자 갱신
-            document.getElementById("calMonth").innerText = leftPad(nowMonth.getMonth() + 1);  // 월 숫자 갱신
-
-            //현재 달력 연 월 정보
-            const month = nowMonth.getMonth();
-            //console.log(month);
-            const year = nowMonth.getFullYear();
-            //console.log(year);
-            //이번달 마지막 요일
-            const lastDayOfMonth = lastDate.getDay();
-            console.log( lastDayOfMonth );
-            console.log(lastDate);
-            //현재 연 월 해당하는 이벤트만 넣기
-            const currentMonth = [];
-            if (events.length != 0){
-                for (let j = 0;  j < events.length; j++){
-                    //console.log(events[j]['start_date'].getMonth());
-                    //console.log(events[j]['finish_date'].getMonth());
-                    if ((events[j]['start_date'].getMonth() === month || events[j]['finish_date'].getMonth() === month) && events[j]['start_date'].getFullYear() == year) {
-                        //console.log(events[j]);
-                        currentMonth.push(events[j]);
-                    };
-    
-                }
-            }
-            
-
-            while (tbody_Calendar.rows.length > 0) {                        // 이전 출력결과가 남아있는 경우 초기화
-                tbody_Calendar.deleteRow(tbody_Calendar.rows.length - 1);
-            }
-
-            let nowRow = tbody_Calendar.insertRow();        // 첫번째 행 추가           
-
-            for (let j = 0; j < firstDate.getDay(); j++) {  // 이번달 1일의 요일만큼
-                let nowColumn = nowRow.insertCell();        // 열 추가
-            }
-
-            for (let nowDay = firstDate; nowDay <= lastDate; nowDay.setDate(nowDay.getDate() + 1)) {   // day는 날짜를 저장하는 변수, 이번달 마지막날까지 증가시키며 반복  
-
-                let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
-
-
-                let newDIV = document.createElement("p");
-                newDIV.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력
-                nowColumn.appendChild(newDIV);
-                if (lastDayOfMonth <= 6 && nowDay.getDate() == lastDate.getDate()) {
-                    console.log('go!');
-                    for (let fillDay = 0; fillDay <= 6-lastDayOfMonth ;fillDay++){
-                        let newColumn = nowRow.insertCell();
-                        let newDIV = document.createElement("p");       // 추가한 열에 날짜 입력
-                        nowColumn.appendChild(newDIV);
-                    }
-                }
-
-                if (currentMonth.length > 0) {
-                    for (let k = 0; k < currentMonth.length; k++) {
-                        if (currentMonth[k].start_date == currentMonth[k].finish_date) {
-                            if (currentMonth[k].start_date.getDate() == nowDay.getDate()){
-                                let newEvent = document.createElement("p");
-                                newEvent.innerHTML = currentMonth[k].detail;
-                                newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
-                                nowColumn.appendChild(newEvent);
-                            }
-                        }
-
-                        else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].finish_date.getMonth() == month) {
-                            for (let m = new Date(currentMonth[k].start_date); m <= currentMonth[k].finish_date; m.setDate(m.getDate() + 1)) {
-                                if (m.getDate() == nowDay.getDate()){
-                                    let newEvent = document.createElement("p");
-                                    newEvent.innerHTML = currentMonth[k].detail;
-                                    newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
-                                    nowColumn.appendChild(newEvent);
-                                }                     
-                            }
-                        }
-
-                        else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].finish_date.getMonth() != month) {
-                            for (let m = new Date(currentMonth[k].start_date); m.getMonth() <= month; m.setDate(m.getDate() + 1)) {
-                                
-                                if (m.getDate() == nowDay.getDate()){
-                                    let newEvent = document.createElement("p");
-                                    newEvent.innerHTML = currentMonth[k].detail;
-                                    newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
-                                    nowColumn.appendChild(newEvent);
-                                }                     
-                            }
-                        }
-
-                        else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].start_date.getMonth() != month) {
-                            for (let m = new Date(currentMonth[k].finish_date); m.getMonth() >= month; m.setDate(m.getDate() - 1)) {
-                                
-                                if (m.getDate() == nowDay.getDate()){
-                                    let newEvent = document.createElement("p");
-                                    newEvent.innerHTML = currentMonth[k].detail;
-                                    newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
-                                    nowColumn.appendChild(newEvent);
-                                }                     
-                            }
-                        }                        
-                    }
-                }
-                const modal_Month = nowDay.getMonth();
-                const modal_Date = nowDay.getDate();
-                const modalDate = document.querySelector(".modal-date");
-                if (nowDay.getDay() == 6) {                 // 토요일인 경우
-                    nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
-                }
-
-                if (nowDay < today) {                       // 지난날인 경우
-                    newDIV.className = "pastDay";
-                    newDIV.onclick = function(){
-                        modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
-                        modalBox.classList.remove("hidden");
-                    }
-                }
-                else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
-                    newDIV.className = "today";
-                    //newDIV.onclick = function () { choiceDate(this); }
-                    newDIV.onclick = function(){
-                        modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
-                        modalBox.classList.remove("hidden");
-                    }
-                    //console.log(nowDay);
-                }
-                else {                                      // 미래인 경우
-                    newDIV.className = "futureDay";
-                    //newDIV.onclick = function () { choiceDate(this); }
-                    newDIV.onclick = function(){
-                        modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
-                        modalBox.classList.remove("hidden");
-                    }
-                }
-            }
-            
-            const makeSum = costSum();
-            const makeRealSum = costRealSum();
-            const makeRatio = costRatio();
-        }
-
-
-        // 날짜 선택
-        function choiceDate(newDIV) {
-            if (document.getElementsByClassName("choiceDay")[0]) {                              // 기존에 선택한 날짜가 있으면
-                document.getElementsByClassName("choiceDay")[0].classList.remove("choiceDay");  // 해당 날짜의 "choiceDay" class 제거
-            }
-            newDIV.classList.add("choiceDay");           // 선택된 날짜에 "choiceDay" class 추가
-        }
-
-
-
-        // 이전달 버튼 클릭
-        function prevCalendar() {
-            nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() - 1, nowMonth.getDate());   // 현재 달을 1 감소
-            buildCalendar();    // 달력 다시 생성
-        }
-        // 다음달 버튼 클릭
-        const emc = document.querySelector(".event_modal_content");
-        function nextCalendar() {
-            nowMonth = new Date(nowMonth.getFullYear(), nowMonth.getMonth() + 1, nowMonth.getDate());   // 현재 달을 1 증가
-            buildCalendar();    // 달력 다시 생성
-            emc.innerHTML = '';
-        }
-
-        // input값이 한자리 숫자인 경우 앞에 '0' 붙혀주는 함수
-        function leftPad(value) {
-            if (value < 10) {
-                value = "0" + value;
-                return value;
-            }
-            return value;
-        }
-
-    var saveMonth;
-    var saveDate;
-    
-
-    {% comment %} function openModal(event, newDIV) {
-        //console.log(newDIV.innerHTML);
-        modalDate.innerHTML = `${modal_Month}월 ${modal_Date}일`;
-        modalBox.classList.remove("hidden");
-        
-        return "Fuck you";
-    } {% endcomment %}
-
-
-
-
-
-    //모달 여닫기
-
-    const e_m_c = document.querySelector(".event_modal_content"); //모달 내용 비우기
-    const s_r_s = document.querySelector(".show_real_spend");
-    function closeModal() {
-      modalBox.classList.add("hidden");
-      e_m_c.innerHTML = '';
-      s_r_s.innerHTML = '';
-      spendForm.classList.remove("hidden4");
-    }
-
-    closeBtn.addEventListener("click", closeModal);
-
-    //모달 내부
-    function openAddEventModal() {
-      modal2.classList.remove("hidden2");
-    }
-
-    function closeAddEventModal() {
-      modal2.classList.add("hidden2");
-    }
-
-    openBtn2.addEventListener("click", openAddEventModal);
-    closeBtn2.addEventListener("click", closeAddEventModal);
-    //요까지
-
-    const date = document.querySelector(".choiceDay");
-    const submitEvent = document.querySelector(".close2");
-
-    window.onload = function () { buildCalendar(); }
-
-    const addEvent = document.querySelector(".addEvent")
-    addEvent.addEventListener("click", openAddEventModal);
-
-
-    //모달 창 열면 그날에 해당하는 이벤트만 보여주기!!!!!!!!
-    const tbody_ = document.querySelector(".tt");
-    const spendForm = document.querySelector(".spend_form");
-             
     function showEvent () {
-    const month_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
-    const month_ = month_for_choice.split('-');  // 하이픈을 기준으로 끊어서 배열로 저장 (["2023","12","23"])
-                
-    let events_lists = JSON.parse('{{ events_list|escapejs }}');
-    let event_modal_content = document.querySelector('.event_modal_content');
+        const month_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
+        const month_ = month_for_choice.split('-');  // 하이픈을 기준으로 끊어서 배열로 저장 (["2023","12","23"])
+                    
+        let events_lists = JSON.parse('{{ events_list|escapejs }}');
+        let event_modal_content = document.querySelector('.event_modal_content');
     
-    for (let i = 1; i < events.length; i++) {
-        let s_month = (new Date (events_lists[i]['start_date'])).getMonth()+1; //내가 작성한 일정의 시작 month
-        let f_month = (new Date (events_lists[i]['finish_date'])).getMonth()+1;
+        for (let i = 1; i < events.length; i++) {
+            let s_month = (new Date (events_lists[i]['start_date'])).getMonth()+1; //내가 작성한 일정의 시작 month
+            let f_month = (new Date (events_lists[i]['finish_date'])).getMonth()+1;
     
-        let s_day = (new Date (events_lists[i]['start_date'])).getDate(); //내가 작성한 일정의 시작 날짜
-        let f_day = (new Date(events_lists[i]['finish_date'])).getDate();
+            let s_day = (new Date (events_lists[i]['start_date'])).getDate(); //내가 작성한 일정의 시작 날짜
+            let f_day = (new Date(events_lists[i]['finish_date'])).getDate();
     
-        if (s_month <= Number(month_[1]) && Number(month_[1]) <= f_month ) {
-            if (s_day <= Number(month_[2]) && Number(month_[2]) <= f_day) {
-                let p_ = document.createElement('p');
-                let span_ = document.createElement('span');
-                let p__ = document.createElement('p');
-
-                span_.innerText = events_lists[i].content;
-                p__.innerText = "예상 지출 금액: " + events_lists[i].cost;
-
-                p_.appendChild(span_);
-                span_.appendChild(p__);
-                event_modal_content.appendChild(p_);
-                p_.classList.add([i]);
-                span_.classList.add("todoEvent");
+            if (s_month <= Number(month_[1]) && Number(month_[1]) <= f_month ) {
+                if (s_day <= Number(month_[2]) && Number(month_[2]) <= f_day) {
+                    let p_ = document.createElement('p');
+                    let span_ = document.createElement('span');
+                    let p__ = document.createElement('p');
+    
+                    span_.innerText = events_lists[i].content;
+                    p__.innerText = "예상 지출 금액: " + events_lists[i].cost;
+    
+                    p_.appendChild(span_);
+                    span_.appendChild(p__);
+                    event_modal_content.appendChild(p_);
+                    p_.classList.add([i]);
+                    span_.classList.add("todoEvent");
+                }
+            }
+        }
+    
+    
+    //모달에 그날의 실제 지출액 보여주기
+        // 내가 누른 날짜 받아오기
+        const clickyear = Number(month_[0]);
+        const clickmonth = Number(month_[1]);
+        const clickdt = Number(month_[2]);
+    
+        // 실제 지출액 적을 모달
+        const show_real_spend = document.querySelector(".show_real_spend");
+    
+        let spends_lists = JSON.parse('{{ spends_list|escapejs }}');
+        let countSpend = JSON.parse('{{ spendCount|escapejs }}');
+    
+        for (i = 0; i < countSpend; i++) {
+            const str_spenddate = String(spends_lists[i].date);
+            console.log(Number(str_spenddate.substring(0,4)), typeof(Number(str_spenddate.substring(0,4))));
+            if (Number(str_spenddate.substring(0,4)) == clickyear && Number(str_spenddate.substring(4,6) == clickmonth && Number(str_spenddate.substring(6,8))) == clickdt) {
+                let pForSpend = document.createElement('p');
+                pForSpend.classList.add("pForSpend");
+                let spanForSpend = document.createElement('span');
+    
+                spanForSpend.innerText = "실제 지출 금액: "+spends_lists[i].spend;
+                pForSpend.appendChild(spanForSpend);
+                show_real_spend.appendChild(pForSpend);
+    
+                //실제지출액 작성 폼 없애기
+                spendForm.classList.add("hidden4");
             }
         }
     }
-
-
-    //모달에 그날의 실제 지출액 보여주기
-     // 내가 누른 날짜 받아오기
-    const clickyear = Number(month_[0]);
-    const clickmonth = Number(month_[1]);
-    const clickdt = Number(month_[2]);
-   
-    // 실제 지출액 적을 모달
-    const show_real_spend = document.querySelector(".show_real_spend");
-
-    let spends_lists = JSON.parse('{{ spends_list|escapejs }}');
-    let countSpend = JSON.parse('{{ spendCount|escapejs }}');
-
-    for (i = 0; i < countSpend; i++) {
-        const str_spenddate = String(spends_lists[i].date);
-        console.log(Number(str_spenddate.substring(0,4)), typeof(Number(str_spenddate.substring(0,4))));
-        if (Number(str_spenddate.substring(0,4)) == clickyear && Number(str_spenddate.substring(4,6) == clickmonth && Number(str_spenddate.substring(6,8))) == clickdt) {
-            let pForSpend = document.createElement('p');
-            pForSpend.classList.add("pForSpend");
-            let spanForSpend = document.createElement('span');
-
-            spanForSpend.innerText = "실제 지출 금액: "+spends_lists[i].spend;
-            pForSpend.appendChild(spanForSpend);
-            show_real_spend.appendChild(pForSpend);
-
-            //실제지출액 작성 폼 없애기
-            spendForm.classList.add("hidden4");
-        }
-    }
-}
-
-    tbody_.addEventListener("click", showEvent);
-
-    //실제 지출액 칸 누르면 date_spend 에 저절로 날짜 값이 들어가게 (finish_date == list)
-    const realSpend = document.querySelector("#real_spend");
-    
-    function fillDate() {
-        const date_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
-        const date_ = date_for_choice.split('-');
-
-        const spendYear = date_[0];
-        const spendMonth = date_[1].padStart(2, '0');
-        const spendDate = date_[2].padStart(2, '0');
-        const spend_date = spendYear+spendMonth+spendDate;
-
-        const spendDateInputBox = document.querySelector("#date_spend");
-        spendDateInputBox.value = spend_date;
-    }
-
-    realSpend.addEventListener("click", fillDate)    
-
-    //모달에서 이벤트 누르면 수정할 수 있게 하는 코드 (p태그의 클래스 = event의 pk값)
-    const todoEvent = document.querySelector(".todoEvent");
-
-    function edit() {
-        for (let i = 1; i < events.length; i++) {
-            let updateEventPk = getElementsByClassName("{{i}}");
-        }
-    }
-
-    //todoEvent.addEventListener("click",edit);
-
 </script>
+<script src="{% static 'js/calendar.js' %}"></script>
+<script src="{% static 'js/modal.js' %}"></script>
 <script src="{% static 'js/touchMove.js' %}"></script>
-<script src="{% static 'js/eventSum.js' %}"></script>
+
 {% endblock container %}
