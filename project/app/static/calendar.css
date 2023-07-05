@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Questrial&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap");
 
-/* 캘린더 위쪽 */ 
+/* 캘린더 위쪽 */
 
 html {
   display: flex;
@@ -10,17 +10,21 @@ html {
   height: 100vh;
 }
 
-body, .viewport, .container, .calendar { 
+body,
+.viewport,
+.container,
+.calendar {
   height: 100%;
   width: 100%;
   margin: 0;
 }
 
-.Calendar, thead, tbody {
+.Calendar,
+thead,
+tbody {
   position: relative;
   width: auto;
   height: auto;
-  
 }
 
 .momdiv {
@@ -35,7 +39,6 @@ body, .viewport, .container, .calendar {
   width: 100%;
   height: auto;
   position: relative;
-  display: flex;
   margin-top: 1 vh;
 }
 
@@ -45,7 +48,7 @@ body, .viewport, .container, .calendar {
   height: 10vh;
   font-size: calc(2vw + 2vh);
   font-weight: bold;
-  display: flex; 
+  display: flex;
   justify-content: flex-start;
   align-items: center;
   white-space: nowrap; /* 한 줄로 표시 */
@@ -54,31 +57,31 @@ body, .viewport, .container, .calendar {
 }
 
 #YearMonth {
-  width:10vw;
+  width: 10vw;
   height: 10vh;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
 }
 
-thead > #monthmenubar > td{
+thead > #monthmenubar > td {
   width: auto;
   height: auto;
   white-space: nowrap;
 }
 
-#weekday{ 
+#weekday {
   display: flex;
   justify-content: space-around;
   align-items: center;
   text-align: center;
   width: 99vw;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
   padding-bottom: 0.5vh;
   margin-bottom: 0.5vh;
 }
 
-thead > #weekday > td{
+thead > #weekday > td {
   font-size: calc(1.25vw + 1.25vh);
   width: 10vw;
   min-height: 3vh;
@@ -105,11 +108,11 @@ thead > #weekday > td{
 
 tbody td {
   position: relative;
-  width: 10vw; 
+  width: 10vw;
   min-height: 9vh;
   height: auto;
   vertical-align: top;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: "Noto Sans KR", sans-serif;
   font-weight: 400;
   font-size: calc(1vw + 1vh);
 }
@@ -134,9 +137,8 @@ a {
 
 .Calendar tbody tr:last-child {
   padding-bottom: 1vh;
-  border-bottom: 1px solid rgba(0,0,0,0.5);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
-
 
 /*지난 일자, 현재 일자, 선택일자 이펙트*/
 
@@ -145,7 +147,7 @@ a {
 }
 
 .today {
-  background-color: #EEEDED;
+  background-color: #eeeded;
   font-weight: bold;
 }
 
@@ -289,4 +291,3 @@ a {
 .hidden4 {
   display: none;
 }
-
