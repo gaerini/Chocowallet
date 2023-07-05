@@ -1,68 +1,143 @@
 @import url("https://fonts.googleapis.com/css?family=Questrial&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap");
+
+/* 캘린더 위쪽 */
+
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+body,
+.viewport,
+.container,
+.calendar {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.Calendar,
+thead,
+tbody {
+  position: relative;
+  width: auto;
+  height: auto;
+}
 
 .momdiv {
-  background-color: white;
+  height: auto;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.momdiv2 {
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin-top: 1 vh;
+}
+
+#monthmenubar {
+  position: relative;
+  width: 93vw;
+  height: 10vh;
+  font-size: calc(2vw + 2vh);
+  font-weight: bold;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  white-space: nowrap; /* 한 줄로 표시 */
+  padding-left: 6vw;
+  padding-top: 1vh;
+}
+
+#YearMonth {
+  width: 10vw;
+  height: 10vh;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+}
+
+thead > #monthmenubar > td {
+  width: auto;
+  height: auto;
+  white-space: nowrap;
+}
+
+#weekday {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+  width: 99vw;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 700;
+  padding-bottom: 0.5vh;
+  margin-bottom: 0.5vh;
+}
+
+thead > #weekday > td {
+  font-size: calc(1.25vw + 1.25vh);
+  width: 10vw;
+  min-height: 3vh;
+}
+
+.Calendar > tbody > tr > td > p {
+  display: block;
+  text-align: center;
+  height: auto;
+  margin: 0;
+}
+
+.Calendar > tbody > tr {
+  display: flex;
+  justify-content: space-around;
   width: 100vw;
-  margin: 0 auto;
-  border-bottom: 1px solid black;
-  margin-bottom: 2vh;
+}
+
+#로그아웃 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+tbody td {
+  position: relative;
+  width: 10vw;
+  min-height: 9vh;
+  height: auto;
+  vertical-align: top;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 400;
+  font-size: calc(1vw + 1vh);
+}
+
+a {
+  color: black;
+}
+
+.line {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70vh;
-  overflow: auto;
+  top: 15.2vh;
+  background-color: rgb(48, 47, 47);
+  transform: translateY(-50%);
+  height: 2px;
+  width: 92vw;
+  left: 4vw;
+  right: 4vw;
 }
 
-.Calendar {
-  position: absolute;
-}
-
-.Calendar > thead {
-  font-family: "Questrial", sans-serif;
-}
-
-.Calendar > thead > tr:first-child > td,
-#YearMonth > span {
-  font-size: 3vh;
-  font-weight: bold;
-  text-align: center;
-  width: 5vh;
-}
-
-.Calendar > thead > tr:last-child > td {
-  font-weight: 600;
-  text-align: center;
-  height: 10px;
-  line-height: 3vh;
-}
-
-.Calendar > thead > tr > td > span {
-  font-size: 6vw;
-  font-weight: bold;
-}
-
-td {
-  width: 10vw;
-  height: 8vh;
-  vertical-align: top;
-}
-
-#monthmenubar > td {
-  height: 8vh;
-  width: 3vw;
-}
-
-.Calendar > tbody > tr > td > p {
-  font-family: "Montserrat", sans-serif;
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
-  transition-duration: 0.2s;
-  line-height: 45px;
-  margin: 2.5px;
-  display: block;
-  text-align: center;
+.Calendar tbody tr:last-child {
+  padding-bottom: 1vh;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
 }
 
 /*지난 일자, 현재 일자, 선택일자 이펙트*/
@@ -72,9 +147,8 @@ td {
 }
 
 .today {
-  background-color: #f5d042;
-  color: #fff;
-  font-weight: 600;
+  background-color: #eeeded;
+  font-weight: bold;
 }
 
 .futureDay.choiceDay,
@@ -87,7 +161,6 @@ td {
 .progress {
   margin: 5%;
   height: 6vh;
-
   position: relative;
 }
 
@@ -98,6 +171,7 @@ td {
   width: 100%;
   height: 100%;
   background-color: beige;
+  border-radius: 8px;
 }
 
 .progresspercent {
@@ -106,6 +180,7 @@ td {
   left: 0;
   height: 100%;
   background-color: antiquewhite;
+  border-radius: 8px;
 }
 
 /* costbox */
@@ -115,7 +190,8 @@ td {
   width: 100%;
 }
 
-.expected_cost, .spent_cost {
+.expected_cost,
+.spent_cost {
   margin-top: 1%;
   margin-bottom: 1%;
   display: flex;
@@ -125,11 +201,13 @@ td {
 .expected_color {
   width: 7%;
   background-color: beige;
+  border-radius: 3px;
 }
 
 .spent_color {
   width: 7%;
   background-color: antiquewhite;
+  border-radius: 3px;
 }
 
 .costbox .span_cost {
@@ -138,7 +216,7 @@ td {
   margin-top: 1%;
 }
 
-.costbox .span{
+.costbox .span {
   width: 40%;
   text-align: center;
   margin-top: 1%;
@@ -156,7 +234,7 @@ td {
   bottom: 0%;
 }
 
-.background{
+.background {
   position: fixed;
   width: 100%;
   top: 0%;
@@ -204,4 +282,12 @@ td {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.hidden3 {
+  display: none;
+}
+
+.hidden4 {
+  display: none;
 }

@@ -73,10 +73,6 @@ def calendar(request, user_pk):
     spend_sum = realSpends.aggregate(Sum('spend'))
     sumForRealSpend = spend_sum['spend__sum'] or 0
 
-    ratioSpend = (sumForRealSpend/(expected_cost or 1)) * 100
-    if ratioSpend >= 100:
-        ratioSpend = 100
-
     if request.method == 'POST':
         Event.objects.create(
             author=request.user,
@@ -84,15 +80,20 @@ def calendar(request, user_pk):
             start_date = request.POST['start_date'],
             finish_date = request.POST['finish_date'],
             cost = request.POST['cost'],
+            category = request.POST['category'],
         )
 
         return redirect('calendar', user_pk)
     
     events_list_ = [event.to_dict() for event in events]
     events_list = json.dumps(events_list_) 
-    print(events_list)
 
-    return render(request, 'calendar.html', {"events":events, "events_list":events_list, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
+    spend_list_ = [spend.toDict() for spend in realSpends]
+    spends_list = json.dumps(spend_list_)
+    spendCount = json.dumps(realSpends.count())
+    print(spends_list)
+
+    return render(request, 'calendar.html', {"events":events, "events_list":events_list, "realSpends":realSpends, "spends_list":spends_list, "spendCount":spendCount, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
 
 
 def spend(request):
@@ -108,8 +109,13 @@ def spend(request):
         Spend.objects.create(
             author=request.user,
             spend = request.POST['spend'],
+            date = request.POST['date'],
         )
 
         return redirect('calendar', user_pk)
     
-    return render(request, 'calendar.html', {"sumForRealSpend":sumForRealSpend})
+    spend_list_ = [spend.toDict() for spend in realSpends]
+    spends_list = json.dumps(spend_list_) 
+    print(spends_list)
+    
+    return render(request, 'calendar.html', {"sumForRealSpend":sumForRealSpend, "spends_list":spends_list})
