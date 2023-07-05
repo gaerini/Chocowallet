@@ -221,16 +221,47 @@
                     let p_ = document.createElement('p');
                     let span_ = document.createElement('span');
                     let p__ = document.createElement('p');
+                    let btn_ = document.createElement('button'); //삭제 버튼
                     span_.innerText = events_lists[i].content;
                     p__.innerText = "예상 지출 금액: " + events_lists[i].cost;
+                    btn_.innerText = "X"
+
+                    btn_.addEventListener('click', function () {
+                        deleteEvent(events_lists[i].id);
+                        console.log(events_lists[i].pk);
+                        p_.remove(); // Remove the corresponding event from the DOM
+                    });
+                
                     p_.appendChild(span_);
                     span_.appendChild(p__);
+                    p_.appendChild(btn_);
                     event_modal_content.appendChild(p_);
                     p_.classList.add([i]);
                     span_.classList.add("todoEvent");
                 }
             }
         }
+
+        function deleteEvent(eventId) {
+            fetch(`/delete-event/${eventId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}', // Include the CSRF token
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                    // Deletion was successful, update the UI or perform any necessary actions
+                    } else {
+                    // Deletion failed, handle the error or display a message
+                    }
+                })
+                .catch((error) => {
+                    // Handle errors, e.g., display an error message
+                });
+        }
+
     //모달에 그날의 실제 지출액 보여주기
         // 내가 누른 날짜 받아오기
         const clickyear = Number(month_[0]);

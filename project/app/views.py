@@ -6,6 +6,7 @@ from django.db.models import Sum
 from .models import Event, Spend
 import datetime
 import json
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -119,3 +120,11 @@ def spend(request):
     print(spends_list)
     
     return render(request, 'calendar.html', {"sumForRealSpend":sumForRealSpend, "spends_list":spends_list})
+
+# def delete_event(request, event_id):
+#     try:
+#         event = Event.objects.get(id=event_id)
+#         event.delete()
+#         return JsonResponse({'success': True})
+#     except Event.DoesNotExist:
+#         return JsonResponse({'success': False, 'message': 'Event not found'})

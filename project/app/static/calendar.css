@@ -162,7 +162,7 @@ a {
 /* 게이지 박스 */
 .progress {
   margin: 5%;
-  height: 6vh;
+  height: 5vh;
   position: relative;
 }
 
