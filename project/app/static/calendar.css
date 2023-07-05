@@ -28,6 +28,7 @@ tbody {
 }
 
 .momdiv {
+  z-index: 0;
   height: auto;
   width: 100%;
   position: relative;
@@ -36,6 +37,7 @@ tbody {
 }
 
 .momdiv2 {
+  z-index: 0;
   width: 100%;
   height: auto;
   position: relative;
@@ -224,6 +226,7 @@ a {
 
 /* 모달 */
 .modalbox {
+  z-index: 1;
   position: fixed;
   display: flex;
   justify-content: center;
