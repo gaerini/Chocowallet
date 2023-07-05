@@ -39,7 +39,6 @@ tbody {
   width: 100%;
   height: auto;
   position: relative;
-  display: flex;
   margin-top: 1 vh;
 }
 

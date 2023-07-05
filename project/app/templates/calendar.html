@@ -475,10 +475,9 @@
 
     //모달에 그날의 실제 지출액 보여주기
      // 내가 누른 날짜 받아오기
-    const clickyear = month_[0];
-    const clickmonth = month_[1];
-    const clickdt = month_[2];
-    const clickdate_ = clickyear+clickmonth+clickdt;
+    const clickyear = Number(month_[0]);
+    const clickmonth = Number(month_[1]);
+    const clickdt = Number(month_[2]);
    
     // 실제 지출액 적을 모달
     const show_real_spend = document.querySelector(".show_real_spend");
@@ -487,7 +486,9 @@
     let countSpend = JSON.parse('{{ spendCount|escapejs }}');
 
     for (i = 0; i < countSpend; i++) {
-        if (spends_lists[i].date == clickdate_) {
+        const str_spenddate = String(spends_lists[i].date);
+        console.log(Number(str_spenddate.substring(0,4)), typeof(Number(str_spenddate.substring(0,4))));
+        if (Number(str_spenddate.substring(0,4)) == clickyear && Number(str_spenddate.substring(4,6) == clickmonth && Number(str_spenddate.substring(6,8))) == clickdt) {
             let pForSpend = document.createElement('p');
             pForSpend.classList.add("pForSpend");
             let spanForSpend = document.createElement('span');
@@ -531,7 +532,7 @@
         }
     }
 
-    todoEvent.addEventListener("click",edit);
+    //todoEvent.addEventListener("click",edit);
 
 </script>
 <script src="{% static 'js/touchMove.js' %}"></script>
