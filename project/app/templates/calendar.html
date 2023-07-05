@@ -133,47 +133,58 @@
 </div>
 
 <div class="addEventModal hidden2">
-    <form action="" method="post">
-        {% csrf_token %}
-        <div>
-            <label for="date">시작날짜</label>
-            <input type="date" name="start_date" id="event_date"/>
+    <div class="background"></div>
+    <div class="addEventModal">
+        <div class="modal_back">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class ="modal_first_bar">
+                    <button class="close2" style="color: red;">취소</button>
+                    <p id="modal_newevent_firstbar">새로운 이벤트</p>
+                    <button type="submit">추가</button>
+                </div>
+                <div class="title_content">
+                    <div>
+                        <input type="text" name="title" id="event_title" placeholder="제목"/>
+                    </div>
+                    <div>
+                        <input type="text" name="content" id="event_content" placeholder="내용"/>
+                    </div>
+                </div>
+                <div class="startdate">
+                    <div>
+                        <label for="date">시작</label>
+                        <input type="date" name="start_date" id="event_date"/>
+                    </div>
+                    <div>
+                        <label for="date">종료</label>
+                        <input type="date" name="finish_date" id="event_finist_date"/>
+                    </div>
+                </div>
+                <div class="color">
+                    <div>
+                        <label for="category">색상</label>
+                        <input type="color" name="category" id="event_category" list="colorOptions">
+                        <datalist id="colorOptions">
+                            <option>#ABE3FF</option>
+                            <option>#FFBBB4</option>
+                            <option>#C4BEFF</option>
+                            <option>#FDD3FF</option>
+                            <option>#D8FFCD</option>
+                            <option>#FFF1D0</option>
+                            <option>#FBFFCD</option>
+                            <option>#D0E1FF</option>
+                            <option>#FFDCD6</option>
+                            <option>#E5E8BA</option>
+                        </datalist>
+                    </div>
+                </div>
+                <div class="expectspend">
+                    <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액"/>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="date">끝 날짜</label>
-            <input type="date" name="finish_date" id="event_finist_date"/>
-        </div>
-        <div>
-            <label for="content">내용</label>
-            <input type="text" name="content" id="event_content" placeholder="이벤트를 입력해주세요"/>
-        </div>
-        <div>
-            <label for="cost">금액</label>
-            <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액을 입력해주세요"/>
-        </div>
-        <div>
-            <label for="category">색상</label>
-            <input type="color" name="category" id="event_category" list="colorOptions">
-            <datalist id="colorOptions">
-                <option>#ABE3FF</option>
-                <option>#FFBBB4</option>
-                <option>#C4BEFF</option>
-                <option>#FDD3FF</option>
-                <option>#D8FFCD</option>
-                <option>#FFF1D0</option>
-                <option>#FBFFCD</option>
-                <option>#D0E1FF</option>
-                <option>#FFDCD6</option>
-                <option>#E5E8BA</option>
-            </datalist>
-        </div>
-        <button type="submit">
-            작성하기
-        </button>
-    </form>
-    <button class="close2">
-        X
-    </button>
+    </div>
 </div>
 
 {% else %}
