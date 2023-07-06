@@ -128,52 +128,62 @@
         <button class="close3">
             X
         </button>
-        {% comment %} <a href="{% url 'delete' {{event}} %}">삭제하기</a> {% endcomment %}
     </div> 
 </div>
 
 <div class="addEventModal hidden2">
-    <form action="" method="post">
-        {% csrf_token %}
-        <div>
-            <label for="date">시작날짜</label>
-            <input type="date" name="start_date" id="event_date"/>
+    <div class="background"></div>
+    <div class="addEventModal">
+        <div class="modal_back">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class ="modal_first_bar">
+                    <button class="close2" style="color: red;">취소</button>
+                    <p id="modal_newevent_firstbar">새로운 이벤트</p>
+                    <button type="submit">추가</button>
+                </div>
+                <div class="title_content">
+                    <div>
+                        <input type="text" name="title" id="event_title" placeholder="제목"/>
+                    </div>
+                    <div>
+                        <input type="text" name="content" id="event_content" placeholder="내용"/>
+                    </div>
+                </div>
+                <div class="startdate">
+                    <div>
+                        <label for="date">시작</label>
+                        <input type="date" name="start_date" id="event_date"/>
+                    </div>
+                    <div>
+                        <label for="date">종료</label>
+                        <input type="date" name="finish_date" id="event_finist_date"/>
+                    </div>
+                </div>
+                <div class="color">
+                    <div>
+                        <label for="category">색상</label>
+                        <input type="color" name="category" id="event_category" list="colorOptions">
+                        <datalist id="colorOptions">
+                            <option>#ABE3FF</option>
+                            <option>#FFBBB4</option>
+                            <option>#C4BEFF</option>
+                            <option>#FDD3FF</option>
+                            <option>#D8FFCD</option>
+                            <option>#FFF1D0</option>
+                            <option>#FBFFCD</option>
+                            <option>#D0E1FF</option>
+                            <option>#FFDCD6</option>
+                            <option>#E5E8BA</option>
+                        </datalist>
+                    </div>
+                </div>
+                <div class="expectspend">
+                    <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액"/>
+                </div>
+            </form>
         </div>
-        <div>
-            <label for="date">끝 날짜</label>
-            <input type="date" name="finish_date" id="event_finist_date"/>
-        </div>
-        <div>
-            <label for="content">내용</label>
-            <input type="text" name="content" id="event_content" placeholder="이벤트를 입력해주세요"/>
-        </div>
-        <div>
-            <label for="cost">금액</label>
-            <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액을 입력해주세요"/>
-        </div>
-        <div>
-            <label for="category">색상</label>
-            <input type="color" name="category" id="event_category" list="colorOptions">
-            <datalist id="colorOptions">
-                <option>#ABE3FF</option>
-                <option>#FFBBB4</option>
-                <option>#C4BEFF</option>
-                <option>#FDD3FF</option>
-                <option>#D8FFCD</option>
-                <option>#FFF1D0</option>
-                <option>#FBFFCD</option>
-                <option>#D0E1FF</option>
-                <option>#FFDCD6</option>
-                <option>#E5E8BA</option>
-            </datalist>
-        </div>
-        <button type="submit">
-            작성하기
-        </button>
-    </form>
-    <button class="close2">
-        X
-    </button>
+    </div>
 </div>
 
 {% else %}
@@ -191,7 +201,6 @@
     const events = [
     {% for event in events %}
         {
-            id : {{event.event_pk}},
             start_date: "{{event.start_date}}",
             finish_date: "{{event.finish_date}}",
             detail: "{{event.content}}",
@@ -208,8 +217,8 @@
         },
     {% endfor %}
     ];
+
     function showEvent () {
-        //그날의 이벤트 보여주기
         const month_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
         const month_ = month_for_choice.split('-');  // 하이픈을 기준으로 끊어서 배열로 저장 (["2023","12","23"])
         let events_lists = JSON.parse('{{ events_list|escapejs }}');
@@ -221,21 +230,29 @@
             let f_day = (new Date(events_lists[i]['finish_date'])).getDate();
             if (s_month <= Number(month_[1]) && Number(month_[1]) <= f_month ) {
                 if (s_day <= Number(month_[2]) && Number(month_[2]) <= f_day) {
+                    let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
                     let p_ = document.createElement('p');
                     let span_ = document.createElement('span');
                     let p__ = document.createElement('p');
+                    let a_ = document.createElement('a'); // modaldp event 삭제 버튼 a tag
+
                     span_.innerText = events_lists[i].content;
-                    p__.innerText = "예상 지출 금액: " + events_lists[i].cost;
+                    p__.innerText = "예상 금액: " + events_lists[i].cost;
+                    a_.innerText = "삭제";
+                    a_.href = "/delete-event/" + events_lists[i].event_pk + "/";
+
+                    div_.appendChild(p_);
+                    div_.appendChild(a_);
                     p_.appendChild(span_);
                     span_.appendChild(p__);
-                    event_modal_content.appendChild(p_);
+
+                    event_modal_content.appendChild(div_);
                     p_.classList.add([i]);
                     span_.classList.add("todoEvent");
                 }
             }
         }
-
-        //모달에 그날의 실제 지출액 보여주기
+    //모달에 그날의 실제 지출액 보여주기
         // 내가 누른 날짜 받아오기
         const clickyear = Number(month_[0]);
         const clickmonth = Number(month_[1]);
@@ -251,7 +268,6 @@
                 let pForSpend = document.createElement('p');
                 pForSpend.classList.add("pForSpend");
                 let spanForSpend = document.createElement('span');
-                spanForSpend.classList.add("spanForSpend");
                 spanForSpend.innerText = "실제 지출 금액: "+spends_lists[i].spend;
                 pForSpend.appendChild(spanForSpend);
                 show_real_spend.appendChild(pForSpend);
@@ -260,15 +276,6 @@
             }
         }
     }
-
-    //모달에서 이벤트 누르면 수정할 수 있게 하는 코드 (p태그의 클래스 = event의 pk값)
-
-    //실제 지출액 수정 모달
-    const spanForSpend = document.querySelector(".spanForSpend");
-    spanForSpend.addEventListener("click", () => {
-
-    })
-
 </script>
 <script src="{% static 'js/calendar.js' %}"></script>
 <script src="{% static 'js/modal.js' %}"></script>
