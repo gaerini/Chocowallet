@@ -27,4 +27,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('spend/', views.spend, name='spend'),
     #  path('delete-event/<int:event_id>/', views.delete_event, name='delete_event'),
+    path('edit/', views.edit, name="edit"),
 ]

@@ -277,6 +277,10 @@ a {
   align-items: center;
 }
 
+.eventEditModal {
+  z-index: 2;
+}
+
 .hidden2 {
   display: none;
 }
@@ -292,5 +296,9 @@ a {
 }
 
 .hidden4 {
+  display: none;
+}
+
+.hidden5 {
   display: none;
 }

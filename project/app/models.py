@@ -18,7 +18,8 @@ class Event(models.Model):
             'content': self.content, 
             'start_date': self.start_date.isoformat(), 
             'finish_date': self.finish_date.isoformat(),
-            'cost' : self.cost
+            'cost' : self.cost,
+            'event_pk': self.pk
         }
 
 class Spend(models.Model):
