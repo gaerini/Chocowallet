@@ -159,7 +159,7 @@ a {
 /* 게이지 박스 */
 .progress {
   margin: 5%;
-  height: 6vh;
+  height: 5vh;
   position: relative;
 }
 
@@ -270,6 +270,10 @@ a {
   align-items: center;
 }
 
+.eventEditModal {
+  z-index: 2;
+}
+
 .hidden2 {
   display: none;
 }
@@ -285,6 +289,10 @@ a {
 }
 
 .hidden4 {
+  display: none;
+}
+
+.hidden5 {
   display: none;
 }
 

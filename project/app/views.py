@@ -122,6 +122,15 @@ def spend(request):
     
     return render(request, 'calendar.html', {"sumForRealSpend":sumForRealSpend, "spends_list":spends_list})
 
+def delete_event(request, event_pk):
+    user = request.user
+    user_pk = user.pk
+    
+    event = Event.objects.get(id=event_pk)
+    event.delete()
+
+    return redirect('calendar', user_pk)
+
 @csrf_exempt
 def edit(request, event_pk):
     user = request.user

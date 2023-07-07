@@ -63,6 +63,7 @@ function eventEditModalValue() {
 
   eventEditModal_.classList.remove("hidden5");
 }
+
 editTrigger.addEventListener("click", eventEditModalValue);
 
 //이벤트 ''수정'' 모달 닫기!
