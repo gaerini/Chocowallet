@@ -51,7 +51,7 @@ function fillDate() {
 realSpend.addEventListener("click", fillDate);
 
 //이벤트 수정 모달에서 내용, 금액 칸에 원래 value 들어가게 하기
-const editTrigger = document.querySelector(".event_modal_content");
+/*const editTrigger = document.querySelector(".event_modal_content");
 const eventEditModal_ = document.querySelector(".eventEditModal");
 
 function eventEditModalValue() {
@@ -63,7 +63,7 @@ function eventEditModalValue() {
 
   eventEditModal_.classList.remove("hidden5");
 }
-editTrigger.addEventListener("click", eventEditModalValue);
+editTrigger.addEventListener("click", eventEditModalValue);*/
 
 //이벤트 ''수정'' 모달 닫기!
 const closeBtn3 = document.querySelector(".close3"); //이벤트 수정 모달 닫는 버튼
