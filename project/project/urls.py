@@ -26,5 +26,7 @@ urlpatterns = [
     path('calendar/<int:user_pk>', views.calendar, name='calendar'),
     path('accounts/', include('allauth.urls')),
     path('spend/', views.spend, name='spend'),
-    path('edit/', views.edit, name="edit"),
+    path('delete-event/<int:event_pk>/', views.delete_event, name='delete_event'),
+    path('edit/<int:event_pk>/', views.edit, name="edit"),
+    path('delete-spend/<int:spend_pk>/', views.delete_spend, name='delete-spend'),
 ]

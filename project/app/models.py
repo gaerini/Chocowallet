@@ -30,5 +30,6 @@ class Spend(models.Model):
     def toDict(self):
         return {
             'date': self.date, 
-            'spend': self.spend 
+            'spend': self.spend,
+            'spend_pk': self.pk
         }
