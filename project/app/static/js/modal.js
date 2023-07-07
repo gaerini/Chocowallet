@@ -43,11 +43,6 @@ const modal2 = document.querySelector(".addEventModal");
 const openBtn2_ = document.querySelector(".addEventBtn");
 const closeBtn2 = document.querySelector(".close2");
 
-function openAddEventModal() {
-  modal2.classList.remove("hidden2");
-  console.log("냐옹");
-}
-
 function closeAddEventModal() {
   modal2.classList.add("hidden2");
 }
@@ -55,5 +50,7 @@ function closeAddEventModal() {
 //openBtn2_.addEventListener("click", openAddEventModal);
 openBtn2_.addEventListener("click", () => {
   modal2.classList.remove("hidden2");
+  console.log(modal2);
+  console.log("나옹");
 });
 closeBtn2.addEventListener("click", closeAddEventModal);
