@@ -227,14 +227,18 @@ a {
 /* 모달 */
 .modalbox {
   z-index: 1;
-  position: fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  top: 0%;
-  bottom: 0%;
+  position: fixed;
+  bottom: 0;
+  height: 75vh;
+  width: 100vw;
+  background-color: #eeeded;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
 }
+
 
 .background {
   position: fixed;
@@ -247,17 +251,14 @@ a {
 .modal {
   z-index: 1;
   position: fixed;
-  width: 50%;
-  height: 30%;
-  background-color: rgb(255, 185, 185);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10%;
-}
-
-.hidden {
-  display: none;
 }
 
 .addEventModal {
@@ -277,14 +278,18 @@ a {
   z-index: 2;
 }
 
-.hidden2 {
-  display: none;
-}
-
 #로그아웃 {
   position: absolute;
   top: 0;
   left: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.hidden2 {
+  display: none;
 }
 
 .hidden3 {
@@ -292,6 +297,10 @@ a {
 }
 
 .hidden4 {
+  display: none;
+}
+
+.hidden5 {
   display: none;
 }
 
@@ -305,7 +314,7 @@ a {
   border-top-right-radius: 16px;
 }
 
-.addEventModal > .modal_back > form > .modal_first_bar {
+.modal_first_bar {
   position: relative;
   display: flex;
   flex-direction: row;
@@ -318,6 +327,7 @@ a {
   border-top-right-radius: 16px;
   font-size: calc(1.2vw + 1.2vh);
 }
+
 
 .modal_first_bar button:first-child {
   margin-left: 4vw;
