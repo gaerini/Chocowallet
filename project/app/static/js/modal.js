@@ -47,10 +47,13 @@ function closeAddEventModal() {
   modal2.classList.add("hidden2");
 }
 
-//openBtn2_.addEventListener("click", openAddEventModal);
 openBtn2_.addEventListener("click", () => {
   modal2.classList.remove("hidden2");
-  console.log(modal2);
-  console.log("나옹");
+  console.log("modal2");
 });
+
 closeBtn2.addEventListener("click", closeAddEventModal);
+
+
+
+
