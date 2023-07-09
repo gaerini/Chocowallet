@@ -86,20 +86,19 @@
     <div class="background"></div>
     <div class="modal">
         <div class="modal_back">
-            <div class="modal-date"></div>
             <div class="event_modal">
-                <div class="event_modal_content"></div>
                 <div class="spendFormAndShow">
-                    <div class="show_real_spend"></div>
                     <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
                         {% csrf_token %}
                         <div class ="modal_first_bar">
                             <button type="button" class="close" style="color: red;">취소</button>
-                            <p id="modal_newevent_firstbar">새로운 이벤트</p>
+                            <p class="modal-date"></p>
                             <button type="submit" class="real_spend_submit">
                                 수정
                             </button>
                         </div>
+                        <div class="event_modal_content"></div>
+                        <div class="show_real_spend"></div>
                         <div>
                             <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
                         </div>
@@ -298,6 +297,12 @@
     menu2.addEventListener('click', function() {
         option2.classList.remove('hidden7');
         option1.classList.add('hidden6');
+    });
+
+    const dateInput = document.getElementById('event_date');
+    
+    dateInput.addEventListener('click', () => {
+      dateInput.focus();
     });
 
 </script>

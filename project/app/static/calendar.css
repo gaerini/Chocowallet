@@ -95,6 +95,8 @@ thead > #weekday > td {
   text-align: center;
   height: auto;
   margin: 0;
+  border-radius: 5px;
+  font-size: calc(0.75vw + 0.75vh);
 }
 
 .Calendar > tbody > tr {
@@ -145,6 +147,8 @@ a {
 .today {
   background-color: #eeeded;
   font-weight: bold;
+  border-radius: 5px;
+  
 }
 
 .futureDay.choiceDay,
@@ -256,7 +260,7 @@ a {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -302,8 +306,9 @@ a {
 
 .modal_back {
   position: fixed;
+  left: 0;
   bottom: 0;
-  height: 75vh;
+  height: 90vh;
   width: 100vw;
   background-color: white;
   border-top-left-radius: 16px;
@@ -348,12 +353,16 @@ a {
   height: auto;
 }
 
-#modal_newevent_firstbar {
-  margin: 0;
+.event_modal_content {
+  font-size: calc(1.25vw + 1.5vh);
   font-family: "Noto Sans KR", sans-serif;
-  font-weight: 700;
-  text-align: center;
-  font-size: calc(1.5vw + 1.5vh);
+  font-weight: 500;
+}
+
+.modal-date {
+  font-size: calc(1.25vw + 1.5vh);
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
 }
 
 #modal_newevent_firstbar p {
@@ -374,16 +383,131 @@ input[type="color"]::-webkit-color-swatch {
 .color {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 100vw;
   height: auto;
-  min-height: 14vh;
+  min-height: 5vh;
   justify-content: center;
   align-items: center;
-  margin-top: 2vh;
+  margin-top: 3vh;
+}
+
+.startdate label {
+  margin-right: 54vw;
+}
+
+.startdate > div:first-child {
+ margin-bottom: 1.5vh; 
+}
+
+#event_title,
+#event_cost,
+#event_content {
+  all: unset;
+}
+
+
+.startdate input {
+  all: unset;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.2);
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  text-align: start;
+}
+
+.startdate {
+  display: flex;
+  width: 90vw;
+  margin-left: 8vw;
+  margin-right: 2vw;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  color: black;
+  align-items: flex-start;
+}
+
+#event_cost {
+  margin-left: 6vw;
+  padding-left: 1vw;
+  border-left: 1vw solid #CDFFED;
+  width: 93vw;
+  font-size: calc(1.2vw + 1.2vh);
+}
+
+.expectspend input{
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  display: inline-block;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.6);
+  height: 3vh;
+}
+
+.modal_back > div:last-child {
+  width: 80vw;
+  display: flex;
+}
+
+.expectspend {
+  margin-bottom: 5vh;
+}
+
+.startdate input[type="date"]::-webkit-calendar-picker-indicator {
+  margin-left: -5vw; 
+}
+
+.title_content input[type="date"]::-webkit-calendar-picker-indicator {
+  pointer-events: auto;
+}
+
+.color{
+  display: flex;
+  width: 90vw;
+  margin-left: 8vw;
+  margin-right: 2vw;
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  color: black;
+  align-items: flex-start;
+  vertical-align: center;
+}
+
+.color input[type="color" i][list] {
+  appearance: auto;
+  inline-size: 20vw;
+  block-size: 4.2vh;
+}
+
+.color label {
+  margin-right: 58vw;
+}
+
+.color input {
+  border: 0;
+}
+
+.title_content {
+  height: 7vh;
+  margin-top: 5vh;
 }
 
 .title_content input {
-  width: 100%;
+  display: inline-block;
+  white-space: nowrap;
+  color: rgba(0, 0, 0, 0.8);
+  height: 4vh;
+  margin-top: 1.5vh;
+  margin-bottom: 1.5vh;
+}
+
+#event_title {
+  margin-left: 6vw;
+  padding-left: 1vw;
+  border-left: 1vw solid #CDFFED;
+  width: 93vw;
+  font-size: calc(1.5vw + 1.5vh);
 }
 
 .title_content input::placeholder {
@@ -420,7 +544,7 @@ input[type="color"]::-webkit-color-swatch {
   border: 1px solid rgba(0,0,0,0.15);
   box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
-  font-size: calc(2.7vw + 2.7vh);
+  font-size: calc(2.5vw + 2.5vh);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -474,4 +598,22 @@ input[type="color"]::-webkit-color-swatch {
 
 .hidden7 {
   display: none;
+}
+
+.modalbox > .background {
+  top: 0;
+  left: 0;
+}
+
+.spendFormAndShow {
+  width: 100vw;
+}
+
+.modal > .modal_back > .event_modal {
+  width: 100vw;
+}
+
+.event_modal_content > div {
+  width: 92vw;
+  margin-left: 8vw;
 }
