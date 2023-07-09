@@ -40,7 +40,8 @@ realSpend.addEventListener("click", fillDate);
 
 //일정 추가하기 모달
 const modal2 = document.querySelector(".addEventModal");
-const openBtn2_ = document.querySelector(".addEventBtn");
+const openBtn2_ = document.querySelector(".addEventBtn1");
+const openBtn2_1 = document.querySelector(".addEventBtn2");
 const closeBtn2 = document.querySelector(".close2");
 
 function closeAddEventModal() {
@@ -48,6 +49,11 @@ function closeAddEventModal() {
 }
 
 openBtn2_.addEventListener("click", () => {
+  modal2.classList.remove("hidden2");
+  console.log("modal2");
+});
+
+openBtn2_1.addEventListener("click", () => {
   modal2.classList.remove("hidden2");
   console.log("modal2");
 });

@@ -68,7 +68,7 @@ a {
   height: 5vh;
 }
 
-#로그인, #회원가입, #뒤로, #signup_회원가입 {
+#로그인, #회원가입, #뒤로, #signup_회원가입, #finding {
   position: relative;
   overflow: hidden;
   font-size: calc(1vw + 1vh);
@@ -80,7 +80,7 @@ a {
   border-radius: 8px;
   margin-top: 12px;
   font-weight: bold;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
 }
 
 #로그인 {
@@ -158,4 +158,16 @@ a {
   color: black;
   border-radius: 8px;
   margin-top: 6px;
+}
+
+p {
+  margin-bottom: 1vh;
+  font-size: calc(1.25vw + 1.25vh);
+}
+
+#finding {
+  background-color: #FBFFCD;
+    color: black;
+    margin-bottom: 8px;
+    margin-top: 1vh;
 }
