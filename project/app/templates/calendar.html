@@ -6,9 +6,6 @@
 {% block container %}
 {% if user.is_authenticated and user.pk == first_thing.author.pk %}
 <div class="momdiv">
-    <div class="button">
-        <a href="{% url 'logout' %}" id="로그아웃">로그아웃</a>
-    </div>
     <div class="calendar">
         <div class="line"></div>
         <table class="Calendar">
@@ -34,6 +31,35 @@
         </table>
     </div>
 </div>
+<div class="momdiv3">
+    <div class="option1 hidden6">
+        <button id="logout">
+            <a href="{% url 'cover' %}" id="로그아웃">
+                로그아웃
+            </a>
+        </button>        
+        <button id="userguide">
+            <a href="https://www.notion.so/256973d97a2b404d824f1a592cd26099?pvs=4">
+                <img src="{% static 'onlylogo.png' %}" alt="only logo"/>사용자 가이드
+            </a>
+        </button>
+        <button class = "eventmenuclose">
+            ⫴
+        </button>
+        <button class = "addEventBtn1">
+            +
+        </button>
+    </div>
+    <div class="option2">
+        <button class = "eventmenuopen">
+            ≡
+        </button>
+        <button class = "addEventBtn2">
+            +
+        </button>
+    </div>
+</div>
+
 
 <div class="momdiv2">    
     <div class="progress">
@@ -54,11 +80,7 @@
     </div>
 </div>
 
-<div class="momdiv3">
-    <button class = "addEventBtn">
-        일정 추가하기
-    </button>
-</div>
+
 
 <div class="modalbox hidden">
     <div class="background"></div>
@@ -74,7 +96,9 @@
                         <div class ="modal_first_bar">
                             <button type="button" class="close" style="color: red;">취소</button>
                             <p id="modal_newevent_firstbar">새로운 이벤트</p>
-                            <button type="submit" class="real_spend_submit">수정</button>
+                            <button type="submit" class="real_spend_submit">
+                                수정
+                            </button>
                         </div>
                         <div>
                             <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
@@ -102,10 +126,7 @@
                 </div>
                 <div class="title_content">
                     <div>
-                        <input type="text" name="title" id="event_title" placeholder="제목"/>
-                    </div>
-                    <div>
-                        <input type="text" name="content" id="event_content" placeholder="내용"/>
+                        <input type="text" name="title" id="event_title" placeholder=" 할 일 "/>
                     </div>
                 </div>
                 <div class="startdate">
@@ -138,6 +159,9 @@
                 </div>
                 <div class="expectspend">
                     <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액"/>
+                </div>
+                <div>
+                    <input type="text" name="content" id="event_content" placeholder="내용"/>
                 </div>
             </form>
         </div>
@@ -259,6 +283,22 @@
             }
         }
     }
+
+    const menu1 = document.querySelector('.eventmenuopen');
+    const menu2 = document.querySelector('.eventmenuclose');
+    const option1 = document.querySelector('.option1');
+    const option2 = document.querySelector('.option2');
+    
+    
+    menu1.addEventListener('click', function() {
+        option1.classList.remove('hidden6');
+        option2.classList.add('hidden7');
+    });
+
+    menu2.addEventListener('click', function() {
+        option2.classList.remove('hidden7');
+        option1.classList.add('hidden6');
+    });
 
 </script>
 <script src="{% static 'js/calendar.js' %}"></script>
