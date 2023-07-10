@@ -270,7 +270,7 @@ function costRealSum() {
 }
 
 function costRatio() {
-  const ratio = sum !== 0 ? (realsum / sum) * 100 : 0;
+  let ratio = sum !== 0 ? (realsum / sum) * 100 : 0;
   if (ratio > 100) {
     ratio = 100;
   }

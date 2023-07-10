@@ -169,7 +169,7 @@ tbody tr td p {
 .progresspercent {
   position: absolute;
   top: 0; left: 0;
-  background-color: rgba(171,227,255,0.75);
+  background-color: #abe3ff;
   border-radius: 8px;
   height: 4vh;
 }
@@ -196,7 +196,7 @@ tbody tr td p {
 }
 
 .spent_color {
-  background-color: rgba(171,227,255,0.75);
+  background-color: #abe3ff;
 }
 
 .expected_color {
