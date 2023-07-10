@@ -1,12 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Questrial&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@700&display=swap");
 
-/* 캘린더 위쪽 */
+/* 기본 설정 시작*/
+* {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: bold;
+}
 
 html {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   height: 100vh;
 }
 
@@ -15,54 +16,25 @@ body,
 .container,
 .calendar {
   height: 100%;
-  width: 100%;
-  margin: 0;
 }
 
-.Calendar,
-thead,
-tbody {
-  position: relative;
-  width: auto;
-  height: auto;
+table {
+  border-spacing: 0px;
 }
 
-.momdiv {
-  z-index: 0;
-  height: auto;
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
+a {
+  color: black;
 }
 
-.momdiv2 {
-  z-index: 0;
-  width: 100%;
-  height: auto;
-  position: relative;
-  margin-top: 1 vh;
-}
+/*기본 설정 끝*/
 
+/*테이블 해드 부분 시작*/
 #monthmenubar {
-  position: relative;
-  width: 93vw;
-  height: 10vh;
-  font-size: calc(2vw + 2vh);
-  font-weight: bold;
+  width: 93vw; height: 10vh;
+  font-size: calc(2vw + 2vh); font-weight: bold;
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  white-space: nowrap; /* 한 줄로 표시 */
-  padding-left: 6vw;
-  padding-top: 1vh;
-}
-
-#YearMonth {
-  width: 10vw;
-  height: 10vh;
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 700;
+  padding-left: 6vw; padding-top: 1vh;
 }
 
 thead > #monthmenubar > td {
@@ -76,15 +48,12 @@ thead > #monthmenubar > td {
   justify-content: space-around;
   align-items: center;
   text-align: center;
-  width: 99vw;
-  font-family: "Noto Sans KR", sans-serif;
   font-weight: 700;
-  padding-bottom: 0.5vh;
-  margin-bottom: 0.5vh;
+  padding-bottom: 0.5vh; margin-bottom: 0.5vh;
 }
 
 thead > #weekday > td {
-  font-size: calc(1.25vw + 1.25vh);
+  font-size: calc(1vw + 1vh);
   width: 10vw;
   min-height: 3vh;
 }
@@ -97,64 +66,177 @@ thead > #weekday > td {
   width: 100%;
 }
 
-.Calendar > tbody > tr {
+.line {
+  position: relative;
+  top: 14.5vh;
+  background-color: rgb(48, 47, 47);
+  height: 2px; width: 92vw;
+  left: 4vw; right: 4vw;
+}
+/*테이블 해드 부분 끝*/
+
+/*테이블 바디 부분 시작*/
+.momdiv {
+  z-index: 0;
+  position: relative;
+}
+
+tbody tr {
   display: flex;
   justify-content: space-around;
   width: 100vw;
 }
 
-#로그아웃 {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
 tbody td {
+  width: 10vw; min-height: 9vh; height: auto;
   position: relative;
   width: 14.3%;
   min-height: 9vh;
   height: auto;
   vertical-align: top;
-  font-family: "Noto Sans KR", sans-serif;
-  font-weight: 400;
   font-size: calc(1vw + 1vh);
   display: flex;
   flex-direction: column;
   padding: 0px;
 }
 
-a {
-  color: black;
-}
-
-.line {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 15.2vh;
-  background-color: rgb(48, 47, 47);
-  transform: translateY(-50%);
-  height: 2px;
-  width: 92vw;
-  left: 4vw;
-  right: 4vw;
+tbody tr td p {
+  text-align: center;
+  height: auto;
+  margin: 0;
+  border-radius: 5px;
+  font-size: calc(0.75vw + 0.75vh);
+  margin-bottom: 0.2vh;
 }
 
 .Calendar tbody tr:last-child {
-  padding-bottom: 1vh;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  margin-bottom: 1vh;
+}
+/*테이블 바디 부분 끝*/
+
+/*옵션 부분 시작*/
+.momdiv3, .option2, .option1 {
+  position: fixed;
+  bottom: 23vh;
+  right: 5vw;
+  display: flex;
 }
 
-/*지난 일자, 현재 일자, 선택일자 이펙트*/
+.momdiv3 button {
+  all: unset;
+  width: calc(3.5vw + 3.5vh);
+  height: calc(3.5vw + 3.5vh);
+  font-weight: 900;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: calc(2.3vw + 2.3vh);
+  display: flex;
+  justify-content: center;
+  margin-left: 2vw;
+}
 
+.momdiv3 #logout {
+  width: 17vw;
+}
+
+.momdiv3 a {
+  all: unset;
+  display: flex;
+  align-items: center;
+  font-size: calc(1vw + 1vh);
+}
+
+.momdiv3 #userguide {
+  width: 33vw;
+}
+
+.momdiv3 img {
+  width: calc(2.5vw + 2.5vh);
+  height: calc(2.5vw + 2.5vh);
+  margin-right: 2vw;
+}
+/*옵션 부분 끝*/
+
+/*지출금액 그래프 부분 시작*/
+.momdiv2 {
+  z-index: 0;
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.progress {
+  margin: 2vh 7.5vw 1vh 7.5vw;
+  height: 5vh;
+  position: relative;
+}
+
+.progressbox {
+  position: absolute;
+  top: 0; left: 0;
+  width: 85vw;
+  height: 4vh;
+  background-color: #fbffb9;
+  border-radius: 8px;
+}
+
+.progresspercent {
+  position: absolute;
+  top: 0; left: 0;
+  background-color: rgba(171,227,255,0.75);
+  border-radius: 8px;
+  height: 4vh;
+}
+
+.costbox {
+  display: flex;
+  flex-direction: column;
+  width: 85vw;
+  margin: 0vh 7.5vw 3vh 7.5vw;
+  height: 10vh;
+}
+
+.expected_cost,
+.spent_cost {
+  margin: 1vh 0vh 1vh 0vh;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.spent_color, .expected_color {
+  height: 3vh; width: 3vh;
+  border-radius: 7px;
+}
+
+.spent_color {
+  background-color: rgba(171,227,255,0.75);
+}
+
+.expected_color {
+  background-color: #FBFFCD;
+}
+
+.momdiv2 span {
+  font-size: calc(1vw + 1vh);
+  letter-spacing: 0px;
+}
+
+.costbox .span {
+  width: 40vw;
+}
+/*지출금액 그래프 부분 끝*/
+
+/*지난 일자, 현재 일자, 선택일자 이펙트 시작*/
 .pastDay {
   color: lightgray;
 }
 
 .today {
-  background-color: #eeeded;
-  font-weight: bold;
+  background-color: black;
+  color: white;
+  border-radius: 5px;
 }
 
 .futureDay.choiceDay,
@@ -162,139 +244,223 @@ a {
   background: #0a174e;
   color: #fff;
 }
+/*지난 일자, 현재 일자, 선택일자 이펙트 끝*/
 
-/* 게이지 박스 */
-.progress {
-  margin: 5%;
-  height: 6vh;
-  position: relative;
-}
-
-.progressbox {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: beige;
-  border-radius: 8px;
-}
-
-.progresspercent {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background-color: antiquewhite;
-  border-radius: 8px;
-}
-
-/* costbox */
-.costbox {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.expected_cost,
-.spent_cost {
-  margin-top: 1%;
-  margin-bottom: 1%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.expected_color {
-  width: 7%;
-  background-color: beige;
-  border-radius: 3px;
-}
-
-.spent_color {
-  width: 7%;
-  background-color: antiquewhite;
-  border-radius: 3px;
-}
-
-.costbox .span_cost {
-  width: 20%;
-  text-align: center;
-  margin-top: 1%;
-}
-
-.costbox .span {
-  width: 40%;
-  text-align: center;
-  margin-top: 1%;
-}
-
-/* 모달 */
-.modalbox {
-  z-index: 1;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  top: 0%;
-  bottom: 0%;
-}
-
+/* 달력 클릭해서 들어가는 모달 시작 */
 .background {
   position: fixed;
-  width: 100%;
-  top: 0%;
-  bottom: 0%;
-
-  opacity: 0.5;
-  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.5);
 }
 
 .modal {
+  z-index: 1;
   position: fixed;
-  width: 50%;
-  height: 30%;
-  background-color: rgb(255, 185, 185);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  border-radius: 10%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; height: 100vh;
 }
 
-.hidden {
+.modal_back {
+  position: fixed;
+  left: 0; bottom: 0;
+  height: 90vh; width: 100vw;
+  background-color: white;
+  border-top-left-radius: 16px; border-top-right-radius: 16px;
+}
+
+.modal > .modal_back > .event_modal {
+  width: 100vw;
+  display: flex;
+}
+
+.modal_first_bar {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 5vh;
+  justify-content: space-between;
+  align-items: center;
+  border-top-left-radius: 16px; border-top-right-radius: 16px;
+  font-size: calc(1.2vw + 1.2vh);
+}
+
+.modal-date {
+  font-size: calc(1.25vw + 1.5vh);
+  font-weight: 500;
+}
+
+.modal_first_bar button {
+  margin-left: 4vw;
+}
+
+/* .modal_first_bar button:last-child {
+  margin-right: 4vw;
+} */
+
+.modal_first_bar > button {
+  all: unset;
+  font-weight: 500;
+}
+
+.event_modal_content {
+  font-size: calc(1.25vw + 1.5vh);
+  font-weight: 500;
+}
+
+.event_modal_content > div {
+  width: 92vw;
+  margin-left: 8vw;
+}
+/* 달력 클릭해서 들어가는 모달 끝 */
+
+/*hidden 속성 시작*/
+.hidden, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7 {
   display: none;
 }
+/*hidden 속성 끝*/
 
+/* 새로운 일정 추가하기 시작*/
 .addEventModal {
+  z-index: 1;
   position: fixed;
-  top: 10%;
-  left: 20%;
-  width: 50%;
-  height: 10%;
-  background-color: rgb(178, 219, 255);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+}
 
+.eventEditModal {
+  z-index: 2;
+}
+
+.title_content,
+.startdate,
+.expectspend,
+.color {
   display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: auto;
+  min-height: 5vh;
   justify-content: center;
   align-items: center;
+  margin-top: 3vh;
 }
 
-.hidden2 {
-  display: none;
+#event_title,
+#event_cost,
+#event_content {
+  all: unset;
 }
 
-#로그아웃 {
-  position: absolute;
+.title_content {
+  height: 7vh;
+  margin-top: 5vh;
+}
+
+#event_title {
+  margin-left: 6vw;
+  padding-left: 1vw;
+  border-left: 1vw solid #CDFFED;
+  width: 93vw;
+  font-size: calc(1.5vw + 1.5vh);
+}
+
+.startdate label {
+  margin-right: 54vw;
+}
+
+.startdate input {
+  all: unset;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.4);
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  text-align: start;
+}
+
+.startdate {
+  width: 90vw;
+  margin-left: 8vw;
+  margin-right: 2vw;
+  font-weight: 500;
+  color: black;
+  align-items: flex-start;
+}
+
+.color{
+  width: 90vw;
+  margin-left: 8vw;
+  margin-right: 2vw;
+  margin-top: 5vh;
+  font-weight: 500;
+  color: black;
+  align-items: flex-start;
+}
+
+.color input[type="color" i][list] {
+  appearance: auto;
+  inline-size: 20vw;
+  block-size: 4.2vh;
+}
+
+.color label {
+  margin-right: 58vw;
+}
+
+.color input {
+  border: 0;
+}
+
+.expectspend {
+  margin-bottom: 5vh;
+}
+
+#event_cost {
+  margin-left: 6vw;
+  padding-left: 1vw;
+  border-left: 1vw solid #cdffed;
+  width: 93vw;
+  font-size: calc(1.2vw + 1.2vh);
+}
+
+.modalbox > .background {
   top: 0;
   left: 0;
 }
 
-.hidden3 {
-  display: none;
+#modal_newevent_firstbar p {
+  font-size: calc(1.25vw + 1.5vh);
+  font-weight: 400;
 }
 
-.hidden4 {
-  display: none;
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
 }
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+}
+
+.startdate input[type="date"]::-webkit-calendar-picker-indicator {
+  margin-left: -5vw; 
+}
+
+.title_content input[type="date"]::-webkit-calendar-picker-indicator {
+  pointer-events: auto;
+}
+
+.title_content input::placeholder {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+/* 새로운 일정 추가하기 끝*/
+
+
+

@@ -6,6 +6,8 @@ from django.db.models import Sum
 from .models import Event, Spend
 import datetime
 import json
+from django.http import JsonResponse, HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -81,6 +83,7 @@ def calendar(request, user_pk):
             finish_date = request.POST['finish_date'],
             cost = request.POST['cost'],
             category = request.POST['category'],
+            memo = request.POST['memo'],
         )
 
         return redirect('calendar', user_pk)
@@ -91,7 +94,7 @@ def calendar(request, user_pk):
     spend_list_ = [spend.toDict() for spend in realSpends]
     spends_list = json.dumps(spend_list_)
     spendCount = json.dumps(realSpends.count())
-    print(spends_list)
+    print(events_list)
 
     return render(request, 'calendar.html', {"events":events, "events_list":events_list, "realSpends":realSpends, "spends_list":spends_list, "spendCount":spendCount, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
 
@@ -116,6 +119,58 @@ def spend(request):
     
     spend_list_ = [spend.toDict() for spend in realSpends]
     spends_list = json.dumps(spend_list_) 
-    print(spends_list)
+    
     
     return render(request, 'calendar.html', {"sumForRealSpend":sumForRealSpend, "spends_list":spends_list})
+
+def delete_event(request, event_pk):
+    user = request.user
+    user_pk = user.pk
+    
+    event = Event.objects.get(id=event_pk)
+    event.delete()
+
+    return redirect('calendar', user_pk)
+
+@csrf_exempt
+def edit(request, event_pk):
+    user = request.user
+    user_pk = user.pk
+
+    #events = Event.objects.all
+    #events_ = Event.objects.filter(author = user)
+    event = Event.objects.get(pk=event_pk)
+    
+    if request.method == "POST":
+        event = Event.objects.filter(pk=event_pk).update(  
+            author = request.user,
+            content = request.POST['content'],
+            start_date = request.POST['start_date'],
+            finish_date = request.POST['finish_date'],
+            cost = request.POST['cost'],
+            category = request.POST['category'],
+            memo = request.POST['memo'],
+        )
+        return redirect('calendar', user_pk)
+
+    events_list = [{
+        'content' : event.content,
+        'start_date': event.start_date.strftime('%y%m%d'),
+        'finish_date':event.finish_date.strftime('%y%m%d'),
+        'cost': event.cost,
+        'category': event.category,
+        'memo': event.memo
+    }]
+    
+    event_list = json.dumps(events_list)
+
+    return render(request, 'edit.html', {'user_pk':user_pk, 'event':event,"event_list":event_list})
+    
+def delete_spend(request, spend_pk) :
+    user = request.user
+    user_pk = user.pk
+
+    spend = Spend.objects.get(pk= spend_pk)
+    spend.delete()
+
+    return redirect('calendar', user_pk)

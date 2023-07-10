@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+
+{% block css %}
+{% load static %}
+{% load account socialaccount %}
+{% providers_media_js %}
+<link rel="stylesheet" type="text/css" href="{% static 'cover.css' %}">
+{% endblock css %}
+
+{% block container %}
+    <!-- 이벤트 수정 -->
+    <div class="eventEdit">
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                <label for="date">시작날짜</label>
+                <input type="date" name="start_date" id="event_date_update"/>
+            </div>
+            <div>
+                <label for="date">끝 날짜</label>
+                <input type="date" name="finish_date" id="event_finish_date_update"/>
+            </div>
+            <div>
+                <label for="content">할일</label>
+                <input type="text" name="content" id="event_content_update" value=""/>
+            </div>
+            <div>
+                <label for="cost">예상 지출 금액</label>
+                <input type="number" name="cost" id="event_cost_update" value=""/>
+            </div>
+            <div>
+                <textarea name="memo" id="event_memo_update" cols="30" rows="10" placeholder="메모"></textarea>
+            </div>
+            <div>
+                <label for="category">색상</label>
+                <input type="color" name="category" id="event_category_update" list="colorOptions">
+                <datalist id="colorOptions">
+                    <option>#ABE3FF</option>
+                    <option>#FFBBB4</option>
+                    <option>#C4BEFF</option>
+                    <option>#FDD3FF</option>
+                    <option>#D8FFCD</option>
+                    <option>#FFF1D0</option>
+                    <option>#FBFFCD</option>
+                    <option>#D0E1FF</option>
+                    <option>#FFDCD6</option>
+                    <option>#E5E8BA</option>
+                </datalist>
+            </div>
+            <button type="submit">
+                작성하기
+            </button>
+        </form>
+        <a href="{% url 'calendar' user_pk %}">
+            닫기
+        </a>
+    </div> 
+
+
+<script>
+//날짜, 내용, 금액 칸에 원래 value 들어가게 하기
+    window.onload = function() {
+        let events_lists_ = JSON.parse('{{ event_list|escapejs }}');
+        
+        //시작 날짜 집어넣기
+        let yymmdd_start = events_lists_[0].start_date
+        let yyyy_s = "20" + yymmdd_start.substr(0, 2);
+        let mm_s = yymmdd_start.substr(2, 2);
+        let dd_s = yymmdd_start.substr(4, 2);
+        let yyyy_mm_dd_s = `${yyyy_s}-${mm_s}-${dd_s}`;
+
+        document.querySelector("#event_date_update").value = yyyy_mm_dd_s;
+
+        //끝 날짜 집어넣기
+        let yymmdd_finish = events_lists_[0].finish_date
+        let yyyy_f = "20" + yymmdd_finish.substr(0, 2);
+        let mm_f = yymmdd_finish.substr(2, 2);
+        let dd_f = yymmdd_finish.substr(4, 2);
+        let yyyy_mm_dd_f = `${yyyy_f}-${mm_f}-${dd_f}`;
+
+        document.querySelector("#event_finish_date_update").value = yyyy_mm_dd_f;
+
+        //내용, 금액, 카테고리 색상
+        document.querySelector("#event_content_update").value = events_lists_[0].content;
+        document.querySelector("#event_cost_update").value = events_lists_[0].cost;
+        document.querySelector("#event_category_update").value = events_lists_[0].category;
+        document.querySelector("#event_memo_update").value = events_lists_[0].memo;
+    }
+
+</script>
+
+{% endblock container %}

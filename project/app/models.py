@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 class Event(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users', default='', null = True)
     content = models.CharField(max_length=50)
+    memo = models.TextField(blank=True)
+    memo = models.TextField(blank=True)
     start_date = models.DateField()
     finish_date = models.DateField()
     cost = models.IntegerField()
@@ -18,7 +20,9 @@ class Event(models.Model):
             'content': self.content, 
             'start_date': self.start_date.isoformat(), 
             'finish_date': self.finish_date.isoformat(),
-            'cost' : self.cost
+            'cost' : self.cost,
+            'event_pk': self.pk,
+            'memo' : self.memo
         }
 
 class Spend(models.Model):
@@ -29,5 +33,6 @@ class Spend(models.Model):
     def toDict(self):
         return {
             'date': self.date, 
-            'spend': self.spend 
+            'spend': self.spend,
+            'spend_pk': self.pk
         }
