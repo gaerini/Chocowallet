@@ -97,7 +97,8 @@
                     <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
                         {% csrf_token %}
                         <div>
-                            <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
+                            <label>실제 지출 금액</label>
+                            <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요" value="0"/>
                         </div>
                         <div class="hidden3">
                             <input type="number" name="date" value="" id="date_spend"/>
@@ -135,13 +136,13 @@
                     </div>
                     <div>
                         <label for="date">종료</label>
-                        <input type="date" name="finish_date" id="event_finist_date"/>
+                        <input type="date" name="finish_date" id="event_finish_date"/>
                     </div>
                 </div>
                 <div class="color">
                     <div>
                         <label for="category">색상</label>
-                        <input type="color" name="category" id="event_category" list="colorOptions">
+                        <input type="color" name="category" id="event_category" list="colorOptions" value="#ABE3FF">
                         <datalist id="colorOptions">
                             <option>#ABE3FF</option>
                             <option>#FFBBB4</option>
@@ -157,7 +158,8 @@
                     </div>
                 </div>
                 <div class="expectspend">
-                    <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액"/>
+                    <label>예상 지출 금액</label>
+                    <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액" value="0" style="color: gray;"/>
                 </div>
                 <div>
                     <textarea name="memo" id="event_memo" cols="30" rows="10" placeholder="메모"></textarea>
@@ -240,13 +242,26 @@
                     span_.appendChild(p__);
                     span_.appendChild(span_for_memo);
                     div_.appendChild(aForEdit);
-
                     event_modal_content.appendChild(div_);
                     span_.classList.add("todoEvent");
                 }
             }
         }
+
+        //실제 지출액 칸 누르면 date_spend 에 저절로 날짜 값이 들어가게 (finish_date == list)
+        // -> filldate함수를 여기로 옮김
+        const date_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
+        const date_ = date_for_choice.split("-");
+
+        const spendYear = date_[0];
+        const spendMonth = date_[1].padStart(2, "0");
+        const spendDate = date_[2].padStart(2, "0");
+        const spend_date = spendYear + spendMonth + spendDate;
+
+        const spendDateInputBox = document.querySelector("#date_spend");
+        spendDateInputBox.value = spend_date;
     
+
         //모달에 그날의 실제 지출액 보여주기
         // 내가 누른 날짜 받아오기
         const clickyear = Number(month_[0]);

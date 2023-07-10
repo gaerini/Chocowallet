@@ -19,26 +19,6 @@ const spendForm = document.querySelector(".spend_form");
 
 tbody_.addEventListener("click", showEvent);
 
-//실제 지출액 칸 누르면 date_spend 에 저절로 날짜 값이 들어가게 (finish_date == list)
-const realSpend = document.querySelector("#real_spend");
-
-function fillDate() {
-  const date_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
-  const date_ = date_for_choice.split("-");
-
-  const spendYear = date_[0];
-  const spendMonth = date_[1].padStart(2, "0");
-  const spendDate = date_[2].padStart(2, "0");
-  const spend_date = spendYear + spendMonth + spendDate;
-
-  const spendDateInputBox = document.querySelector("#date_spend");
-  spendDateInputBox.value = spend_date;
-}
-
-realSpend.addEventListener("click", fillDate);
-
-//
-
 //일정 추가하기 모달
 const modal2 = document.querySelector(".addEventModal");
 const openBtn2_ = document.querySelector(".addEventBtn1");
@@ -51,12 +31,27 @@ function closeAddEventModal() {
 
 openBtn2_.addEventListener("click", () => {
   modal2.classList.remove("hidden2");
-  console.log("modal2");
 });
 
 openBtn2_1.addEventListener("click", () => {
+  //모달열기
   modal2.classList.remove("hidden2");
-  console.log("modal2");
+  //시작 날짜, 끝날짜에 오늘 날짜 들어가게하기
+  const _date = new Date();
+  const year__ = _date.getFullYear();
+  const month__ = _date.getMonth() + 1;
+  const date__ = _date.getDate();
+
+  const yy_mm_dd =
+    year__ +
+    "-" +
+    ("00" + month__.toString()).slice(-2) +
+    "-" +
+    ("00" + date__.toString()).slice(-2);
+
+  document.querySelector("#event_date").value = yy_mm_dd;
+  document.querySelector("#event_finish_date").value = yy_mm_dd;
+  console.log(yy_mm_dd);
 });
 
 closeBtn2.addEventListener("click", closeAddEventModal);

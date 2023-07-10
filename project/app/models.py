@@ -1,14 +1,16 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+import datetime
 
 # Create your models here.
 class Event(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users', default='', null = True)
-    content = models.CharField(max_length=50)
+    content = models.CharField(blank=True, max_length=50)
     memo = models.TextField(blank=True)
     start_date = models.DateField()
     finish_date = models.DateField()
-    cost = models.IntegerField()
+    cost = models.IntegerField(null=True, blank=True, default=0)
     category = models.CharField(max_length=50, default='')
 
     def __str__(self):
