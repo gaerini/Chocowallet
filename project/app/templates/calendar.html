@@ -99,9 +99,6 @@
                         <div>
                             <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
                         </div>
-                        <button type="submit" class="real_spend_submit">
-                            작성
-                        </button>
                         <div class="hidden3">
                             <input type="number" name="date" value="" id="date_spend"/>
                         </div>
@@ -242,7 +239,7 @@
                     p_.appendChild(span_);
                     span_.appendChild(p__);
                     span_.appendChild(span_for_memo);
-                    span_.appendChild(aForEdit);
+                    div.appendChild(aForEdit);
 
                     event_modal_content.appendChild(div_);
                     span_.classList.add("todoEvent");
