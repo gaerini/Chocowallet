@@ -59,7 +59,3 @@ openBtn2_1.addEventListener("click", () => {
 });
 
 closeBtn2.addEventListener("click", closeAddEventModal);
-
-
-
-

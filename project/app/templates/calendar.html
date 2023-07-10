@@ -88,20 +88,20 @@
         <div class="modal_back">
             <div class="event_modal">
                 <div class="spendFormAndShow">
+                    <div class="show_real_spend"></div>
                     <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
                         {% csrf_token %}
                         <div class ="modal_first_bar">
                             <button type="button" class="close" style="color: red;">취소</button>
                             <p class="modal-date"></p>
-                            <button type="submit" class="real_spend_submit">
-                                수정
-                            </button>
                         </div>
                         <div class="event_modal_content"></div>
-                        <div class="show_real_spend"></div>
                         <div>
                             <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
                         </div>
+                        <button type="submit" class="real_spend_submit">
+                            작성
+                        </button>
                         <div class="hidden3">
                             <input type="number" name="date" value="" id="date_spend"/>
                         </div>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="title_content">
                     <div>
-                        <input type="text" name="title" id="event_title" placeholder=" 할 일 "/>
+                        <input type="text" name="content" id="event_title" placeholder=" 할 일 "/>
                     </div>
                 </div>
                 <div class="startdate">
@@ -160,7 +160,7 @@
                     <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액"/>
                 </div>
                 <div>
-                    <input type="text" name="content" id="event_content" placeholder="내용"/>
+                    <textarea name="memo" id="event_memo" cols="30" rows="10" placeholder="메모"></textarea>
                 </div>
             </form>
         </div>
@@ -215,11 +215,13 @@
                     let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
                     let p_ = document.createElement('p');
                     let span_ = document.createElement('span');
+                    let span_for_memo = document.createElement('span');
                     let p__ = document.createElement('p');
                     let a_ = document.createElement('a'); // modaldp event 삭제 버튼 a tag
                     let aForEdit = document.createElement('a');
 
                     span_.innerText = events_lists[i].content;
+                    span_for_memo.innerText = events_lists[i].memo;
                     p__.innerText = "예상 금액: " + (events_lists[i].cost).toLocaleString();
                     
                     //이벤트 삭제
@@ -236,6 +238,7 @@
                     div_.appendChild(a_);
                     p_.appendChild(span_);
                     span_.appendChild(p__);
+                    span_.appendChild(span_for_memo);
                     span_.appendChild(aForEdit);
 
                     event_modal_content.appendChild(div_);
