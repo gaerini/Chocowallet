@@ -88,23 +88,23 @@
         <div class="modal_back">
             <div class="event_modal">
                 <div class="spendFormAndShow">
+                    <div class ="modal_first_bar">
+                        <p class="modal-date"></p>
+                        <button type="button" class="close">확인</button>
+                    </div>
+                    <div class="event_modal_content"></div>
+                    <div class="show_real_spend"></div>
                     <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
                         {% csrf_token %}
-                        <div class ="modal_first_bar">
-                            <button type="button" class="close" style="color: red;">취소</button>
-                            <p class="modal-date"></p>
-                            <button type="submit" class="real_spend_submit">
-                                수정
-                            </button>
-                        </div>
-                        <div class="event_modal_content"></div>
-                        <div class="show_real_spend"></div>
                         <div>
                             <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요"/>
                         </div>
                         <div class="hidden3">
                             <input type="number" name="date" value="" id="date_spend"/>
                         </div>
+                        <button type="submit" class="real_spend_submit">
+                            입력
+                        </button>
                     </form>
                 </div>
             </div>
@@ -227,16 +227,16 @@
                     a_.href = "/delete-event/" + events_lists[i].event_pk + "/";
 
                     //이벤트 수정
-                    aForEdit.innerText = "수정";
+                    // aForEdit.innerText = "수정";
                     aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
                     aForEdit.classList.add("aForEdit");
                     aForEdit.classList.add(`${events_lists[i].event_pk}`);
 
-                    div_.appendChild(p_);
+                    aForEdit.appendChild(p_);
                     div_.appendChild(a_);
                     p_.appendChild(span_);
                     span_.appendChild(p__);
-                    span_.appendChild(aForEdit);
+                    div_.appendChild(aForEdit);
 
                     event_modal_content.appendChild(div_);
                     span_.classList.add("todoEvent");
