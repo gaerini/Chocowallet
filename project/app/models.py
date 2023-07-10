@@ -6,6 +6,7 @@ class Event(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users', default='', null = True)
     content = models.CharField(max_length=50)
     memo = models.TextField(blank=True)
+    memo = models.TextField(blank=True)
     start_date = models.DateField()
     finish_date = models.DateField()
     cost = models.IntegerField()

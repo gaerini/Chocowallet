@@ -1,6 +1,7 @@
 // 일정 보여주는 모달 없애기, 내용 비우기
 const e_m_c = document.querySelector(".event_modal_content"); //모달 내용 비우기
 const s_r_s = document.querySelector(".show_real_spend");
+
 function closeModal() {
   modalBox.classList.add("hidden");
   e_m_c.innerHTML = "";

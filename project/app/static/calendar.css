@@ -333,13 +333,13 @@ a {
   font-size: calc(1.3vw + 1.3vh);
 }
 
-.modal_first_bar button:first-child {
+.modal_first_bar button {
   margin-left: 4vw;
 }
 
-.modal_first_bar button:last-child {
+/* .modal_first_bar button:last-child {
   margin-right: 4vw;
-}
+} */
 
 .modal_back > form {
   width: 100vw;
