@@ -83,6 +83,7 @@ def calendar(request, user_pk):
             finish_date = request.POST['finish_date'],
             cost = request.POST['cost'],
             category = request.POST['category'],
+            memo = request.POST['memo'],
         )
 
         return redirect('calendar', user_pk)
@@ -93,7 +94,7 @@ def calendar(request, user_pk):
     spend_list_ = [spend.toDict() for spend in realSpends]
     spends_list = json.dumps(spend_list_)
     spendCount = json.dumps(realSpends.count())
-    print(spends_list)
+    print(events_list)
 
     return render(request, 'calendar.html', {"events":events, "events_list":events_list, "realSpends":realSpends, "spends_list":spends_list, "spendCount":spendCount, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
 
@@ -148,6 +149,7 @@ def edit(request, event_pk):
             finish_date = request.POST['finish_date'],
             cost = request.POST['cost'],
             category = request.POST['category'],
+            memo = request.POST['memo'],
         )
         return redirect('calendar', user_pk)
 
@@ -156,7 +158,8 @@ def edit(request, event_pk):
         'start_date': event.start_date.strftime('%y%m%d'),
         'finish_date':event.finish_date.strftime('%y%m%d'),
         'cost': event.cost,
-        'category': event.category
+        'category': event.category,
+        'memo': event.memo
     }]
     
     event_list = json.dumps(events_list)

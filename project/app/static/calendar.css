@@ -162,7 +162,7 @@ tbody tr td p {
   top: 0; left: 0;
   width: 85vw;
   height: 4vh;
-  background-color: #FBFFB9;
+  background-color: #fbffb9;
   border-radius: 8px;
 }
 
@@ -277,13 +277,13 @@ tbody tr td p {
   font-weight: 500;
 }
 
-.modal_first_bar button:first-child {
+.modal_first_bar button {
   margin-left: 4vw;
 }
 
-.modal_first_bar button:last-child {
+/* .modal_first_bar button:last-child {
   margin-right: 4vw;
-}
+} */
 
 .modal_first_bar > button {
   all: unset;
@@ -409,7 +409,7 @@ tbody tr td p {
 #event_cost {
   margin-left: 6vw;
   padding-left: 1vw;
-  border-left: 1vw solid #CDFFED;
+  border-left: 1vw solid #cdffed;
   width: 93vw;
   font-size: calc(1.2vw + 1.2vh);
 }
@@ -446,4 +446,6 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 /* 새로운 일정 추가하기 끝*/
+
+
 
