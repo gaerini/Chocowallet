@@ -125,7 +125,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 15.2vh;
+  top: 15.5vh;
   background-color: rgb(48, 47, 47);
   transform: translateY(-50%);
   height: 2px;
@@ -329,6 +329,11 @@ a {
   font-size: calc(1.2vw + 1.2vh);
 }
 
+.modal_first_bar > p {
+  font-family: "Noto Sans KR", sans-serif;
+  font-weight: 500;
+  font-size: calc(1.3vw + 1.3vh);
+}
 
 .modal_first_bar button:first-child {
   margin-left: 4vw;
@@ -410,7 +415,7 @@ input[type="color"]::-webkit-color-swatch {
   all: unset;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.4);
   display: inline-flex;
   align-items: center;
   overflow: hidden;
@@ -544,7 +549,7 @@ input[type="color"]::-webkit-color-swatch {
   border: 1px solid rgba(0,0,0,0.15);
   box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
-  font-size: calc(2.5vw + 2.5vh);
+  font-size: calc(2.3vw + 2.3vh);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -561,7 +566,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 #logout a, #userguide a {
-  font-size: calc(1.1vw + 1.1vh);
+  font-size: calc(1vw + 1vh);
 }
 
 .momdiv3 #logout {
