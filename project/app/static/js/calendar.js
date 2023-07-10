@@ -69,11 +69,11 @@ function buildCalendar() {
         let newDIV = document.createElement("div");
         newDIV.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력
         nowColumn.appendChild(newDIV);
-        for(let _ = 0; _ < 6; _++){
+        for(let _ = 0; _ < 5; _++){
             let testEvent = document.createElement("div");
             testEvent.setAttribute("id", _ + nowDay.getDate().toString() );
             
-            testEvent.style.height = "2vh";
+            testEvent.style.height = "1.8vh";
             nowColumn.appendChild(testEvent);
         }
 
@@ -83,95 +83,6 @@ function buildCalendar() {
                 let newColumn = nowRow.insertCell();
 
             }
-        }
-        if (currentMonth.length > 0) {
-            // for (let k = 0; k < currentMonth.length; k++) {
-            //     const writeEventDay = parseInt((currentMonth[k].start_date.getDate() + currentMonth[k].finish_date.getDate())/2);
-            //     if (currentMonth[k].start_date == currentMonth[k].finish_date) {
-            //         if (currentMonth[k].start_date.getDate() == nowDay.getDate()){
-            //             let newEvent = document.getElementById(k + nowDay.getDate().toString());
-            //             newEvent.innerHTML = currentMonth[k].detail;
-            //             newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
-            //             console.log(nowColumn);
-            //             // nowColumn.appendChild(newEvent);
-            //         }
-            //     }
-
-            //     else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].finish_date.getMonth() == month) {
-            //         for (let m = new Date(currentMonth[k].start_date); m <= currentMonth[k].finish_date; m.setDate(m.getDate() + 1)) {
-            //             if (m.getDate() == nowDay.getDate()){
-            //                 let newEvent = document.getElementById(k + nowDay.getDate().toString());
-            //                 if (newEvent.innerText == "") {
-            //                     newEvent.innerText = " ";
-            //                     if(m.getDate() == writeEventDay) {
-            //                         newEvent.innerText = currentMonth[k].detail;
-            //                     }
-            //                     newEvent.style.height = "2vh";
-            //                     newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
-            //                 }
-            //                 else if(newEvent.innerText != ""){
-            //                     while(newEvent.innerText == ""){
-            //                         if(k >= 7){
-            //                             alert("더 이상 일정을 추가할 수 없습니다 ㅜㅜ");
-            //                             break;
-            //                         }
-            //                         k += 1;
-            //                     }
-            //                     newEvent.innerText = " ";
-            //                     if(m.getDate() == writeEventDay) {
-            //                         newEvent.innerText = currentMonth[k].detail;
-            //                     }
-            //                     newEvent.style.height = "2vh";
-            //                     newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
-            //                 }
-                            
-                            
-            //                 // nowColumn.appendChild(newEvent);
-            //             }                     
-            //         }
-
-            //     }
-
-            //     else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].finish_date.getMonth() != month) {
-            //         for (let m = new Date(currentMonth[k].start_date); m.getMonth() <= month; m.setDate(m.getDate() + 1)) {
-                        
-            //             if (m.getDate() == nowDay.getDate()){
-            //                 let newEvent = document.querySelector('.' + k);
-            //                 newEvent.innerHTML = currentMonth[k].detail;
-            //                 newEvent.setAttribute('style', 'height: 2vh');
-            //                 newEvent.innerText = " ";
-            //                 if(m.getDate() == writeEventDay) {
-            //                     newEvent.innerText = currentMonth[k].detail;
-            //                 }
-            //                 newEvent.innerHTML = currentMonth[k].detail;
-            //                 newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
-            //                 console.log(nowColumn.children().length);
-            //                 // nowColumn.appendChild(newEvent);
-            //             }                     
-            //         }
-            //     }
-
-            //     else if (currentMonth[k].start_date != currentMonth[k].finish_date && currentMonth[k].start_date.getMonth() != month) {
-            //         for (let m = new Date(currentMonth[k].finish_date); m.getMonth() >= month; m.setDate(m.getDate() - 1)) {
-                        
-            //             if (m.getDate() == nowDay.getDate()){
-            //                 let newEvent = document.createElement("div");
-            //                 newEvent.innerText = " ";
-            //                 if(m.getDate() == writeEventDay) {
-            //                     newEvent.innerText = currentMonth[k].detail;
-            //                 }
-            //                 newEvent.innerHTML = currentMonth[k].detail;
-            //                 newEvent.style.backgroundColor = currentMonth[k].category.toUpperCase();
-            //                 console.log(nowEvent.children().length);
-            //                 // nowColumn.appendChild(newEvent);
-            //             }                     
-            //         }
-            //     }
-
-                
-            // }
-            
-
         }
         const modal_Month = nowDay.getMonth();
         const modal_Date = nowDay.getDate();
@@ -464,7 +375,6 @@ function eventColoring (currentMonth, month, lastDate) {
                     searchDate.innerText = " ";
                 }
                 
-                searchDate.style.height = "2vh";
                 searchDate.style.backgroundColor = currentMonth[i].category.toUpperCase();
             }
         }
@@ -534,7 +444,6 @@ function eventColoring (currentMonth, month, lastDate) {
                     searchDate.innerText = " ";
                 }
 
-                searchDate.style.height = "2vh";
                 searchDate.style.backgroundColor = currentMonth[i].category.toUpperCase();
             }
         }
@@ -553,11 +462,6 @@ function findAndColor (currentMonth, currentMonthIdx, eventRowIdx, writeEventDay
             searchDate.innerText = " ";
         }
 
-        searchDate.style.height = "2vh";
         searchDate.style.backgroundColor = currentMonth[currentMonthIdx].category.toUpperCase();
     }
-}
-
-function fillDetailText (currentMonth, eventRowIdx) {
-    
 }
