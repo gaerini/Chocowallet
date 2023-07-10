@@ -89,11 +89,12 @@ thead > #weekday > td {
   min-height: 3vh;
 }
 
-.Calendar > tbody > tr > td > p {
+.Calendar > tbody > tr > td > div {
   display: block;
   text-align: center;
-  height: auto;
+  /* height: 30%; */
   margin: 0;
+  width: 100%;
 }
 
 .Calendar > tbody > tr {
@@ -110,13 +111,16 @@ thead > #weekday > td {
 
 tbody td {
   position: relative;
-  width: 10vw;
+  width: 14.3%;
   min-height: 9vh;
   height: auto;
   vertical-align: top;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 400;
   font-size: calc(1vw + 1vh);
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
 }
 
 a {
