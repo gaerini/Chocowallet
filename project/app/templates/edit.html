@@ -21,12 +21,15 @@
                 <input type="date" name="finish_date" id="event_finish_date_update"/>
             </div>
             <div>
-                <label for="content">내용</label>
+                <label for="content">할일</label>
                 <input type="text" name="content" id="event_content_update" value=""/>
             </div>
             <div>
-                <label for="cost">금액</label>
+                <label for="cost">예상 지출 금액</label>
                 <input type="number" name="cost" id="event_cost_update" value=""/>
+            </div>
+            <div>
+                <textarea name="memo" id="event_memo_update" cols="30" rows="10" placeholder="메모"></textarea>
             </div>
             <div>
                 <label for="category">색상</label>
@@ -81,6 +84,7 @@
         document.querySelector("#event_content_update").value = events_lists_[0].content;
         document.querySelector("#event_cost_update").value = events_lists_[0].cost;
         document.querySelector("#event_category_update").value = events_lists_[0].category;
+        document.querySelector("#event_memo_update").value = events_lists_[0].memo;
     }
 
 </script>

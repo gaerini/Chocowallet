@@ -162,7 +162,7 @@ tbody tr td p {
   top: 0; left: 0;
   width: 85vw;
   height: 4vh;
-  background-color: #FBFFB9;
+  background-color: #fbffb9;
   border-radius: 8px;
 }
 
@@ -277,17 +277,10 @@ tbody tr td p {
   font-weight: 500;
 }
 
-.modal_first_bar button:first-child {
-  margin-left: 4vw;
-}
-
-.modal_first_bar button:last-child {
-  margin-right: 4vw;
-}
-
-.modal_first_bar > button {
+.modal_first_bar button {
   all: unset;
   font-weight: 500;
+  margin: 0vw 4vw 0vw 4vw;
 }
 
 .event_modal_content {
@@ -350,7 +343,7 @@ tbody tr td p {
 #event_title {
   margin-left: 6vw;
   padding-left: 1vw;
-  border-left: 1vw solid #CDFFED;
+  border-left: 1vw solid rgba(171,227,255,0.75);
   width: 93vw;
   font-size: calc(1.5vw + 1.5vh);
 }
@@ -385,13 +378,23 @@ tbody tr td p {
   margin-top: 5vh;
   font-weight: 500;
   color: black;
-  align-items: flex-start;
+  align-items: flex-start; 
+}
+
+.color > div {
+  display: flex;
+  align-items: center;
 }
 
 .color input[type="color" i][list] {
   appearance: auto;
   inline-size: 20vw;
   block-size: 4.2vh;
+}
+
+.color input[type="color" i] {
+  background-color: white;
+  padding: 0;
 }
 
 .color label {
@@ -409,7 +412,7 @@ tbody tr td p {
 #event_cost {
   margin-left: 6vw;
   padding-left: 1vw;
-  border-left: 1vw solid #CDFFED;
+  border-left: 1vw solid rgba(171,227,255,0.75);
   width: 93vw;
   font-size: calc(1.2vw + 1.2vh);
 }
@@ -445,5 +448,18 @@ input[type="color"]::-webkit-color-swatch {
   color: rgba(0, 0, 0, 0.2);
 }
 
+#event_memo {
+  width: 88vw;
+  margin: 0vw 7vw 0vw 6vw;
+  padding: 0;
+  padding-left: 1vw;
+  border: 0;
+  border-left: 1vw solid rgba(171,227,255,0.75);
+  font-size: calc(1.2vw + 1.2vh);
+}
+
+#event_memo:focus {
+  outline: none;
+}
 /* 새로운 일정 추가하기 끝*/
 
