@@ -148,7 +148,6 @@ a {
   background-color: #eeeded;
   font-weight: bold;
   border-radius: 5px;
-  
 }
 
 .futureDay.choiceDay,
@@ -173,7 +172,7 @@ a {
   left: 0;
   width: 85vw;
   height: 4vh;
-  background-color: #FBFFB9;
+  background-color: #fbffb9;
   border-radius: 8px;
 }
 
@@ -182,7 +181,7 @@ a {
   top: 0;
   left: 0;
   height: 100%;
-  background-color: rgba(171,227,255,0.75);
+  background-color: rgba(171, 227, 255, 0.75);
   border-radius: 8px;
 }
 
@@ -210,14 +209,14 @@ a {
 .expected_color {
   height: 3vh;
   width: 3vh;
-  background-color: #FBFFCD;
+  background-color: #fbffcd;
   border-radius: 7px;
 }
 
 .spent_color {
   height: 3vh;
   width: 3vh;
-  background-color: rgba(171,227,255,0.75);
+  background-color: rgba(171, 227, 255, 0.75);
   border-radius: 7px;
 }
 
@@ -244,7 +243,6 @@ a {
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
 }
-
 
 .background {
   position: fixed;
@@ -401,7 +399,7 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .startdate > div:first-child {
- margin-bottom: 1.5vh; 
+  margin-bottom: 1.5vh;
 }
 
 #event_title,
@@ -409,7 +407,6 @@ input[type="color"]::-webkit-color-swatch {
 #event_content {
   all: unset;
 }
-
 
 .startdate input {
   all: unset;
@@ -436,12 +433,12 @@ input[type="color"]::-webkit-color-swatch {
 #event_cost {
   margin-left: 6vw;
   padding-left: 1vw;
-  border-left: 1vw solid #CDFFED;
+  border-left: 1vw solid #cdffed;
   width: 93vw;
   font-size: calc(1.2vw + 1.2vh);
 }
 
-.expectspend input{
+.expectspend input {
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 500;
   display: inline-block;
@@ -460,14 +457,14 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .startdate input[type="date"]::-webkit-calendar-picker-indicator {
-  margin-left: -5vw; 
+  margin-left: -5vw;
 }
 
 .title_content input[type="date"]::-webkit-calendar-picker-indicator {
   pointer-events: auto;
 }
 
-.color{
+.color {
   display: flex;
   width: 90vw;
   margin-left: 8vw;
@@ -510,7 +507,7 @@ input[type="color"]::-webkit-color-swatch {
 #event_title {
   margin-left: 6vw;
   padding-left: 1vw;
-  border-left: 1vw solid #CDFFED;
+  border-left: 1vw solid #cdffed;
   width: 93vw;
   font-size: calc(1.5vw + 1.5vh);
 }
@@ -528,7 +525,9 @@ input[type="color"]::-webkit-color-swatch {
   letter-spacing: 0px;
 }
 
-.momdiv3, .option2, .option1 {
+.momdiv3,
+.option2,
+.option1 {
   position: fixed;
   bottom: 23vh;
   right: 5vw;
@@ -546,7 +545,7 @@ input[type="color"]::-webkit-color-swatch {
   height: calc(3.5vw + 3.5vh);
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 900;
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   font-size: calc(2.3vw + 2.3vh);
@@ -565,7 +564,8 @@ input[type="color"]::-webkit-color-swatch {
   align-items: center;
 }
 
-#logout a, #userguide a {
+#logout a,
+#userguide a {
   font-size: calc(1vw + 1vh);
 }
 
@@ -588,7 +588,7 @@ input[type="color"]::-webkit-color-swatch {
   width: 10vw;
   font-family: "Noto Sans KR", sans-serif;
   font-weight: 900;
-  border: 1px solid rgba(0,0,0,0.15);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   display: flex;
