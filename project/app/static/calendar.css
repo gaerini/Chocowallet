@@ -301,6 +301,16 @@ tbody tr td > div {
   width: 92vw;
   margin-left: 8vw;
 }
+
+.spendFormAndShow > .modal_second_bar button {
+  position: absolute;
+  right: 0;
+}
+
+.modal-date {
+  margin-left: 6vw;
+}
+
 /* 달력 클릭해서 들어가는 모달 끝 */
 
 /*hidden 속성 시작*/

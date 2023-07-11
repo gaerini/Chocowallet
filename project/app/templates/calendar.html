@@ -145,8 +145,8 @@
                         <div class="color-picker">
                             <input type="color" name="category" id="event_category" list="colorOptions" value="#ABE3FF">
                             <datalist id="colorOptions">
-                                <option>#ABE3FF</option>
-                                <option>#FFBBB4</option>
+                                <option>#abe3ff</option>
+                                <option>#FFBBB4<x/option>
                                 <option>#C4BEFF</option>
                                 <option>#FDD3FF</option>
                                 <option>#D8FFCD</option>
@@ -154,7 +154,7 @@
                                 <option>#FBFFCD</option>
                                 <option>#D0E1FF</option>
                                 <option>#FFDCD6</option>
-                                <option>#E5E8BA</option>
+                                <option>#bcffe7</option>
                             </datalist>
                         </div>
                     </div>
@@ -234,8 +234,8 @@
                     //이벤트 수정
                     // aForEdit.innerText = "수정";
                     aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
-                    aForEdit.classList.add("aForEdit");
                     aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                    aForEdit.classList.add("aForEdit");
 
                     aForEdit.appendChild(p_);
                     div_.appendChild(a_);
