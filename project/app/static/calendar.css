@@ -411,6 +411,13 @@ tbody tr td > div {
   padding: 0;
 }
 
+.color-picker {
+  width: 20vw;
+  height: 4.2vh;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
 .color label {
   margin-right: 58vw;
 }
