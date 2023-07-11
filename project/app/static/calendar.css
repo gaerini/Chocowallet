@@ -58,6 +58,14 @@ thead > #weekday > td {
   min-height: 3vh;
 }
 
+.Calendar > tbody > tr > td > div {
+  display: block;
+  text-align: center;
+  /* height: 30%; */
+  margin: 0;
+  width: 100%;
+}
+
 .line {
   position: relative;
   top: 14.5vh;
@@ -75,21 +83,22 @@ thead > #weekday > td {
 
 tbody tr {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   width: 100vw;
 }
 
 tbody td {
-  width: 10vw; min-height: 9vh; height: auto;
+  width: 14.28vw; min-height: 9vh; height: auto;
   vertical-align: top;
   font-size: calc(1vw + 1vh);
+  padding: 0px;
 }
 
-tbody tr td p {
+tbody tr td > div {
   text-align: center;
   height: auto;
   margin: 0;
-  border-radius: 5px;
+  /* border-radius: 5px; */
   font-size: calc(0.75vw + 0.75vh);
   margin-bottom: 0.2vh;
 }
@@ -349,7 +358,7 @@ tbody tr td p {
 }
 
 .startdate label {
-  margin-right: 54vw;
+  margin-right: 50vw;
 }
 
 .startdate input {
@@ -379,6 +388,11 @@ tbody tr td p {
   font-weight: 500;
   color: black;
   align-items: flex-start; 
+}
+
+.color > div {
+  display: flex;
+  align-items: center;
 }
 
 .color > div {
@@ -457,7 +471,6 @@ input[type="color"]::-webkit-color-swatch {
   border-left: 1vw solid rgba(171,227,255,0.75);
   font-size: calc(1.2vw + 1.2vh);
 }
-
 #event_memo:focus {
   outline: none;
 }
