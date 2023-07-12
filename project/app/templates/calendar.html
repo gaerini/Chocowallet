@@ -142,24 +142,25 @@
                 <div class="color">
                     <div>
                         <label for="category">색상</label>
-                        <input type="color" name="category" id="event_category" list="colorOptions" value="#ABE3FF">
-                        <datalist id="colorOptions">
-                            <option>#ABE3FF</option>
-                            <option>#FFBBB4</option>
-                            <option>#C4BEFF</option>
-                            <option>#FDD3FF</option>
-                            <option>#D8FFCD</option>
-                            <option>#FFF1D0</option>
-                            <option>#FBFFCD</option>
-                            <option>#D0E1FF</option>
-                            <option>#FFDCD6</option>
-                            <option>#E5E8BA</option>
-                        </datalist>
+                        <div class="color-picker">
+                            <input type="color" name="category" id="event_category" list="colorOptions" value="#ABE3FF">
+                            <datalist id="colorOptions">
+                                <option>#abe3ff</option>
+                                <option>#FFBBB4<x/option>
+                                <option>#C4BEFF</option>
+                                <option>#FDD3FF</option>
+                                <option>#D8FFCD</option>
+                                <option>#FFF1D0</option>
+                                <option>#FBFFCD</option>
+                                <option>#D0E1FF</option>
+                                <option>#FFDCD6</option>
+                                <option>#bcffe7</option>
+                            </datalist>
+                        </div>
                     </div>
                 </div>
                 <div class="expectspend">
-                    <label>예상 지출 금액</label>
-                    <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액" value="0" style="color: gray;"/>
+                    <input type="number" name="cost" id="event_cost" placeholder="예상 지출 금액" style="color: gray;"/>
                 </div>
                 <div>
                     <textarea name="memo" id="event_memo" cols="30" rows="10" placeholder="메모"></textarea>
@@ -233,8 +234,8 @@
                     //이벤트 수정
                     // aForEdit.innerText = "수정";
                     aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
-                    aForEdit.classList.add("aForEdit");
                     aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                    aForEdit.classList.add("aForEdit");
 
                     aForEdit.appendChild(p_);
                     div_.appendChild(a_);
@@ -322,6 +323,19 @@
     dateInput.addEventListener('click', () => {
       dateInput.focus();
     });
+
+    const eventCategoryInput = document.getElementById('event_category');
+    const eventTitleInput = document.getElementById('event_title');
+    const eventCost = document.getElementById('event_cost');
+    const eventMemo = document.getElementById('event_memo');
+
+    eventCategoryInput.addEventListener("input", function () {
+        const selectedColor = eventCategoryInput.value;
+        eventTitleInput.style.borderLeftColor = selectedColor;
+        eventCost.style.borderLeftColor = selectedColor;
+        eventMemo.style.borderLeftColor = selectedColor;
+    });
+
 
 </script>
 <script src="{% static 'js/calendar.js' %}"></script>

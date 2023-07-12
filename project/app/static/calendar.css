@@ -88,7 +88,7 @@ tbody tr {
 }
 
 tbody td {
-  width: 14vw; min-height: 9vh; height: auto;
+  width: 14.28vw; min-height: 9vh; height: auto;
   vertical-align: top;
   font-size: calc(1vw + 1vh);
   padding: 0px;
@@ -178,7 +178,7 @@ tbody tr td > div {
 .progresspercent {
   position: absolute;
   top: 0; left: 0;
-  background-color: #abe3ff;
+  background-color: rgba(171,227,255,0.75);
   border-radius: 8px;
   height: 4vh;
 }
@@ -205,7 +205,7 @@ tbody tr td > div {
 }
 
 .spent_color {
-  background-color: #abe3ff;
+  background-color: rgba(171,227,255,0.75);
 }
 
 .expected_color {
@@ -301,6 +301,16 @@ tbody tr td > div {
   width: 92vw;
   margin-left: 8vw;
 }
+
+.spendFormAndShow > .modal_second_bar button {
+  position: absolute;
+  right: 0;
+}
+
+.modal-date {
+  margin-left: 6vw;
+}
+
 /* 달력 클릭해서 들어가는 모달 끝 */
 
 /*hidden 속성 시작*/
@@ -352,13 +362,13 @@ tbody tr td > div {
 #event_title {
   margin-left: 6vw;
   padding-left: 1vw;
-  border-left: 1vw solid rgba(171,227,255, 0.75);
+  border-left: 1vw solid rgba(171,227,255,0.75);
   width: 93vw;
   font-size: calc(1.5vw + 1.5vh);
 }
 
 .startdate label {
-  margin-right: 54vw;
+  margin-right: 50vw;
 }
 
 .startdate input {
@@ -387,7 +397,12 @@ tbody tr td > div {
   margin-top: 5vh;
   font-weight: 500;
   color: black;
-  align-items: flex-start;
+  align-items: flex-start; 
+}
+
+.color > div {
+  display: flex;
+  align-items: center;
 }
 
 .color > div {
@@ -406,6 +421,13 @@ tbody tr td > div {
   padding: 0;
 }
 
+.color-picker {
+  width: 20vw;
+  height: 4.2vh;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
 .color label {
   margin-right: 58vw;
 }
@@ -421,7 +443,7 @@ tbody tr td > div {
 #event_cost {
   margin-left: 6vw;
   padding-left: 1vw;
-  border-left: 1vw solid rgba(171, 227, 255, 0.75);
+  border-left: 1vw solid rgba(171,227,255,0.75);
   width: 93vw;
   font-size: calc(1.2vw + 1.2vh);
 }
@@ -470,6 +492,4 @@ input[type="color"]::-webkit-color-swatch {
   outline: none;
 }
 /* 새로운 일정 추가하기 끝*/
-
-
 
