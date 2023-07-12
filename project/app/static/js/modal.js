@@ -55,3 +55,16 @@ openBtn2_1.addEventListener("click", () => {
 });
 
 closeBtn2.addEventListener("click", closeAddEventModal);
+
+// 내용 없이 새 이벤트 입력시 alert창 띄움
+const form = document.getElementById('event_form');
+
+form.addEventListener('submit', (event) => {
+    const titleInput = document.getElementById('event_title');
+
+    if (titleInput.value.trim() === '') {
+        event.preventDefault();
+
+        alert('할 일을 입력해주세요.');
+    }
+});

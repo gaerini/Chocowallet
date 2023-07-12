@@ -177,8 +177,6 @@ function costSum() {
   events.forEach(function (obj) {
     const month = Number(monthSpan.innerText);
     const eventDate = new Date(obj.finish_date);
-    //console.log(eventDate.getMonth());
-    //헷갈려서 콘솔로그 주석처리했음
     if (month == eventDate.getMonth() + 1) {
       sum = sum + obj.cost;
     }
@@ -208,13 +206,16 @@ function costRealSum() {
 
 function costRatio() {
   let ratio = sum !== 0 ? (realsum / sum) * 100 : 0;
+  const progressPercentElement = document.querySelector(".progresspercent");
+
   if (ratio > 100) {
     ratio = 100;
+    progressPercentElement.style.backgroundColor = '#e01414';
   }
 
-  const progressPercentElement = document.querySelector(".progresspercent");
   progressPercentElement.style.width = `${ratio}%`;
 }
+
 
 function eventColoring (currentMonth, month, lastDate) {
     for(let i = 0; i < currentMonth.length; i++) {
