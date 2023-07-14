@@ -13,20 +13,16 @@
         <form action="" method="post">
             {% csrf_token %}
             <div>
-                <label for="date">시작날짜</label>
                 <input type="date" name="start_date" id="event_date_update"/>
             </div>
             <div>
-                <label for="date">끝 날짜</label>
                 <input type="date" name="finish_date" id="event_finish_date_update"/>
             </div>
             <div>
-                <label for="content">할일</label>
-                <input type="text" name="content" id="event_content_update" value=""/>
+                <input type="text" name="content" id="event_content_update" value="" placeholder="할 일"/>
             </div>
             <div>
-                <label for="cost">예상 지출 금액</label>
-                <input type="number" name="cost" id="event_cost_update" value=""/>
+                <input type="number" name="cost" id="event_cost_update" value="" placeholder="예상 지출 금액"/>
             </div>
             <div>
                 <textarea name="memo" id="event_memo_update" cols="30" rows="10" placeholder="메모"></textarea>
@@ -35,8 +31,8 @@
                 <label for="category">색상</label>
                 <input type="color" name="category" id="event_category_update" list="colorOptions">
                 <datalist id="colorOptions">
-                    <option>#ABE3FF</option>
-                    <option>#FFBBB4</option>
+                    <option>#abe3ff</option>
+                    <option>#FFBBB4<x/option>
                     <option>#C4BEFF</option>
                     <option>#FDD3FF</option>
                     <option>#D8FFCD</option>
@@ -44,11 +40,11 @@
                     <option>#FBFFCD</option>
                     <option>#D0E1FF</option>
                     <option>#FFDCD6</option>
-                    <option>#E5E8BA</option>
+                    <option>#bcffe7</option>
                 </datalist>
             </div>
             <button type="submit">
-                작성하기
+                수정하기 
             </button>
         </form>
         <a href="{% url 'calendar' user_pk %}">
