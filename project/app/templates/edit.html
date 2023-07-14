@@ -4,52 +4,64 @@
 {% load static %}
 {% load account socialaccount %}
 {% providers_media_js %}
-<link rel="stylesheet" type="text/css" href="{% static 'cover.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'edit.css' %}">
 {% endblock css %}
 
 {% block container %}
     <!-- 이벤트 수정 -->
+    <div class="background"></div>
     <div class="eventEdit">
-        <form action="" method="post">
-            {% csrf_token %}
-            <div>
-                <input type="date" name="start_date" id="event_date_update"/>
-            </div>
-            <div>
-                <input type="date" name="finish_date" id="event_finish_date_update"/>
-            </div>
-            <div>
-                <input type="text" name="content" id="event_content_update" value="" placeholder="할 일"/>
-            </div>
-            <div>
-                <input type="number" name="cost" id="event_cost_update" value="" placeholder="예상 지출 금액"/>
-            </div>
-            <div>
-                <textarea name="memo" id="event_memo_update" cols="30" rows="10" placeholder="메모"></textarea>
-            </div>
-            <div>
-                <label for="category">색상</label>
-                <input type="color" name="category" id="event_category_update" list="colorOptions">
-                <datalist id="colorOptions">
-                    <option>#abe3ff</option>
-                    <option>#FFBBB4<x/option>
-                    <option>#C4BEFF</option>
-                    <option>#FDD3FF</option>
-                    <option>#D8FFCD</option>
-                    <option>#FFF1D0</option>
-                    <option>#FBFFCD</option>
-                    <option>#D0E1FF</option>
-                    <option>#FFDCD6</option>
-                    <option>#bcffe7</option>
-                </datalist>
-            </div>
-            <button type="submit">
-                수정하기 
-            </button>
-        </form>
-        <a href="{% url 'calendar' user_pk %}">
-            닫기
-        </a>
+        <div class="modal_back">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class ="modal_first_bar">
+                    <button onclick="goBack()" style="color:red;">뒤로</button>
+                    <p class="modal-date"></p>
+                    <button type="submit">수정</button>
+                </div> 
+                <div class="title_content">
+                    <div>
+                        <input type="text" name="content" id="event_content_update" value="" placeholder="할 일"/>
+                    </div>
+                </div>
+                <div class="startdate">
+                    <div>
+                        <label for="date">시작</label>
+                        <input type="date" name="start_date" id="event_date_update"/>
+                    </div>
+                    <div>
+                        <label for="date">종료</label>
+                        <input type="date" name="finish_date" id="event_finish_date_update"/>
+                    </div>
+                </div>
+                <div class="color">
+                    <div>
+                        <label for="category">색상</label>
+                        <div class="color-picker">
+                            <input type="color" name="category" id="event_category_update" list="colorOptions">
+                            <datalist id="colorOptions">
+                                <option>#abe3ff</option>
+                                <option>#FFBBB4<x/option>
+                                <option>#C4BEFF</option>
+                                <option>#FDD3FF</option>
+                                <option>#D8FFCD</option>
+                                <option>#FFF1D0</option>
+                                <option>#FBFFCD</option>
+                                <option>#D0E1FF</option>
+                                <option>#FFDCD6</option>
+                                <option>#bcffe7</option>
+                            </datalist>
+                        </div>
+                    </div> 
+                </div>
+                <div class="expectspend">
+                    <input type="number" name="cost" id="event_cost_update" value="" placeholder="예상 지출 금액"/>
+                </div>
+                <div>
+                    <textarea name="memo" id="event_memo_update" cols="30" rows="10" placeholder="메모"></textarea>
+                </div>
+            </form>
+        </div>
     </div> 
 
 

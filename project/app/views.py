@@ -133,6 +133,7 @@ def delete_event(request, event_pk):
     return redirect('calendar', user_pk)
 
 @csrf_exempt
+
 def edit(request, event_pk):
     user = request.user
     user_pk = user.pk
