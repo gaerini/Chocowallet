@@ -323,9 +323,9 @@ tbody tr td > div {
   font-size: calc(2.3vw + 2.3vh);
   display: flex;
   justify-content: center;
-  margin-right: 10vw;
-  margin-left: 80vw;
-  margin-top: 30vh;
+  position: fixed;
+  right: 6vw;
+  bottom: 2.5vh;
 }
 
 /* 달력 클릭해서 들어가는 모달 끝 */
@@ -422,11 +422,6 @@ tbody tr td > div {
   align-items: center;
 }
 
-.color > div {
-  display: flex;
-  align-items: center;
-}
-
 .color input[type="color" i][list] {
   appearance: auto;
   inline-size: 20vw;
@@ -468,11 +463,6 @@ tbody tr td > div {
 .modalbox > .background {
   top: 0;
   left: 0;
-}
-
-#modal_newevent_firstbar p {
-  font-size: calc(1.25vw + 1.5vh);
-  font-weight: 400;
 }
 
 input[type="color"]::-webkit-color-swatch-wrapper {
