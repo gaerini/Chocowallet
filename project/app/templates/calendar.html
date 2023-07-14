@@ -97,8 +97,7 @@
                     <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
                         {% csrf_token %}
                         <div>
-                            <label>실제 지출 금액</label>
-                            <input type="number" name="spend" id="real_spend" placeholder="실제로 지출한 금액을 적어주세요" value="0"/>
+                            <input type="number" name="spend" id="real_spend" placeholder="실제 지출 금액" />
                         </div>
                         <div class="hidden3">
                             <input type="number" name="date" value="" id="date_spend"/>
@@ -107,6 +106,9 @@
                             입력
                         </button>
                     </form>
+                    <button class = "addEventBtn_in">
+                        +
+                    </button>
                 </div>
             </div>
         </div>

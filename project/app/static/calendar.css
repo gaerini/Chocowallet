@@ -268,6 +268,7 @@ tbody tr td > div {
 .modal > .modal_back > .event_modal {
   width: 100vw;
   display: flex;
+  height: 100vh;
 }
 
 .modal_first_bar {
@@ -309,6 +310,22 @@ tbody tr td > div {
 
 .modal-date {
   margin-left: 6vw;
+}
+
+.addEventBtn_in {
+  all: unset;
+  width: calc(3.5vw + 3.5vh);
+  height: calc(3.5vw + 3.5vh);
+  font-weight: 900;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: calc(2.3vw + 2.3vh);
+  display: flex;
+  justify-content: center;
+  margin-right: 10vw;
+  margin-left: 80vw;
+  margin-top: 30vh;
 }
 
 /* 달력 클릭해서 들어가는 모달 끝 */
