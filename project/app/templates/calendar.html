@@ -177,37 +177,67 @@
     const modalBox = document.querySelector(".modalbox");
     const openBtn = document.querySelector("tbody");
     const closeBtn = document.querySelector(".close");
-
     
     const events = [
-    {% for event in events %}
-        {
-            start_date: "{{event.start_date}}",
-            finish_date: "{{event.finish_date}}",
-            detail: "{{event.content}}",
-            cost: {{event.cost}},
-            category: "{{event.category}}",
-        },
-    {%endfor%}
-    ];
-    const realspends = [
-    {% for realspend in realSpends %}
-        {
-            date: "{{realspend.date}}",
-            spend: {{realspend.spend}},
-        },
-    {% endfor %}
+        {% for event in events %}
+            {
+                start_date: "{{event.start_date}}",
+                finish_date: "{{event.finish_date}}",
+                detail: "{{event.content}}",
+                cost: {{event.cost}},
+                category: "{{event.category}}",
+            },
+        {%endfor%}
+        ];
+        const realspends = [
+        {% for realspend in realSpends %}
+            {
+                date: "{{realspend.date}}",
+                spend: {{realspend.spend}},
+            },
+        {% endfor %}
     ];
 
+    firstLanding();
 
+
+    function firstLanding() {
+        console.log("first landing");
+        const key = window.localStorage.getItem("modal")
+        if (key) {
+            console.log(key);
+            const modalDate = document.querySelector(".modal-date");
+            modalDate.innerHTML = key
+            month_ = key.split("-");
+            const modalBox = document.querySelector('.modalbox')
+            modalBox.classList.remove("hidden")
+            console.log(modalBox, "first landing")
+            makeModal(month_);
+        }
+    }
+    
     function showEvent () {
-        const month_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
-        const month_ = month_for_choice.split('-');  // 하이픈을 기준으로 끊어서 배열로 저장 (["2023","12","23"])
+        const key = window.localStorage.getItem("modal")
+        let month_ = ''
+        if (!key) {
+            const month_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
+            month_ = month_for_choice.split('-');  // 하이픈을 기준으로 끊어서 배열로 저장 (["2023","12","23"])
+            window.localStorage.setItem("modal", month_for_choice);
+        } else {
+            month_ = key.split("-")
+        }
+
+        makeModal(month_)
+    }
+
+    function makeModal(month_) {
         let events_lists = JSON.parse('{{ events_list|escapejs }}');
         let event_modal_content = document.querySelector('.event_modal_content');
         let expectedCost = 0
 
         for (let i = 1; i < events.length; i++) {
+            let s_year = (new Date (events_lists[i]['start_date'])).getFullYear();
+            let f_year = (new Date(events_lists[i]['finish_date'])).getFullYear();
             let s_month = (new Date (events_lists[i]['start_date'])).getMonth()+1; //내가 작성한 일정의 시작 month
             let f_month = (new Date (events_lists[i]['finish_date'])).getMonth()+1;
             let s_day = (new Date (events_lists[i]['start_date'])).getDate(); //내가 작성한 일정의 시작 날짜
@@ -221,8 +251,8 @@
                     let aForEdit = document.createElement('a');
 
                     span_.innerText = events_lists[i].content;
-                    expectedCost += events_lists[i].cost
-                    
+                    expectedCost += events_lists[i].cost;
+
                     //이벤트 수정
                     aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
                     aForEdit.classList.add(`${events_lists[i].event_pk}`);
@@ -240,9 +270,9 @@
 
         //실제 지출액 칸 누르면 date_spend 에 저절로 날짜 값이 들어가게 (finish_date == list)
         // -> filldate함수를 여기로 옮김
-        const date_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
-        const date_ = date_for_choice.split("-");
-
+        // const date_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
+        // const date_ = date_for_choice.split("-");
+        const date_ = month_;
         const spendYear = date_[0];
         const spendMonth = date_[1].padStart(2, "0");
         const spendDate = date_[2].padStart(2, "0");
@@ -313,6 +343,7 @@
                 
 
                 //실제지출액 작성 폼 없애기
+                const spendForm = document.querySelector(".spend_form");
                 spendForm.classList.add("hidden4");
             }
         }
@@ -347,11 +378,10 @@
 
     eventCategoryInput.addEventListener("input", function () {
         const selectedColor = eventCategoryInput.value;
-        eventTitleInput.style.borderLeftColor = selectedColor;
+        Input.style.borderLeftColor = selectedColor;
         eventCost.style.borderLeftColor = selectedColor;
         eventMemo.style.borderLeftColor = selectedColor;
     });
-
 
 </script>
 <script src="{% static 'js/calendar.js' %}"></script>
