@@ -1,5 +1,12 @@
 window.onload = function () {
   buildCalendar();
+
+  //새로고침해도 modal-day에 요일이 들어가있게
+  const modalDayKey = window.localStorage.getItem("modalDay");
+
+  if (modalDayKey) {
+    document.querySelector(".modal-day").innerText = modalDayKey;
+  }
 };
 events.forEach(function (idx) {
   idx.start_date = new Date(idx.start_date);

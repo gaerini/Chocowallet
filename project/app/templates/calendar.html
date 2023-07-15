@@ -235,16 +235,7 @@
         }
         makeModal(month_)
     }
-
-    //새로고침해도 modal-day에 요일이 들어가있게
-    window.onload = function () {
-        const modalDayKey = window.localStorage.getItem("modalDay");
-        console.log(modalDayKey);
-
-        if (modalDayKey) {
-            document.querySelector(".modal-day").innerText = modalDayKey;
-        }
-    };
+    
 
     function makeModal(month_) {
         let events_lists = JSON.parse('{{ events_list|escapejs }}');
