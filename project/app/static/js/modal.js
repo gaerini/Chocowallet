@@ -8,6 +8,7 @@ function closeModal() {
   modalBox.classList.add("hidden");
   spendForm.classList.remove("hidden4");
   window.localStorage.removeItem("modal");
+  window.localStorage.removeItem("modalDay");
 }
 
 closeBtn.addEventListener("click", closeModal);
@@ -64,11 +65,27 @@ const form = document.getElementById("event_form");
 
 form.addEventListener("submit", (event) => {
   const titleInput = document.getElementById("event_title");
+  const costInput = document.getElementById("event_cost");
 
-  if (titleInput.value.trim() === "") {
+  //할일만 안적은 경우
+  if (titleInput.value.trim() === "" && costInput.value.trim() != "") {
     event.preventDefault();
 
     alert("할 일을 입력해주세요.");
+  }
+
+  //예상 지출 금액만 안적은 경우
+  if (titleInput.value.trim() != "" && costInput.value.trim() === "") {
+    event.preventDefault();
+
+    alert("예상 지출 금액을 입력해주세요");
+  }
+
+  //둘 다 안적은 경우
+  if (titleInput.value.trim() === "" && costInput.value.trim() === "") {
+    event.preventDefault();
+
+    alert("할 일과 예상 지출 금액을 입력해주세요!");
   }
 });
 
