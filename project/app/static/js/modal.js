@@ -3,9 +3,9 @@ const e_m_c = document.querySelector(".event_modal_content"); //모달 내용 �
 const s_r_s = document.querySelector(".show_real_spend");
 
 function closeModal() {
-  modalBox.classList.add("hidden");
   e_m_c.innerHTML = "";
   s_r_s.innerHTML = "";
+  modalBox.classList.add("hidden");
   spendForm.classList.remove("hidden4");
   window.localStorage.removeItem("modal");
 }
@@ -69,6 +69,19 @@ form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     alert("할 일을 입력해주세요.");
+  }
+});
+
+//내용 없이 금액 추가시 alert창 띄움
+const spend_form = document.querySelector(".spend_form");
+
+spend_form.addEventListener("submit", (event) => {
+  const spendmoney = document.getElementById("real_spend");
+
+  if (spendmoney.value.trim() === "") {
+    event.preventDefault();
+
+    alert("이날 실제로 지출한 금액을 입력해주세요!");
   }
 });
 

@@ -302,6 +302,7 @@
             //해당 날의 실제 지출 금액을 적은 경우
             if (Number(str_spenddate.substring(0,4)) == clickyear && Number(str_spenddate.substring(4,6) == clickmonth && Number(str_spenddate.substring(6,8))) == clickdt) {
             
+               
                 let divBox = document.createElement('div');
                 divBox.classList.add("divBox"); //클래스명
                 
@@ -351,8 +352,8 @@
                 const spendForm = document.querySelector(".spend_form");
                 spendForm.classList.add("hidden4");
 
-                //divBoxForZero 없애기
-                (document.querySelector(".divBoxForZero")).classList.add("hidden");
+                 //divBoxForZero 없애기
+                 (document.querySelector(".divBoxForZero")).classList.add("hidden");
 
             }
 
