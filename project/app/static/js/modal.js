@@ -3,11 +3,12 @@ const e_m_c = document.querySelector(".event_modal_content"); //모달 내용 �
 const s_r_s = document.querySelector(".show_real_spend");
 
 function closeModal() {
-  modalBox.classList.add("hidden");
   e_m_c.innerHTML = "";
   s_r_s.innerHTML = "";
+  modalBox.classList.add("hidden");
   spendForm.classList.remove("hidden4");
   window.localStorage.removeItem("modal");
+  window.localStorage.removeItem("modalDay");
 }
 
 closeBtn.addEventListener("click", closeModal);
@@ -66,11 +67,27 @@ const form = document.getElementById("event_form");
 
 form.addEventListener("submit", (event) => {
   const titleInput = document.getElementById("event_title");
+  const costInput = document.getElementById("event_cost");
 
-  if (titleInput.value.trim() === "") {
+  //할일만 안적은 경우
+  if (titleInput.value.trim() === "" && costInput.value.trim() != "") {
     event.preventDefault();
 
     alert("할 일을 입력해주세요.");
+  }
+
+  //예상 지출 금액만 안적은 경우
+  if (titleInput.value.trim() != "" && costInput.value.trim() === "") {
+    event.preventDefault();
+
+    alert("예상 지출 금액을 입력해주세요");
+  }
+
+  //둘 다 안적은 경우
+  if (titleInput.value.trim() === "" && costInput.value.trim() === "") {
+    event.preventDefault();
+
+    alert("할 일과 예상 지출 금액을 입력해주세요!");
   }
 });
 
@@ -86,7 +103,6 @@ spend_form.addEventListener("submit", (event) => {
     alert("이날 실제로 지출한 금액을 입력해주세요!");
   }
 });
-
 
 //일정 보기 모달에서 바로 일정 추가하기 위한 버튼
 const openBtn3 = document.querySelector(".addEventBtn3");
@@ -111,5 +127,3 @@ openBtn3.addEventListener("click", () => {
   modalbox.classList.add("hidden");
   
 });
-
-

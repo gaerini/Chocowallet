@@ -97,6 +97,7 @@ function buildCalendar() {
       // 지난날인 경우
       newDIV.className = "pastDay";
       newDIV.onclick = function () {
+        console.log(nowDay);
         modalDate.innerHTML = `${year}-${modal_Month + 1}-${modal_Date}`;
         modalDay.innerHTML = `(${dayNumToChar(dayNum)})`;
         modalBox.classList.remove("hidden");
