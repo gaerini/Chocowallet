@@ -3,7 +3,6 @@ window.onload = function () {
 
   //새로고침해도 modal-day에 요일이 들어가있게
   const modalDayKey = window.localStorage.getItem("modalDay");
-  console.log("야!!ㅡㅡ");
 
   if (modalDayKey) {
     document.querySelector(".modal-day").innerText = modalDayKey;
