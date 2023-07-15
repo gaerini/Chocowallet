@@ -105,9 +105,7 @@
                     입력
                 </button>
             </form>
-            <button class = "addEventBtn_in">
-                +
-            </button>
+            
         </div>
     </div>
 </div>
@@ -200,18 +198,17 @@
 
     firstLanding();
 
-
+    //수정창에서 뒤로가기 누르면 모달창 그대로 떠있게
     function firstLanding() {
-        console.log("first landing");
         const key = window.localStorage.getItem("modal")
+
         if (key) {
-            console.log(key);
             const modalDate = document.querySelector(".modal-date");
             modalDate.innerHTML = key
             month_ = key.split("-");
             const modalBox = document.querySelector('.modalbox')
             modalBox.classList.remove("hidden")
-            console.log(modalBox, "first landing")
+            
             makeModal(month_);
         }
     }
@@ -243,27 +240,29 @@
             let s_day = (new Date (events_lists[i]['start_date'])).getDate(); //내가 작성한 일정의 시작 날짜
             let f_day = (new Date(events_lists[i]['finish_date'])).getDate();
 
-            if (s_month <= Number(month_[1]) && Number(month_[1]) <= f_month ) {
-                if (s_day <= Number(month_[2]) && Number(month_[2]) <= f_day) {
-                    let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
-                    let div_2 = document.createElement('div');
-                    let span_ = document.createElement('span');
-                    let aForEdit = document.createElement('a');
+            if (s_year <= Number(month_[0]) && Number(month_[0]) <= f_year ) {
+                if (s_month <= Number(month_[1]) && Number(month_[1]) <= f_month ) {
+                    if (s_day <= Number(month_[2]) && Number(month_[2]) <= f_day) {
+                        let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
+                        let div_2 = document.createElement('div');
+                        let span_ = document.createElement('span');
+                        let aForEdit = document.createElement('a');
 
-                    span_.innerText = events_lists[i].content;
-                    expectedCost += events_lists[i].cost;
+                        span_.innerText = events_lists[i].content;
+                        expectedCost += events_lists[i].cost;
 
-                    //이벤트 수정
-                    aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
-                    aForEdit.classList.add(`${events_lists[i].event_pk}`);
-                    aForEdit.classList.add("aForEdit");
+                        //이벤트 수정
+                        aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
+                        aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                        aForEdit.classList.add("aForEdit");
 
-                    aForEdit.appendChild(div_2);
-                    div_.appendChild(aForEdit);
-                    div_2.appendChild(span_);
-                    
-                    event_modal_content.appendChild(div_);
-                    span_.classList.add("todoEvent");
+                        aForEdit.appendChild(div_2);
+                        div_.appendChild(aForEdit);
+                        div_2.appendChild(span_);
+                        
+                        event_modal_content.appendChild(div_);
+                        span_.classList.add("todoEvent");
+                    }
                 }
             }
         }
@@ -291,14 +290,16 @@
         const show_real_spend = document.querySelector(".show_real_spend");
         let spends_lists = JSON.parse('{{ spends_list|escapejs }}');
         let countSpend = JSON.parse('{{ spendCount|escapejs }}');
-
+    
         for (i = 0; i < countSpend; i++) {
             const str_spenddate = String(spends_lists[i].date);
             // console.log(Number(str_spenddate.substring(0,4)), typeof(Number(str_spenddate.substring(0,4))));
 
+            //해당 날의 실제 지출 금액을 적은 경우
             if (Number(str_spenddate.substring(0,4)) == clickyear && Number(str_spenddate.substring(4,6) == clickmonth && Number(str_spenddate.substring(6,8))) == clickdt) {
+            
                 let divBox = document.createElement('div');
-                divBox.classList.add("divBox");
+                divBox.classList.add("divBox"); //클래스명
                 
                 //이벤트 모달에서 금액 이름 부분
                 let divForTitle = document.createElement('div');
@@ -324,8 +325,9 @@
                 spanGap2.innerText = "|";
                 let spanForSpendCost = document.createElement('span');
 
+                //실제 지출 금액
                 let spendInInt = (spends_lists[i].spend).toLocaleString();
-                console.log(spendInInt, typeof(spendInInt));
+                //console.log(spendInInt, typeof(spendInInt));
                 spanForSpendCost.innerText = spendInInt;
 
                 divBox.appendChild(divForCost);
@@ -341,10 +343,59 @@
                 
                 show_real_spend.appendChild(divBox);
                 
-
                 //실제지출액 작성 폼 없애기
                 const spendForm = document.querySelector(".spend_form");
                 spendForm.classList.add("hidden4");
+
+                //divBoxForZero 없애기
+                (document.querySelector(".divBoxForZero")).classList.add("hidden");
+
+            }
+
+            //실제지출금액을 적지 않은 경우
+            else {
+                const divBoxForZero = document.querySelector(".divBoxForZero");
+
+                if (!divBoxForZero) { //div가 여러번 생기는 걸 방지하기 위함
+                    let divBox = document.createElement('div');
+                    divBox.classList.add("divBoxForZero"); //위 코드에서 div class명만 바꿈
+                    
+                    //이벤트 모달에서 금액 이름 부분
+                    let divForTitle = document.createElement('div');
+                    divForTitle.classList.add("divForTitle");
+                    let spanForExpected = document.createElement('span');
+                    spanForExpected.innerText = "총 예상 지출 금액";
+                    let spanGap1 = document.createElement('span');
+                    spanGap1.innerText = "|";
+                    let spanForSpend = document.createElement('span');
+                    spanForSpend.innerText = "실제 지출 금액";
+
+                    divBox.appendChild(divForTitle);
+                    divForTitle.appendChild(spanForExpected);
+                    divForTitle.appendChild(spanGap1);
+                    divForTitle.appendChild(spanForSpend);
+
+                    //이벤트 모달에서 금액 부분
+                    let divForCost = document.createElement('div');
+                    divForCost.classList.add("divForCost");
+                    let spanForExpectedCost = document.createElement('span');
+                    spanForExpectedCost.innerText = (expectedCost).toLocaleString();
+                    let spanGap2 = document.createElement('span');
+                    spanGap2.innerText = "|";
+                    let spanForSpendCost = document.createElement('span');
+
+                    //실제 지출 금액을 0으로 표시
+                    let spendInInt = 0;
+                    //console.log(spendInInt, typeof(spendInInt));
+                    spanForSpendCost.innerText = spendInInt;
+
+                    divBox.appendChild(divForCost);
+                    divForCost.appendChild(spanForExpectedCost);
+                    divForCost.appendChild(spanGap2);
+                    divForCost.appendChild(spanForSpendCost);
+                    
+                    show_real_spend.appendChild(divBox);
+                }
             }
         }
     }

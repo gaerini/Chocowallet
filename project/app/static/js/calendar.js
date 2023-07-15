@@ -24,12 +24,9 @@ function buildCalendar() {
 
   //현재 달력 연 월 정보
   const month = nowMonth.getMonth();
-  console.log(month);
   const year = nowMonth.getFullYear();
-  //console.log(year);
   const lastDayOfMonth = lastDate.getDay();
-  console.log(lastDayOfMonth);
-  console.log(lastDate);
+
   //현재 연 월 해당하는 이벤트만 넣기
   const currentMonth = [];
   if (events.length != 0) {
