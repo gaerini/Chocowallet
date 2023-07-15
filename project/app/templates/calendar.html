@@ -266,53 +266,56 @@
             const str_spenddate = String(spends_lists[i].date);
             // console.log(Number(str_spenddate.substring(0,4)), typeof(Number(str_spenddate.substring(0,4))));
 
+            let divBox = document.createElement('div');
+            divBox.classList.add("divBox");
+            
+            //이벤트 모달에서 금액 이름 부분
+            let divForTitle = document.createElement('div');
+            divForTitle.classList.add("divForTitle");
+            let spanForExpected = document.createElement('span');
+            spanForExpected.innerText = "총 예상 지출 금액";
+            let spanGap1 = document.createElement('span');
+            spanGap1.innerText = "|";
+            let spanForSpend = document.createElement('span');
+            spanForSpend.innerText = "실제 지출 금액";
+
+            divBox.appendChild(divForTitle);
+            divForTitle.appendChild(spanForExpected);
+            divForTitle.appendChild(spanGap1);
+            divForTitle.appendChild(spanForSpend);
+
+            //이벤트 모달에서 금액 부분
+            let divForCost = document.createElement('div');
+            divForCost.classList.add("divForCost");
+            let spanForExpectedCost = document.createElement('span');
+            spanForExpectedCost.innerText = (expectedCost).toLocaleString();
+            let spanGap2 = document.createElement('span');
+            spanGap2.innerText = "|";
+            let spanForSpendCost = document.createElement('span');
+
+            let spendInInt = (spends_lists[i].spend).toLocaleString();
+            console.log(spendInInt, typeof(spendInInt));
+            spanForSpendCost.innerText = spendInInt;
+
+            divBox.appendChild(divForCost);
+            divForCost.appendChild(spanForExpectedCost);
+            divForCost.appendChild(spanGap2);
+            divForCost.appendChild(spanForSpendCost);
+
+            //실제 지출 금액 삭제 버튼
+            let aForSpendEdit = document.createElement('a');
+            aForSpendEdit.innerText = '삭제';
+            aForSpendEdit.href = "/delete-spend/" + spends_lists[i].spend_pk + "/";
+            divBox.appendChild(aForSpendEdit);
+            
+            show_real_spend.appendChild(divBox);
+
             if (Number(str_spenddate.substring(0,4)) == clickyear && Number(str_spenddate.substring(4,6) == clickmonth && Number(str_spenddate.substring(6,8))) == clickdt) {
-                let divBox = document.createElement('div');
-                divBox.classList.add("divBox");
                 
-                //이벤트 모달에서 금액 이름 부분
-                let divForTitle = document.createElement('div');
-                divForTitle.classList.add("divForTitle");
-                let spanForExpected = document.createElement('span');
-                spanForExpected.innerText = "총 예상 지출 금액";
-                let spanGap1 = document.createElement('span');
-                spanGap1.innerText = "|";
-                let spanForSpend = document.createElement('span');
-                spanForSpend.innerText = "실제 지출 금액";
-
-                divBox.appendChild(divForTitle);
-                divForTitle.appendChild(spanForExpected);
-                divForTitle.appendChild(spanGap1);
-                divForTitle.appendChild(spanForSpend);
-
-                //이벤트 모달에서 금액 부분
-                let divForCost = document.createElement('div');
-                divForCost.classList.add("divForCost");
-                let spanForExpectedCost = document.createElement('span');
-                spanForExpectedCost.innerText = (expectedCost).toLocaleString();
-                let spanGap2 = document.createElement('span');
-                spanGap2.innerText = "|";
-                let spanForSpendCost = document.createElement('span');
-
-                let spendInInt = (spends_lists[i].spend).toLocaleString();
-                console.log(spendInInt, typeof(spendInInt));
-                spanForSpendCost.innerText = spendInInt;
-
-                divBox.appendChild(divForCost);
-                divForCost.appendChild(spanForExpectedCost);
-                divForCost.appendChild(spanGap2);
-                divForCost.appendChild(spanForSpendCost);
-
-                //실제 지출 금액 삭제 버튼
-                let aForSpendEdit = document.createElement('a');
-                aForSpendEdit.innerText = '삭제';
-                aForSpendEdit.href = "/delete-spend/" + spends_lists[i].spend_pk + "/";
-                divBox.appendChild(aForSpendEdit);
-                
-                show_real_spend.appendChild(divBox);
                 
 
                 //실제지출액 작성 폼 없애기
+                const spendForm = document.querySelector(.spend_form);
                 spendForm.classList.add("hidden4");
             }
         }
