@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap");
 
 * {
   margin: 0;
@@ -18,7 +18,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Raleway", sans-serif;
   font-weight: bold;
 }
 
@@ -33,10 +33,11 @@ body {
   margin-bottom: 8%;
 }
 
-.navbar__menu__item, .button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.navbar__menu__item,
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a {
@@ -49,15 +50,16 @@ a {
   font-size: calc(1vw + 1vh);
   white-space: nowrap;
   text-overflow: ellipsis;
-  display:flex;
+  display: flex;
   align-items: center;
 }
 
-#아이디, #비밀번호  {
+#아이디,
+#비밀번호 {
   position: relative;
   background-color: #fff;
-  border: 2px solid #E3E4ED;
-  border-radius : 2px;
+  border: 2px solid #e3e4ed;
+  border-radius: 2px;
   overflow: hidden;
   font-size: calc(1vw + 1vh);
   white-space: nowrap;
@@ -68,7 +70,11 @@ a {
   height: 5vh;
 }
 
-#로그인, #회원가입, #뒤로, #signup_회원가입, #finding {
+#로그인,
+#회원가입,
+#뒤로,
+#signup_회원가입,
+#finding {
   position: relative;
   overflow: hidden;
   font-size: calc(1vw + 1vh);
@@ -84,27 +90,27 @@ a {
 }
 
 #로그인 {
-    background-color: #FBFFCD ;
-    color: black;
-    margin-bottom: 6px;
+  background-color: #fbffcd;
+  color: black;
+  margin-bottom: 6px;
 }
 
 #회원가입 {
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(171, 227, 255, 0.75);
-    color: black;
-    border-radius: 8px;
-    margin-top: 6px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(171, 227, 255, 0.75);
+  color: black;
+  border-radius: 8px;
+  margin-top: 6px;
 }
 
 .line {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .line::before,
 .line::after {
   content: "";
@@ -112,8 +118,8 @@ a {
   top: 50%;
   width: 70%;
   max-height: 1px;
-  height:50%;
-  background-color: #BFB6B6; 
+  height: 50%;
+  background-color: #bfb6b6;
   transform: translateY(-50%);
 }
 
@@ -122,18 +128,18 @@ a {
   z-index: 1;
   background-color: white;
   padding: 0 10px;
-  color: #BFB6B6;
+  color: #bfb6b6;
   transform-origin: left top;
 }
 
 .line::before {
-    transform-origin: left top;
+  transform-origin: left top;
 }
 
 .line::after {
-    transform-origin: right top;
+  transform-origin: right top;
 }
-  
+
 #비밀번호 {
   margin-bottom: 10px;
 }
@@ -154,7 +160,7 @@ a {
 #뒤로 {
   justify-content: center;
   align-items: center;
-  background-color: #EEEDED;
+  background-color: #eeeded;
   color: black;
   border-radius: 8px;
   margin-top: 6px;
@@ -166,8 +172,12 @@ p {
 }
 
 #finding {
-  background-color: #FBFFCD;
-    color: black;
-    margin-bottom: 8px;
-    margin-top: 1vh;
+  background-color: #fbffcd;
+  color: black;
+  margin-bottom: 8px;
+  margin-top: 1vh;
+}
+
+.buttonForFindingAccount {
+  display: none;
 }
