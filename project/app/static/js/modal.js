@@ -68,3 +68,11 @@ form.addEventListener('submit', (event) => {
         alert('할 일을 입력해주세요.');
     }
 });
+
+//일정 보기 모달에서 바로 일정 추가하기 위한 버튼
+const openBtn3 = document.querySelector(".addEventBtn3");
+
+openBtn3.addEventListener("click", () => {
+  // modalBox.classList.add("hidden");
+  modal2.classList.remove("hidden2");
+});
