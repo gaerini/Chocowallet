@@ -310,14 +310,11 @@
                 divForTitle.classList.add("divForTitle");
                 let spanForExpected = document.createElement('span');
                 spanForExpected.innerText = "총 예상 지출 금액";
-                let spanGap1 = document.createElement('span');
-                spanGap1.innerText = "|";
                 let spanForSpend = document.createElement('span');
                 spanForSpend.innerText = "실제 지출 금액";
 
                 divBox.appendChild(divForTitle);
                 divForTitle.appendChild(spanForExpected);
-                divForTitle.appendChild(spanGap1);
                 divForTitle.appendChild(spanForSpend);
 
                 //이벤트 모달에서 금액 부분
@@ -325,8 +322,6 @@
                 divForCost.classList.add("divForCost");
                 let spanForExpectedCost = document.createElement('span');
                 spanForExpectedCost.innerText = (expectedCost).toLocaleString();
-                let spanGap2 = document.createElement('span');
-                spanGap2.innerText = "|";
                 let spanForSpendCost = document.createElement('span');
 
                 //실제 지출 금액
@@ -336,12 +331,11 @@
 
                 divBox.appendChild(divForCost);
                 divForCost.appendChild(spanForExpectedCost);
-                divForCost.appendChild(spanGap2);
                 divForCost.appendChild(spanForSpendCost);
 
                 //실제 지출 금액 삭제 버튼
                 let aForSpendEdit = document.createElement('a');
-                aForSpendEdit.innerText = '삭제';
+                aForSpendEdit.innerText = '실제 지출 금액 수정/삭제';
                 aForSpendEdit.href = "/delete-spend/" + spends_lists[i].spend_pk + "/";
                 divBox.appendChild(aForSpendEdit);
                 
@@ -369,14 +363,11 @@
                     divForTitle.classList.add("divForTitle");
                     let spanForExpected = document.createElement('span');
                     spanForExpected.innerText = "총 예상 지출 금액";
-                    let spanGap1 = document.createElement('span');
-                    spanGap1.innerText = "|";
                     let spanForSpend = document.createElement('span');
                     spanForSpend.innerText = "실제 지출 금액";
 
                     divBox.appendChild(divForTitle);
                     divForTitle.appendChild(spanForExpected);
-                    divForTitle.appendChild(spanGap1);
                     divForTitle.appendChild(spanForSpend);
 
                     //이벤트 모달에서 금액 부분
@@ -384,8 +375,6 @@
                     divForCost.classList.add("divForCost");
                     let spanForExpectedCost = document.createElement('span');
                     spanForExpectedCost.innerText = (expectedCost).toLocaleString();
-                    let spanGap2 = document.createElement('span');
-                    spanGap2.innerText = "|";
                     let spanForSpendCost = document.createElement('span');
 
                     //실제 지출 금액을 0으로 표시
@@ -395,7 +384,6 @@
 
                     divBox.appendChild(divForCost);
                     divForCost.appendChild(spanForExpectedCost);
-                    divForCost.appendChild(spanGap2);
                     divForCost.appendChild(spanForSpendCost);
                     
                     show_real_spend.appendChild(divBox);

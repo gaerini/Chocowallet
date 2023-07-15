@@ -72,6 +72,20 @@ form.addEventListener("submit", (event) => {
   }
 });
 
+//내용 없이 금액 추가시 alert창 띄움
+const spend_form = document.querySelector(".spend_form");
+
+spend_form.addEventListener("submit", (event) => {
+  const spendmoney = document.getElementById("real_spend");
+
+  if (spendmoney.value.trim() === "") {
+    event.preventDefault();
+
+    alert("이날 실제로 지출한 금액을 입력해주세요!");
+  }
+});
+
+
 //일정 보기 모달에서 바로 일정 추가하기 위한 버튼
 const openBtn3 = document.querySelector(".addEventBtn3");
 
@@ -92,3 +106,5 @@ openBtn3.addEventListener("click", () => {
 
   console.log();
 });
+
+
