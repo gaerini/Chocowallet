@@ -88,7 +88,9 @@ function buildCalendar() {
     }
     const modal_Month = nowDay.getMonth();
     const modal_Date = nowDay.getDate();
+    const dayNum = nowDay.getDay();
     const modalDate = document.querySelector(".modal-date");
+    const modalDay = document.querySelector(".modal-day");
     if (nowDay.getDay() == 6) {
       // 토요일인 경우
       nowRow = tbody_Calendar.insertRow(); // 새로운 행 추가
@@ -99,6 +101,7 @@ function buildCalendar() {
       newDIV.className = "pastDay";
       newDIV.onclick = function () {
         modalDate.innerHTML = `${year}-${modal_Month + 1}-${modal_Date}`;
+        modalDay.innerHTML = `(${dayNumToChar(dayNum)})`;
         modalBox.classList.remove("hidden");
       };
     } else if (
@@ -111,6 +114,7 @@ function buildCalendar() {
       //newDIV.onclick = function () { choiceDate(this); }
       newDIV.onclick = function () {
         modalDate.innerHTML = `${year}-${modal_Month + 1}-${modal_Date}`;
+        modalDay.innerHTML = `(${dayNumToChar(dayNum)})`;
         modalBox.classList.remove("hidden");
       };
       //console.log(nowDay);
@@ -120,6 +124,7 @@ function buildCalendar() {
       //newDIV.onclick = function () { choiceDate(this); }
       newDIV.onclick = function () {
         modalDate.innerHTML = `${year}-${modal_Month + 1}-${modal_Date}`;
+        modalDay.innerHTML = `(${dayNumToChar(dayNum)})`;
         modalBox.classList.remove("hidden");
       };
     }
@@ -511,5 +516,23 @@ function findAndColor(
 
     searchDate.style.backgroundColor =
       currentMonth[currentMonthIdx].category.toUpperCase();
+  }
+}
+
+function dayNumToChar(dayNum) {
+  if (dayNum == 0) {
+    return "일";
+  } else if (dayNum == 1) {
+    return "월";
+  } else if (dayNum == 2) {
+    return "화";
+  } else if (dayNum == 3) {
+    return "수";
+  } else if (dayNum == 4) {
+    return "목";
+  } else if (dayNum == 5) {
+    return "금";
+  } else if (dayNum == 6) {
+    return "토";
   }
 }

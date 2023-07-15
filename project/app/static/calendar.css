@@ -265,14 +265,7 @@ tbody tr td > div {
   border-top-left-radius: 16px; border-top-right-radius: 16px;
 }
 
-.modal > .modal_back > .event_modal {
-  width: 100vw;
-  display: flex;
-  height: 100vh;
-}
-
 .modal_first_bar {
-  position: relative;
   display: flex;
   width: 100%;
   height: 5vh;
@@ -299,13 +292,15 @@ tbody tr td > div {
 }
 
 .event_modal_content > div {
+  display: flex;
+  flex-direction: row;
   width: 92vw;
   margin-left: 8vw;
 }
 
-.spendFormAndShow > .modal_second_bar button {
-  position: absolute;
-  right: 0;
+.todoEvent {
+  display: flex;
+  flex-direction: row;
 }
 
 .modal-date {
@@ -338,7 +333,7 @@ tbody tr td > div {
 
 /* 새로운 일정 추가하기 시작*/
 .addEventModal {
-  z-index: 1;
+  z-index: 2;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -348,7 +343,7 @@ tbody tr td > div {
 }
 
 .eventEditModal {
-  z-index: 2;
+  z-index: 3;
 }
 
 .title_content,

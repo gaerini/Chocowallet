@@ -80,3 +80,11 @@ function openModalInLocalStroage() {
   }
   // 없으면 그냥 모달을 생성하지 않는다.
 }
+
+//일정 보기 모달에서 바로 일정 추가하기 위한 버튼
+const openBtn3 = document.querySelector(".addEventBtn3");
+
+openBtn3.addEventListener("click", () => {
+  // modalBox.classList.add("hidden");
+  modal2.classList.remove("hidden2");
+});
