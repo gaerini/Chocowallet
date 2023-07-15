@@ -275,9 +275,20 @@ tbody tr td > div {
   font-size: calc(1.2vw + 1.2vh);
 }
 
-.modal-date {
+.modal_date {
   font-size: calc(1.25vw + 1.5vh);
   font-weight: 500;
+  display: flex;
+  flex-direction: row;
+  margin-left: 1vw;
+}
+
+.modal-day {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
 
 .modal_first_bar button {
@@ -301,10 +312,6 @@ tbody tr td > div {
 .todoEvent {
   display: flex;
   flex-direction: row;
-}
-
-.modal-date {
-  margin-left: 6vw;
 }
 
 .addEventBtn_in {
