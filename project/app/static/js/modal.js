@@ -72,19 +72,23 @@ form.addEventListener("submit", (event) => {
   }
 });
 
-function openModalInLocalStroage() {
-  // LocalStroage에서 key가 modal인 정보가 있는지 확인한다
-  const key = window.localStorage.getItem("modal");
-  // 만약 있으면 그 정보로 모달을 생성하고
-  if (key) {
-  }
-  // 없으면 그냥 모달을 생성하지 않는다.
-}
-
 //일정 보기 모달에서 바로 일정 추가하기 위한 버튼
 const openBtn3 = document.querySelector(".addEventBtn3");
 
 openBtn3.addEventListener("click", () => {
-  // modalBox.classList.add("hidden");
   modal2.classList.remove("hidden2");
+
+  //모달창에서 추가버튼 눌렀을 때 시작날짜, 끝날짜에 해당 모달 날짜 들어가게하기
+  let key_ = window.localStorage.getItem("modal");
+  let startAndFinishDate = key_.split("-");
+
+  const yearkey = startAndFinishDate[0];
+  const monthkey = startAndFinishDate[1].padStart(2, "0");
+  const datekey = startAndFinishDate[2].padStart(2, "0");
+  let y_m_dkey = `${yearkey}-${monthkey}-${datekey}`;
+
+  document.querySelector("#event_date").value = y_m_dkey;
+  document.querySelector("#event_finish_date").value = y_m_dkey;
+
+  console.log();
 });
