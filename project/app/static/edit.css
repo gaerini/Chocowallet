@@ -193,3 +193,18 @@ input[type="color"]::-webkit-color-swatch {
 #event_memo_update:focus {
   outline: none;
 }
+
+#delete {
+  all: unset;
+  width: 90vw;
+  height: 4vh;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: calc(1.2vw + 1.2vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 4vh 4vw 0 5vw;
+  color: red;
+}
