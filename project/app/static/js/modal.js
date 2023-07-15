@@ -28,9 +28,11 @@ const modal2 = document.querySelector(".addEventModal");
 const openBtn2_ = document.querySelector(".addEventBtn1");
 const openBtn2_1 = document.querySelector(".addEventBtn2");
 const closeBtn2 = document.querySelector(".close2");
+const modalbox = document.querySelector(".modalbox");
 
 function closeAddEventModal() {
   modal2.classList.add("hidden2");
+  modalbox.classList.remove("hidden");
 }
 
 openBtn2_.addEventListener("click", () => {
@@ -105,6 +107,7 @@ spend_form.addEventListener("submit", (event) => {
 //일정 보기 모달에서 바로 일정 추가하기 위한 버튼
 const openBtn3 = document.querySelector(".addEventBtn3");
 
+
 openBtn3.addEventListener("click", () => {
   modal2.classList.remove("hidden2");
 
@@ -121,4 +124,6 @@ openBtn3.addEventListener("click", () => {
   document.querySelector("#event_finish_date").value = y_m_dkey;
 
   console.log();
+  modalbox.classList.add("hidden");
+  
 });

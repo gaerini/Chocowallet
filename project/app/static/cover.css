@@ -178,6 +178,7 @@ p {
   margin-top: 1vh;
 }
 
-.buttonForFindingAccount {
+/*1차 mvp 위해*/
+.buttonForFindingAccount, .line {
   display: none;
 }
