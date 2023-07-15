@@ -22,32 +22,36 @@ function buildCalendar() {
     nowMonth.getMonth() + 1
   ); // 월 숫자 갱신
 
-    //현재 달력 연 월 정보
-    const month = nowMonth.getMonth();
-    console.log(month);
-    const year = nowMonth.getFullYear();
-    //console.log(year);
-    const lastDayOfMonth = lastDate.getDay();
-    console.log( lastDayOfMonth );
-    console.log(lastDate);
-    //현재 연 월 해당하는 이벤트만 넣기
-    const currentMonth = [];
-    if (events.length != 0){
-        for (let j = 0;  j < events.length; j++){
-            //console.log(events[j]['start_date'].getMonth());
-            //console.log(events[j]['finish_date'].getMonth());
-            if ((events[j]['start_date'].getMonth() === month || events[j]['finish_date'].getMonth() === month) && events[j]['start_date'].getFullYear() == year) {
-                //console.log(events[j]);
-                currentMonth.push(events[j]);
-            };
-
-        }
+  //현재 달력 연 월 정보
+  const month = nowMonth.getMonth();
+  console.log(month);
+  const year = nowMonth.getFullYear();
+  //console.log(year);
+  const lastDayOfMonth = lastDate.getDay();
+  console.log(lastDayOfMonth);
+  console.log(lastDate);
+  //현재 연 월 해당하는 이벤트만 넣기
+  const currentMonth = [];
+  if (events.length != 0) {
+    for (let j = 0; j < events.length; j++) {
+      //console.log(events[j]['start_date'].getMonth());
+      //console.log(events[j]['finish_date'].getMonth());
+      if (
+        (events[j]["start_date"].getMonth() === month ||
+          events[j]["finish_date"].getMonth() === month) &&
+        events[j]["start_date"].getFullYear() == year
+      ) {
+        //console.log(events[j]);
+        currentMonth.push(events[j]);
+      }
     }
-    console.log(currentMonth);
+  }
+  console.log(currentMonth);
 
-    while (tbody_Calendar.rows.length > 0) {                        // 이전 출력결과가 남아있는 경우 초기화
-        tbody_Calendar.deleteRow(tbody_Calendar.rows.length - 1);
-    }
+  while (tbody_Calendar.rows.length > 0) {
+    // 이전 출력결과가 남아있는 경우 초기화
+    tbody_Calendar.deleteRow(tbody_Calendar.rows.length - 1);
+  }
 
   let nowRow = tbody_Calendar.insertRow(); // 첫번째 행 추가
 
@@ -63,65 +67,69 @@ function buildCalendar() {
   ) {
     // day는 날짜를 저장하는 변수, 이번달 마지막날까지 증가시키며 반복
 
-        let nowColumn = nowRow.insertCell();        // 새 열을 추가하고
-        
+    let nowColumn = nowRow.insertCell(); // 새 열을 추가하고
 
-        let newDIV = document.createElement("div");
-        newDIV.innerHTML = leftPad(nowDay.getDate());        // 추가한 열에 날짜 입력
-        nowColumn.appendChild(newDIV);
-        for(let _ = 0; _ < 5; _++){
-            let testEvent = document.createElement("div");
-            testEvent.setAttribute("id", _ + nowDay.getDate().toString() );
-            
-            testEvent.style.height = "1.8vh";
-            nowColumn.appendChild(testEvent);
-        }
+    let newDIV = document.createElement("div");
+    newDIV.innerHTML = leftPad(nowDay.getDate()); // 추가한 열에 날짜 입력
+    nowColumn.appendChild(newDIV);
+    for (let _ = 0; _ < 5; _++) {
+      let testEvent = document.createElement("div");
+      testEvent.setAttribute("id", _ + nowDay.getDate().toString());
 
-        if (lastDayOfMonth <= 6 && nowDay.getDate() == lastDate.getDate()) {
-            console.log('go!');
-            for (let fillDay = 0; fillDay < 6-lastDayOfMonth ;fillDay++){
-                let newColumn = nowRow.insertCell();
-
-            }
-        }
-        const modal_Month = nowDay.getMonth();
-        const modal_Date = nowDay.getDate();
-        const modalDate = document.querySelector(".modal-date");
-        if (nowDay.getDay() == 6) {                 // 토요일인 경우
-            nowRow = tbody_Calendar.insertRow();    // 새로운 행 추가
-        }
-
-        if (nowDay < today) {                       // 지난날인 경우
-            newDIV.className = "pastDay";
-            newDIV.onclick = function(){
-                modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
-                modalBox.classList.remove("hidden");
-            }
-        }
-        else if (nowDay.getFullYear() == today.getFullYear() && nowDay.getMonth() == today.getMonth() && nowDay.getDate() == today.getDate()) { // 오늘인 경우           
-            newDIV.className = "today";
-            //newDIV.onclick = function () { choiceDate(this); }
-            newDIV.onclick = function(){
-                modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
-                modalBox.classList.remove("hidden");
-            }
-            //console.log(nowDay);
-        }
-        else {                                      // 미래인 경우
-            newDIV.className = "futureDay";
-            //newDIV.onclick = function () { choiceDate(this); }
-            newDIV.onclick = function(){
-                modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
-                modalBox.classList.remove("hidden");
-            }
-        }
+      testEvent.style.height = "1.8vh";
+      nowColumn.appendChild(testEvent);
     }
-    if(currentMonth.length > 0){
-        const colorStart = eventColoring(currentMonth, month, lastDate);
+
+    if (lastDayOfMonth <= 6 && nowDay.getDate() == lastDate.getDate()) {
+      console.log("go!");
+      for (let fillDay = 0; fillDay < 6 - lastDayOfMonth; fillDay++) {
+        let newColumn = nowRow.insertCell();
+      }
     }
-    const makeSum = costSum();
-    const makeRealSum = costRealSum();
-    const makeRatio = costRatio();
+    const modal_Month = nowDay.getMonth();
+    const modal_Date = nowDay.getDate();
+    const modalDate = document.querySelector(".modal-date");
+    if (nowDay.getDay() == 6) {
+      // 토요일인 경우
+      nowRow = tbody_Calendar.insertRow(); // 새로운 행 추가
+    }
+
+    if (nowDay < today) {
+      // 지난날인 경우
+      newDIV.className = "pastDay";
+      newDIV.onclick = function () {
+        modalDate.innerHTML = `${year}-${modal_Month + 1}-${modal_Date}`;
+        modalBox.classList.remove("hidden");
+      };
+    } else if (
+      nowDay.getFullYear() == today.getFullYear() &&
+      nowDay.getMonth() == today.getMonth() &&
+      nowDay.getDate() == today.getDate()
+    ) {
+      // 오늘인 경우
+      newDIV.className = "today";
+      //newDIV.onclick = function () { choiceDate(this); }
+      newDIV.onclick = function () {
+        modalDate.innerHTML = `${year}-${modal_Month + 1}-${modal_Date}`;
+        modalBox.classList.remove("hidden");
+      };
+      //console.log(nowDay);
+    } else {
+      // 미래인 경우
+      newDIV.className = "futureDay";
+      //newDIV.onclick = function () { choiceDate(this); }
+      newDIV.onclick = function () {
+        modalDate.innerHTML = `${year}-${modal_Month + 1}-${modal_Date}`;
+        modalBox.classList.remove("hidden");
+      };
+    }
+  }
+  if (currentMonth.length > 0) {
+    const colorStart = eventColoring(currentMonth, month, lastDate);
+  }
+  const makeSum = costSum();
+  const makeRealSum = costRealSum();
+  const makeRatio = costRatio();
 }
 
 // 날짜 선택
@@ -210,259 +218,298 @@ function costRatio() {
 
   if (ratio > 100) {
     ratio = 100;
-    progressPercentElement.style.backgroundColor = '#e01414';
+    progressPercentElement.style.backgroundColor = "#e01414";
   }
 
   progressPercentElement.style.width = `${ratio}%`;
 }
 
+function eventColoring(currentMonth, month, lastDate) {
+  for (let i = 0; i < currentMonth.length; i++) {
+    console.log(currentMonth[i].start_date.getMonth());
+    var eventRowIdxStart = 0;
+    var eventRowIdxFinish = 0;
+    var eventRowIdx = 0;
+    var initCheckIdx = 0;
 
-function eventColoring (currentMonth, month, lastDate) {
-    for(let i = 0; i < currentMonth.length; i++) {
-        
-        console.log(currentMonth[i].start_date.getMonth());
-        var eventRowIdxStart = 0;
-        var eventRowIdxFinish = 0;
-        var eventRowIdx = 0;
-        var initCheckIdx= 0;
-
-        if (currentMonth[i].start_date == currentMonth[i].finish_date) {
-            
-            eventRowIdxStart = 0;
-            eventRowIdxFinish = 0;
-            eventRowIdx = 0;
-            initCheckIdx= 0;
-            var checkEventStart = document.getElementById( initCheckIdx.toString() + currentMonth[i].start_date.getDate().toString());
-            if (checkEventStart.innerText == ""){
-                eventRowIdxStart = initCheckIdx;
-            }
-            else{
-                while(checkEventStart.innerText != ""){
-                    if(initCheckIdx >= 8){
-                        alert("더 이상 이벤트를 추가할 수 없어요 ㅜㅜ");
-                        break;
-                    }
-                    checkEventStart = document.getElementById( initCheckIdx.toString() + currentMonth[i].start_date.getDate().toString());
-                    initCheckIdx++
-                    }
-                }
-                eventRowIdxStart = initCheckIdxStart;
-                findAndColor(currentMonth, i, eventRowIdx, currentMonth[i].start_date);
-            }
-        
-
-        else if (currentMonth[i].start_date != currentMonth[i].finish_date && currentMonth[i].finish_date.getMonth() == month && currentMonth[i].start_date.getMonth() == month) {
-            console.log(currentMonth[i].detail);
-            const writeEventDay = parseInt((currentMonth[i].start_date.getDate() + currentMonth[i].finish_date.getDate())/2);
-            eventRowIdxStart = 0;
-            eventRowIdxFinish = 0;
-            eventRowIdx = 0;
-            initCheckIdx= 0;
-            var checkEventStart = document.getElementById( initCheckIdx.toString() + currentMonth[i].start_date.getDate().toString());
-            var checkEventFinish = document.getElementById( initCheckIdx.toString() + currentMonth[i].finish_date.getDate().toString());
-            console.log(checkEventStart.innerText);
-            console.log(checkEventFinish.innerText);
-            if (checkEventStart.style.backgroundColor == "") {
-                eventRowIdxStart = initCheckIdx;
-                console.log(eventRowIdxStart);
-            }
-            else{
-                while(checkEventStart.style.backgroundColor != ""){
-                    if(initCheckIdx >= 8){
-                        alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
-                        break;
-                    }
-                    checkEventStart = document.getElementById( initCheckIdx.toString() + currentMonth[i].start_date.getDate().toString());
-                    initCheckIdx++
-                    console.log(checkEventStart.style.backgroundColor);
-                    console.log(initCheckIdx-1);
-                    
-                }
-                eventRowIdxStart = initCheckIdx-1;
-                console.log(eventRowIdxStart);
-            }
-            
-
-            initCheckIdx = 0;
-            if (checkEventFinish.style.backgroundColor == ""){
-                eventRowIdx = initCheckIdx;
-                console.log(eventRowIdxFinish);
-            }
-            else{
-                while(checkEventFinish.style.backgroundColor != ""){
-                    if(initCheckIdx >= 8){
-                        alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
-                        break;
-                    }
-                    checkEventFinish = document.getElementById( initCheckIdx.toString() + currentMonth[i].finish_date.getDate().toString());
-                    initCheckIdx++;
-                    console.log(initCheckIdx-1);
-                    
-                }
-                eventRowIdxFinish = initCheckIdx-1;
-                console.log(eventRowIdxFinish);
-            }
-            
-            
-    
-            
-            eventRowIdx = Math.max(eventRowIdxStart, eventRowIdxFinish);
-            findAndColor(currentMonth, i, eventRowIdx, writeEventDay);
+    if (currentMonth[i].start_date == currentMonth[i].finish_date) {
+      eventRowIdxStart = 0;
+      eventRowIdxFinish = 0;
+      eventRowIdx = 0;
+      initCheckIdx = 0;
+      var checkEventStart = document.getElementById(
+        initCheckIdx.toString() +
+          currentMonth[i].start_date.getDate().toString()
+      );
+      if (checkEventStart.innerText == "") {
+        eventRowIdxStart = initCheckIdx;
+      } else {
+        while (checkEventStart.innerText != "") {
+          if (initCheckIdx >= 8) {
+            alert("더 이상 이벤트를 추가할 수 없어요 ㅜㅜ");
+            break;
+          }
+          checkEventStart = document.getElementById(
+            initCheckIdx.toString() +
+              currentMonth[i].start_date.getDate().toString()
+          );
+          initCheckIdx++;
         }
-        
-
-        else if (currentMonth[i].start_date != currentMonth[i].finish_date && currentMonth[i].finish_date.getMonth() == month+1 && currentMonth[i].start_date.getMonth() == month) {
-            console.log(currentMonth[i].detail);
-            const writeEventDay = parseInt((currentMonth[i].start_date.getDate() + lastDate.getDate())/2);
-            eventRowIdxStart = 0;
-            eventRowIdxFinish = 0;
-            eventRowIdx = 0;
-            initCheckIdx= 0;
-            var checkEventStart = document.getElementById( initCheckIdx.toString() + currentMonth[i].start_date.getDate().toString());
-            var checkEventFinish = document.getElementById( initCheckIdx.toString() + lastDate.getDate().toString());
-            console.log(checkEventStart.innerText);
-            console.log(checkEventFinish.innerText);
-            if (checkEventStart.style.backgroundColor == "") {
-                eventRowIdxStart = initCheckIdx;
-                console.log(eventRowIdxStart);
-            }
-            else{
-                while(checkEventStart.style.backgroundColor != ""){
-                    if(initCheckIdx >= 8){
-                        alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
-                        break;
-                    }
-                    checkEventStart = document.getElementById( initCheckIdx.toString() + currentMonth[i].start_date.getDate().toString());
-                    initCheckIdx++
-                    console.log(checkEventStart.style.backgroundColor);
-                    console.log(initCheckIdx-1);
-                    
-                }
-                eventRowIdxStart = initCheckIdx-1;
-                console.log(eventRowIdxStart);
-            }
-            
-
-            initCheckIdx = 0;
-            if (checkEventFinish.style.backgroundColor == ""){
-                eventRowIdx = initCheckIdx;
-                console.log(eventRowIdxFinish);
-            }
-            else{
-                while(checkEventFinish.style.backgroundColor != ""){
-                    if(initCheckIdx >= 8){
-                        alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
-                        break;
-                    }
-                    checkEventFinish = document.getElementById( initCheckIdx.toString() + lastDate.getDate().toString());
-                    initCheckIdx++;
-                    console.log(initCheckIdx-1);
-                    
-                }
-                eventRowIdxFinish = initCheckIdx-1;
-                console.log(eventRowIdxFinish);
-            }
-            
-            
-    
-            
-            eventRowIdx = Math.max(eventRowIdxStart, eventRowIdxFinish);
-            for(let l = currentMonth[i].start_date.getDate(); l <= lastDate.getDate(); l++) {
-                const searchDate = document.getElementById(eventRowIdx.toString() + l.toString());
-                if(l == writeEventDay) {
-                    searchDate.innerText = currentMonth[i].detail;
-                }
-                else {
-                    searchDate.innerText = " ";
-                }
-                
-                searchDate.style.backgroundColor = currentMonth[i].category.toUpperCase();
-            }
+      }
+      eventRowIdxStart = initCheckIdxStart;
+      findAndColor(currentMonth, i, eventRowIdx, currentMonth[i].start_date);
+    } else if (
+      currentMonth[i].start_date != currentMonth[i].finish_date &&
+      currentMonth[i].finish_date.getMonth() == month &&
+      currentMonth[i].start_date.getMonth() == month
+    ) {
+      console.log(currentMonth[i].detail);
+      const writeEventDay = parseInt(
+        (currentMonth[i].start_date.getDate() +
+          currentMonth[i].finish_date.getDate()) /
+          2
+      );
+      eventRowIdxStart = 0;
+      eventRowIdxFinish = 0;
+      eventRowIdx = 0;
+      initCheckIdx = 0;
+      var checkEventStart = document.getElementById(
+        initCheckIdx.toString() +
+          currentMonth[i].start_date.getDate().toString()
+      );
+      var checkEventFinish = document.getElementById(
+        initCheckIdx.toString() +
+          currentMonth[i].finish_date.getDate().toString()
+      );
+      console.log(checkEventStart.innerText);
+      console.log(checkEventFinish.innerText);
+      if (checkEventStart.style.backgroundColor == "") {
+        eventRowIdxStart = initCheckIdx;
+        console.log(eventRowIdxStart);
+      } else {
+        while (checkEventStart.style.backgroundColor != "") {
+          if (initCheckIdx >= 8) {
+            alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
+            break;
+          }
+          checkEventStart = document.getElementById(
+            initCheckIdx.toString() +
+              currentMonth[i].start_date.getDate().toString()
+          );
+          initCheckIdx++;
+          console.log(checkEventStart.style.backgroundColor);
+          console.log(initCheckIdx - 1);
         }
+        eventRowIdxStart = initCheckIdx - 1;
+        console.log(eventRowIdxStart);
+      }
 
-        else if (currentMonth[i].start_date != currentMonth[i].finish_date && currentMonth[i].finish_date.getMonth() == month && currentMonth[i].start_date.getMonth() == month-1) {
-            console.log(currentMonth[i].detail);
-            const writeEventDay = parseInt((1 + currentMonth[i].finish_date.getDate())/2);
-            eventRowIdxStart = 0;
-            eventRowIdxFinish = 0;
-            eventRowIdx = 0;
-            initCheckIdx= 0;
-            var checkEventStart = document.getElementById( initCheckIdx.toString() + "1");
-            var checkEventFinish = document.getElementById( initCheckIdx.toString() + currentMonth[i].finish_date.getDate().toString());
-            console.log(checkEventStart.innerText);
-            console.log(checkEventFinish.innerText);
-            if (checkEventStart.style.backgroundColor == "") {
-                eventRowIdxStart = initCheckIdx;
-                console.log(eventRowIdxStart);
-            }
-            else{
-                while(checkEventStart.style.backgroundColor != ""){
-                    if(initCheckIdx >= 8){
-                        alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
-                        break;
-                    }
-                    checkEventStart = document.getElementById( initCheckIdx.toString() + "1");
-                    initCheckIdx++
-                    console.log(checkEventStart.style.backgroundColor);
-                    console.log(initCheckIdx-1);
-                    
-                }
-                eventRowIdxStart = initCheckIdx-1;
-                console.log(eventRowIdxStart);
-            }
-            
+      initCheckIdx = 0;
+      if (checkEventFinish.style.backgroundColor == "") {
+        eventRowIdx = initCheckIdx;
+        console.log(eventRowIdxFinish);
+      } else {
+        while (checkEventFinish.style.backgroundColor != "") {
+          if (initCheckIdx >= 8) {
+            alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
+            break;
+          }
+          checkEventFinish = document.getElementById(
+            initCheckIdx.toString() +
+              currentMonth[i].finish_date.getDate().toString()
+          );
+          initCheckIdx++;
+          console.log(initCheckIdx - 1);
+        }
+        eventRowIdxFinish = initCheckIdx - 1;
+        console.log(eventRowIdxFinish);
+      }
 
-            initCheckIdx = 0;
-            if (checkEventFinish.style.backgroundColor == ""){
-                eventRowIdx = initCheckIdx;
-                console.log(eventRowIdxFinish);
-            }
-            else{
-                while(checkEventFinish.style.backgroundColor != ""){
-                    if(initCheckIdx >= 8){
-                        alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
-                        break;
-                    }
-                    checkEventFinish = document.getElementById( initCheckIdx.toString() + currentMonth[i].finish_date.getDate().toString());
-                    initCheckIdx++;
-                    console.log(initCheckIdx-1);
-                    
-                }
-                eventRowIdxFinish = initCheckIdx-1;
-                console.log(eventRowIdxFinish);
-            }
-            
-            
-    
-            
-            eventRowIdx = Math.max(eventRowIdxStart, eventRowIdxFinish);
-            for(let l = 1; l <= currentMonth[i].finish_date.getDate(); l++) {
-                const searchDate = document.getElementById(eventRowIdx.toString() + l.toString());
-                if(l == writeEventDay){
-                    searchDate.innerText = currentMonth[i].detail;
-                }
-                else{
-                    searchDate.innerText = " ";
-                }
+      eventRowIdx = Math.max(eventRowIdxStart, eventRowIdxFinish);
+      findAndColor(currentMonth, i, eventRowIdx, writeEventDay);
+    } else if (
+      currentMonth[i].start_date != currentMonth[i].finish_date &&
+      currentMonth[i].finish_date.getMonth() == month + 1 &&
+      currentMonth[i].start_date.getMonth() == month
+    ) {
+      console.log(currentMonth[i].detail);
+      const writeEventDay = parseInt(
+        (currentMonth[i].start_date.getDate() + lastDate.getDate()) / 2
+      );
+      eventRowIdxStart = 0;
+      eventRowIdxFinish = 0;
+      eventRowIdx = 0;
+      initCheckIdx = 0;
+      var checkEventStart = document.getElementById(
+        initCheckIdx.toString() +
+          currentMonth[i].start_date.getDate().toString()
+      );
+      var checkEventFinish = document.getElementById(
+        initCheckIdx.toString() + lastDate.getDate().toString()
+      );
+      console.log(checkEventStart.innerText);
+      console.log(checkEventFinish.innerText);
+      if (checkEventStart.style.backgroundColor == "") {
+        eventRowIdxStart = initCheckIdx;
+        console.log(eventRowIdxStart);
+      } else {
+        while (checkEventStart.style.backgroundColor != "") {
+          if (initCheckIdx >= 8) {
+            alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
+            break;
+          }
+          checkEventStart = document.getElementById(
+            initCheckIdx.toString() +
+              currentMonth[i].start_date.getDate().toString()
+          );
+          initCheckIdx++;
+          console.log(checkEventStart.style.backgroundColor);
+          console.log(initCheckIdx - 1);
+        }
+        eventRowIdxStart = initCheckIdx - 1;
+        console.log(eventRowIdxStart);
+      }
 
-                searchDate.style.backgroundColor = currentMonth[i].category.toUpperCase();
-            }
+      initCheckIdx = 0;
+      if (checkEventFinish.style.backgroundColor == "") {
+        eventRowIdx = initCheckIdx;
+        console.log(eventRowIdxFinish);
+      } else {
+        while (checkEventFinish.style.backgroundColor != "") {
+          if (initCheckIdx >= 8) {
+            alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
+            break;
+          }
+          checkEventFinish = document.getElementById(
+            initCheckIdx.toString() + lastDate.getDate().toString()
+          );
+          initCheckIdx++;
+          console.log(initCheckIdx - 1);
+        }
+        eventRowIdxFinish = initCheckIdx - 1;
+        console.log(eventRowIdxFinish);
+      }
+
+      eventRowIdx = Math.max(eventRowIdxStart, eventRowIdxFinish);
+      for (
+        let l = currentMonth[i].start_date.getDate();
+        l <= lastDate.getDate();
+        l++
+      ) {
+        const searchDate = document.getElementById(
+          eventRowIdx.toString() + l.toString()
+        );
+        if (l == writeEventDay) {
+          searchDate.innerText = currentMonth[i].detail;
+        } else {
+          searchDate.innerText = " ";
         }
 
-}
-}
-
-function findAndColor (currentMonth, currentMonthIdx, eventRowIdx, writeEventDay){
-    for(let i = currentMonth[currentMonthIdx].start_date.getDate(); i <= currentMonth[currentMonthIdx].finish_date.getDate(); i++) {
-
-        const searchDate = document.getElementById(eventRowIdx.toString() + i.toString());
-        if(i == writeEventDay){
-            searchDate.innerText = currentMonth[currentMonthIdx].detail;
+        searchDate.style.backgroundColor =
+          currentMonth[i].category.toUpperCase();
+      }
+    } else if (
+      currentMonth[i].start_date != currentMonth[i].finish_date &&
+      currentMonth[i].finish_date.getMonth() == month &&
+      currentMonth[i].start_date.getMonth() == month - 1
+    ) {
+      console.log(currentMonth[i].detail);
+      const writeEventDay = parseInt(
+        (1 + currentMonth[i].finish_date.getDate()) / 2
+      );
+      eventRowIdxStart = 0;
+      eventRowIdxFinish = 0;
+      eventRowIdx = 0;
+      initCheckIdx = 0;
+      var checkEventStart = document.getElementById(
+        initCheckIdx.toString() + "1"
+      );
+      var checkEventFinish = document.getElementById(
+        initCheckIdx.toString() +
+          currentMonth[i].finish_date.getDate().toString()
+      );
+      console.log(checkEventStart.innerText);
+      console.log(checkEventFinish.innerText);
+      if (checkEventStart.style.backgroundColor == "") {
+        eventRowIdxStart = initCheckIdx;
+        console.log(eventRowIdxStart);
+      } else {
+        while (checkEventStart.style.backgroundColor != "") {
+          if (initCheckIdx >= 8) {
+            alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
+            break;
+          }
+          checkEventStart = document.getElementById(
+            initCheckIdx.toString() + "1"
+          );
+          initCheckIdx++;
+          console.log(checkEventStart.style.backgroundColor);
+          console.log(initCheckIdx - 1);
         }
-        else{
-            searchDate.innerText = " ";
+        eventRowIdxStart = initCheckIdx - 1;
+        console.log(eventRowIdxStart);
+      }
+
+      initCheckIdx = 0;
+      if (checkEventFinish.style.backgroundColor == "") {
+        eventRowIdx = initCheckIdx;
+        console.log(eventRowIdxFinish);
+      } else {
+        while (checkEventFinish.style.backgroundColor != "") {
+          if (initCheckIdx >= 8) {
+            alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
+            break;
+          }
+          checkEventFinish = document.getElementById(
+            initCheckIdx.toString() +
+              currentMonth[i].finish_date.getDate().toString()
+          );
+          initCheckIdx++;
+          console.log(initCheckIdx - 1);
+        }
+        eventRowIdxFinish = initCheckIdx - 1;
+        console.log(eventRowIdxFinish);
+      }
+
+      eventRowIdx = Math.max(eventRowIdxStart, eventRowIdxFinish);
+      for (let l = 1; l <= currentMonth[i].finish_date.getDate(); l++) {
+        const searchDate = document.getElementById(
+          eventRowIdx.toString() + l.toString()
+        );
+        if (l == writeEventDay) {
+          searchDate.innerText = currentMonth[i].detail;
+        } else {
+          searchDate.innerText = " ";
         }
 
-        searchDate.style.backgroundColor = currentMonth[currentMonthIdx].category.toUpperCase();
+        searchDate.style.backgroundColor =
+          currentMonth[i].category.toUpperCase();
+      }
     }
+  }
+}
+
+function findAndColor(
+  currentMonth,
+  currentMonthIdx,
+  eventRowIdx,
+  writeEventDay
+) {
+  for (
+    let i = currentMonth[currentMonthIdx].start_date.getDate();
+    i <= currentMonth[currentMonthIdx].finish_date.getDate();
+    i++
+  ) {
+    const searchDate = document.getElementById(
+      eventRowIdx.toString() + i.toString()
+    );
+    if (i == writeEventDay) {
+      searchDate.innerText = currentMonth[currentMonthIdx].detail;
+    } else {
+      searchDate.innerText = " ";
+    }
+
+    searchDate.style.backgroundColor =
+      currentMonth[currentMonthIdx].category.toUpperCase();
+  }
 }
