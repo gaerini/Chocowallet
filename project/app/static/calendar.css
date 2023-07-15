@@ -275,11 +275,6 @@ tbody tr td > div {
   font-size: calc(1.2vw + 1.2vh);
 }
 
-.modal-date {
-  font-size: calc(1.25vw + 1.5vh);
-  font-weight: 500;
-}
-
 .modal_first_bar button {
   all: unset;
   font-weight: 500;
@@ -298,13 +293,10 @@ tbody tr td > div {
   margin-left: 8vw;
 }
 
-.todoEvent {
+.modal_date_day {
+  margin-left: 1vw;
   display: flex;
   flex-direction: row;
-}
-
-.modal-date {
-  margin-left: 6vw;
 }
 
 .addEventBtn_in {
@@ -323,15 +315,48 @@ tbody tr td > div {
   bottom: 2.5vh;
 }
 
+.modal-day {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.event_modal_content > div {
+  margin: 3vh 0vw 0vh 6vw;
+}
+
+.event_modal_content a {
+  all: unset;
+  padding-left: 1vw;
+  border-left: 1vw solid rgba(171,227,255,0.75);
+}
+
+.doit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+}
+
+.doit p {
+  margin-bottom: 1.5vh;
+  font-size: calc(1.2vw + 1.2vh);
+}
+
 /* 달력 클릭해서 들어가는 모달 끝 */
 
 /*hidden 속성 시작*/
+
 .hidden, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7 {
   display: none;
 }
+
 /*hidden 속성 끝*/
 
 /* 새로운 일정 추가하기 시작*/
+
 .addEventModal {
   z-index: 2;
   position: fixed;
@@ -493,5 +518,6 @@ input[type="color"]::-webkit-color-swatch {
 #event_memo:focus {
   outline: none;
 }
+
 /* 새로운 일정 추가하기 끝*/
 
