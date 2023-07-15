@@ -97,7 +97,7 @@ window.onload = function () {
               newDIV.className = "pastDay";
               newDIV.onclick = function(){
                   modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
-                  modalDay.innerHTML = `${dayNumToChar(dayNum)}요일`;
+                  modalDay.innerHTML = `(${dayNumToChar(dayNum)})`;
                   modalBox.classList.remove("hidden");
               }
           }
@@ -106,7 +106,7 @@ window.onload = function () {
               //newDIV.onclick = function () { choiceDate(this); }
               newDIV.onclick = function(){
                   modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
-                  modalDay.innerHTML = `${dayNumToChar(dayNum)}요일`;
+                  modalDay.innerHTML = `(${dayNumToChar(dayNum)})`;
                   modalBox.classList.remove("hidden");
               }
               //console.log(nowDay);
@@ -116,7 +116,7 @@ window.onload = function () {
               //newDIV.onclick = function () { choiceDate(this); }
               newDIV.onclick = function(){
                   modalDate.innerHTML = `${year}-${modal_Month+1}-${modal_Date}`;
-                  modalDay.innerHTML = `${dayNumToChar(dayNum)}요일`;
+                  modalDay.innerHTML = `(${dayNumToChar(dayNum)})`;
                   modalBox.classList.remove("hidden");
               }
           }
