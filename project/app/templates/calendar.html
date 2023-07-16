@@ -39,7 +39,7 @@
             </a>
         </button>        
         <button id="userguide">
-            <a href="https://www.notion.so/256973d97a2b404d824f1a592cd26099?pvs=4">
+            <a href="https://typical-spectacles-572.notion.site/2be0f8cc68d94f98bd93e7ca1568e58e?pvs=4">
                 <img src="{% static 'onlylogo.png' %}" alt="only logo"/>사용자 가이드
             </a>
         </button>
@@ -59,7 +59,6 @@
         </button>
     </div>
 </div>
-
 
 <div class="momdiv2">    
     <div class="progress">
@@ -87,11 +86,14 @@
         <div class="modal_back">
             <div class ="modal_first_bar">
                 <button type="button" class="close">확인</button>
-                <div class="modal_date">
+                <div class="modal_date_day">
                     <p class="modal-date"></p>
                     <span class="modal-day"></span>
                 </div>
-                <button type="button" class="addEventBtn3">추가</button>
+                <button type="button" class="addEventBtn3" style="color: blue;">추가</button>
+            </div>
+            <div class="doit">
+                <p>할 일</p>
             </div>
             <div class="event_modal_content"></div>
             <div class="show_real_spend"></div>
@@ -214,19 +216,25 @@
         }
     }
     
+    //
     function showEvent () {
         const key = window.localStorage.getItem("modal")
         let month_ = ''
+        
         if (!key) {
             const month_for_choice = document.querySelector(".modal-date").innerText; //"modal-date" div의 innertext를 가져옴
+            const modal_day = document.querySelector(".modal-day").innerText; //모달창의 요일
             month_ = month_for_choice.split('-');  // 하이픈을 기준으로 끊어서 배열로 저장 (["2023","12","23"])
+
             window.localStorage.setItem("modal", month_for_choice);
+            window.localStorage.setItem("modalDay", modal_day);
         } else {
             month_ = key.split("-")
-        }
 
+        }
         makeModal(month_)
     }
+    
 
     function makeModal(month_) {
         let events_lists = JSON.parse('{{ events_list|escapejs }}');
@@ -299,6 +307,7 @@
             //해당 날의 실제 지출 금액을 적은 경우
             if (Number(str_spenddate.substring(0,4)) == clickyear && Number(str_spenddate.substring(4,6) == clickmonth && Number(str_spenddate.substring(6,8))) == clickdt) {
             
+               
                 let divBox = document.createElement('div');
                 divBox.classList.add("divBox"); //클래스명
                 
@@ -307,14 +316,11 @@
                 divForTitle.classList.add("divForTitle");
                 let spanForExpected = document.createElement('span');
                 spanForExpected.innerText = "총 예상 지출 금액";
-                let spanGap1 = document.createElement('span');
-                spanGap1.innerText = "|";
                 let spanForSpend = document.createElement('span');
                 spanForSpend.innerText = "실제 지출 금액";
 
                 divBox.appendChild(divForTitle);
                 divForTitle.appendChild(spanForExpected);
-                divForTitle.appendChild(spanGap1);
                 divForTitle.appendChild(spanForSpend);
 
                 //이벤트 모달에서 금액 부분
@@ -322,8 +328,6 @@
                 divForCost.classList.add("divForCost");
                 let spanForExpectedCost = document.createElement('span');
                 spanForExpectedCost.innerText = (expectedCost).toLocaleString();
-                let spanGap2 = document.createElement('span');
-                spanGap2.innerText = "|";
                 let spanForSpendCost = document.createElement('span');
 
                 //실제 지출 금액
@@ -333,12 +337,11 @@
 
                 divBox.appendChild(divForCost);
                 divForCost.appendChild(spanForExpectedCost);
-                divForCost.appendChild(spanGap2);
                 divForCost.appendChild(spanForSpendCost);
 
                 //실제 지출 금액 삭제 버튼
                 let aForSpendEdit = document.createElement('a');
-                aForSpendEdit.innerText = '삭제';
+                aForSpendEdit.innerText = '실제 지출 금액 수정/삭제';
                 aForSpendEdit.href = "/delete-spend/" + spends_lists[i].spend_pk + "/";
                 divBox.appendChild(aForSpendEdit);
                 
@@ -348,8 +351,8 @@
                 const spendForm = document.querySelector(".spend_form");
                 spendForm.classList.add("hidden4");
 
-                //divBoxForZero 없애기
-                (document.querySelector(".divBoxForZero")).classList.add("hidden");
+                 //divBoxForZero 없애기
+                 (document.querySelector(".divBoxForZero")).classList.add("hidden");
 
             }
 
@@ -366,14 +369,11 @@
                     divForTitle.classList.add("divForTitle");
                     let spanForExpected = document.createElement('span');
                     spanForExpected.innerText = "총 예상 지출 금액";
-                    let spanGap1 = document.createElement('span');
-                    spanGap1.innerText = "|";
                     let spanForSpend = document.createElement('span');
                     spanForSpend.innerText = "실제 지출 금액";
 
                     divBox.appendChild(divForTitle);
                     divForTitle.appendChild(spanForExpected);
-                    divForTitle.appendChild(spanGap1);
                     divForTitle.appendChild(spanForSpend);
 
                     //이벤트 모달에서 금액 부분
@@ -381,8 +381,6 @@
                     divForCost.classList.add("divForCost");
                     let spanForExpectedCost = document.createElement('span');
                     spanForExpectedCost.innerText = (expectedCost).toLocaleString();
-                    let spanGap2 = document.createElement('span');
-                    spanGap2.innerText = "|";
                     let spanForSpendCost = document.createElement('span');
 
                     //실제 지출 금액을 0으로 표시
@@ -392,7 +390,6 @@
 
                     divBox.appendChild(divForCost);
                     divForCost.appendChild(spanForExpectedCost);
-                    divForCost.appendChild(spanGap2);
                     divForCost.appendChild(spanForSpendCost);
                     
                     show_real_spend.appendChild(divBox);

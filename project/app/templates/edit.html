@@ -15,8 +15,9 @@
             <form action="" method="post">
                 {% csrf_token %}
                 <div class ="modal_first_bar">
-                    <button onclick="goBack()">뒤로</button>
-                    <button type="submit">수정</button>
+                    <button onclick="goBack()" >뒤로</button>
+
+                    <button type="submit" style="color:blue;">수정</button>
                 </div> 
                 <div class="title_content">
                     <div>
@@ -98,6 +99,4 @@
 
 </script>
 
-<!-- <script src="{% static 'js/calendar.js' %}"></script>
-<script src="{% static 'js/modal.js' %}"></script> -->
 {% endblock container %}

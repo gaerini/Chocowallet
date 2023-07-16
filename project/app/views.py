@@ -34,6 +34,11 @@ def signup(request):
             finish_date = '1900-12-13',
             cost = 0,
         )
+        first_spend = Spend.objects.create(
+            author = new_user,
+            date = 19001212,
+            spend = 0,
+        )
         auth.login(request, new_user, backend ="django.contrib.auth.backends.ModelBackend")
 
         return redirect('cover')

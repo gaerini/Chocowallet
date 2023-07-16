@@ -1,5 +1,12 @@
 window.onload = function () {
   buildCalendar();
+
+  //새로고침해도 modal-day에 요일이 들어가있게
+  const modalDayKey = window.localStorage.getItem("modalDay");
+
+  if (modalDayKey) {
+    document.querySelector(".modal-day").innerText = modalDayKey;
+  }
 };
 events.forEach(function (idx) {
   idx.start_date = new Date(idx.start_date);
@@ -97,6 +104,7 @@ function buildCalendar() {
       // 지난날인 경우
       newDIV.className = "pastDay";
       newDIV.onclick = function () {
+        console.log(nowDay);
         modalDate.innerHTML = `${year}-${modal_Month + 1}-${modal_Date}`;
         modalDay.innerHTML = `(${dayNumToChar(dayNum)})`;
         modalBox.classList.remove("hidden");
@@ -220,7 +228,7 @@ function costRatio() {
 
   if (ratio > 100) {
     ratio = 100;
-    progressPercentElement.style.backgroundColor = "#e01414";
+    progressPercentElement.style.backgroundColor = "#FF6955";
   }
 
   progressPercentElement.style.width = `${ratio}%`;

@@ -275,22 +275,6 @@ tbody tr td > div {
   font-size: calc(1.2vw + 1.2vh);
 }
 
-.modal_date {
-  font-size: calc(1.25vw + 1.5vh);
-  font-weight: 500;
-  display: flex;
-  flex-direction: row;
-  margin-left: 1vw;
-}
-
-.modal-day {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-}
-
 .modal_first_bar button {
   all: unset;
   font-weight: 500;
@@ -309,7 +293,8 @@ tbody tr td > div {
   margin-left: 8vw;
 }
 
-.todoEvent {
+.modal_date_day {
+  margin-left: 1vw;
   display: flex;
   flex-direction: row;
 }
@@ -330,15 +315,137 @@ tbody tr td > div {
   bottom: 2.5vh;
 }
 
+.modal-day {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.event_modal_content > div {
+  margin: 3vh 0vw 0vh 6vw;
+}
+
+.event_modal_content a {
+  all: unset;
+  padding-left: 1vw;
+  border-left: 1vw solid rgba(171,227,255,0.75);
+}
+
+.doit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid rgba(0,0,0,0.2);
+}
+
+.doit p {
+  margin-bottom: 1.5vh;
+  font-size: calc(1.2vw + 1.2vh);
+}
+
+.show_real_spend {
+  margin-left: 3vw;
+  margin-right: 3vw;
+}
+
+.divBoxForZero, .divBox, .show_real_spend {
+  margin-top: 10vh;
+  
+}
+
+.divBoxForZero > div, .divBox > div {
+  margin-top: 1vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: calc(1.2vw + 1.2vh);
+  width: 94vw;
+}
+
+.divBoxForZero span, .divBox span {
+  display: flex;
+  justify-content: center;
+  width: 35vw;
+}
+
+.divBoxForZero div span:first-child, .divBox div span:first-child{ 
+  margin-left: 8vw;
+  padding-right: 5vw;
+  border-right: 1px solid rgba(0,0,0,0.3);
+}
+
+.divBoxForZero div span:last-child, .divBox div span:last-child{
+  margin-right: 8vw;
+  padding-left: 5vw;
+}
+
+.divBoxForZero div:first-child, .divBox div:first-child{
+  padding-bottom: 1vh;
+  border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.spend_form {
+  display: flex;
+  flex-direction: row;
+  margin-top: 5vh;
+}
+
+.real_spend_submit {
+  all: unset;
+  width: 15vw;
+  height: 5vh;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: calc(1.1vw + 1.1vh);
+  display: flex;
+  justify-content: center;
+  margin-right: 5vw;
+  align-items: center;
+}
+
+#real_spend {
+  width: 69vw;
+  margin-right: 1vw;
+  height: 5vh;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: calc(1.1vw + 1.1vh);
+  display: flex;
+  justify-content: center;
+  margin-left: 10vw;
+  align-items: center;
+}
+
+.divBox a {
+  all: unset;
+  height: 4vh;
+  border: 1px solid rgba(0,0,0,0.15);
+  box-shadow: 0 1.5px 1.5px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  font-size: calc(1.1vw + 1.1vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5vh 5vw 0 5vw;
+  color: red;
+}
+
 /* 달력 클릭해서 들어가는 모달 끝 */
 
 /*hidden 속성 시작*/
+
 .hidden, .hidden2, .hidden3, .hidden4, .hidden5, .hidden6, .hidden7 {
   display: none;
 }
+
 /*hidden 속성 끝*/
 
 /* 새로운 일정 추가하기 시작*/
+
 .addEventModal {
   z-index: 2;
   position: fixed;
@@ -500,5 +607,6 @@ input[type="color"]::-webkit-color-swatch {
 #event_memo:focus {
   outline: none;
 }
+
 /* 새로운 일정 추가하기 끝*/
 
