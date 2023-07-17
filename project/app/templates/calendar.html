@@ -109,7 +109,6 @@
                     입력
                 </button>
             </form>
-            
         </div>
     </div>
 </div>
@@ -219,6 +218,8 @@
     
     //
     function showEvent () {
+        (document.querySelector(".event_modal_content")).innerHTML = ""; //모달창에 가끔씩 이벤트 여러번 뜬다길래.. 이렇게 하면 사라질까하공,,
+        
         const key = window.localStorage.getItem("modal")
         let month_ = ''
         
@@ -250,9 +251,17 @@
             let s_day = (new Date (events_lists[i]['start_date'])).getDate(); //내가 작성한 일정의 시작 날짜
             let f_day = (new Date(events_lists[i]['finish_date'])).getDate();
 
+            console.log(events_lists[i].content)
+            console.log(month_[1],"월",s_month,"~",f_month);
+            console.log(month_[2],"날짜",s_day,"~",f_day);
+
+            //연도 비교
             if (s_year <= Number(month_[0]) && Number(month_[0]) <= f_year ) {
-                if (s_month <= Number(month_[1]) && Number(month_[1]) <= f_month ) {
-                    if (s_day <= Number(month_[2]) && Number(month_[2]) <= f_day) {
+                //달을 넘어가는 이벤트 (start month =/= finish month 7/30~8/3)
+                if (s_month != f_month) {
+                    
+                    //6~9월에 걸치는 이벤트면 7,8월 모달엔 그 이벤트가 항상 뜨게
+                    if (s_month < Number(month_[1]) && Number(month_[1]) < f_month ) {
                         let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
                         let div_2 = document.createElement('div');
                         let span_ = document.createElement('span');
@@ -269,9 +278,86 @@
                         aForEdit.appendChild(div_2);
                         div_.appendChild(aForEdit);
                         div_2.appendChild(span_);
-                        
+                            
                         event_modal_content.appendChild(div_);
                         span_.classList.add("todoEvent");
+                    }
+
+                    //달을 넘어가는 이벤트 6~8월에 걸치는 이벤트일때 6월(startmonth) 8월(finishmonth) 때 모달 계산하기
+                    //6월 모달 계산(start month)
+                    if ((s_month === Number(month_[1]) )) {
+                        if (s_month === Number(month_[1]) && s_day <= Number(month_[2])) {
+                            let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
+                            let div_2 = document.createElement('div');
+                            let span_ = document.createElement('span');
+                            let aForEdit = document.createElement('a');
+
+                            span_.innerText = events_lists[i].content;
+                            expectedCost += events_lists[i].cost;
+
+                            //이벤트 수정
+                            aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
+                            aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                            aForEdit.classList.add("aForEdit");
+
+                            aForEdit.appendChild(div_2);
+                            div_.appendChild(aForEdit);
+                            div_2.appendChild(span_);
+                            
+                            event_modal_content.appendChild(div_);
+                            span_.classList.add("todoEvent");
+                        }
+                    }
+                    //8월모달 계산(finish month)
+                    if (Number(month_[1]) === f_month ){
+                        if (Number(month_[1]) === f_month && Number(month_[2]) <= f_day){
+                            let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
+                            let div_2 = document.createElement('div');
+                            let span_ = document.createElement('span');
+                            let aForEdit = document.createElement('a');
+
+                            span_.innerText = events_lists[i].content;
+                            expectedCost += events_lists[i].cost;
+
+                            //이벤트 수정
+                            aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
+                            aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                            aForEdit.classList.add("aForEdit");
+
+                            aForEdit.appendChild(div_2);
+                            div_.appendChild(aForEdit);
+                            div_2.appendChild(span_);
+                            
+                            event_modal_content.appendChild(div_);
+                            span_.classList.add("todoEvent");
+                        }
+                    }
+                }
+
+                //달을 넘어가지 않는 이벤트 (7/1~7/3)
+                else if (s_month === f_month) {
+                    if ((s_month === Number(month_[1])) && (Number(month_[1]) === f_month)) { //month비교
+                        if ((s_day <= Number(month_[2])) && (Number(month_[2] <= f_day))){ //date비교
+                            let div_ = document.createElement('div'); 
+                            let div_2 = document.createElement('div');
+                            let span_ = document.createElement('span');
+                            let aForEdit = document.createElement('a');
+
+                            span_.innerText = events_lists[i].content;
+                            expectedCost += events_lists[i].cost;
+
+                            //이벤트 수정
+                            aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
+                            aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                            aForEdit.classList.add("aForEdit");
+
+                            aForEdit.appendChild(div_2);
+                            div_.appendChild(aForEdit);
+                            div_2.appendChild(span_);
+                            
+                            event_modal_content.appendChild(div_);
+                            span_.classList.add("todoEvent");
+                        }
                     }
                 }
             }
