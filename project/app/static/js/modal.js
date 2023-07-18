@@ -7,6 +7,7 @@ function closeModal() {
   e_m_c.innerHTML = "";
   s_r_s.innerHTML = "";
   spendForm.classList.remove("hidden4");
+  window.localStorage.removeItem("modal");
 }
 
 closeBtn.addEventListener("click", closeModal);
@@ -15,9 +16,11 @@ const date = document.querySelector(".choiceDay");
 
 //모달 창 열면 그날에 해당하는 이벤트(+예상 지출 금액)만 보여주기!!!!!!!!
 const tbody_ = document.querySelector(".tt");
+const go_back = document.querySelector(".go_back");
 const spendForm = document.querySelector(".spend_form");
 
 tbody_.addEventListener("click", showEvent);
+// go_back.addEventListener("click", showEvent);
 
 //일정 추가하기 모달
 const modal2 = document.querySelector(".addEventModal");
@@ -57,17 +60,26 @@ openBtn2_1.addEventListener("click", () => {
 closeBtn2.addEventListener("click", closeAddEventModal);
 
 // 내용 없이 새 이벤트 입력시 alert창 띄움
-const form = document.getElementById('event_form');
+const form = document.getElementById("event_form");
 
-form.addEventListener('submit', (event) => {
-    const titleInput = document.getElementById('event_title');
+form.addEventListener("submit", (event) => {
+  const titleInput = document.getElementById("event_title");
 
-    if (titleInput.value.trim() === '') {
-        event.preventDefault();
+  if (titleInput.value.trim() === "") {
+    event.preventDefault();
 
-        alert('할 일을 입력해주세요.');
-    }
+    alert("할 일을 입력해주세요.");
+  }
 });
+
+function openModalInLocalStroage() {
+  // LocalStroage에서 key가 modal인 정보가 있는지 확인한다
+  const key = window.localStorage.getItem("modal");
+  // 만약 있으면 그 정보로 모달을 생성하고
+  if (key) {
+  }
+  // 없으면 그냥 모달을 생성하지 않는다.
+}
 
 //일정 보기 모달에서 바로 일정 추가하기 위한 버튼
 const openBtn3 = document.querySelector(".addEventBtn3");
