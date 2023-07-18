@@ -34,6 +34,11 @@ def signup(request):
             finish_date = '1900-12-13',
             cost = 0,
         )
+        first_spend = Spend.objects.create(
+            author = new_user,
+            date = 19001212,
+            spend = 0,
+        )
         auth.login(request, new_user, backend ="django.contrib.auth.backends.ModelBackend")
 
         return redirect('cover')
@@ -120,7 +125,6 @@ def spend(request):
     spend_list_ = [spend.toDict() for spend in realSpends]
     spends_list = json.dumps(spend_list_) 
     
-    
     return render(request, 'calendar.html', {"sumForRealSpend":sumForRealSpend, "spends_list":spends_list})
 
 def delete_event(request, event_pk):
@@ -133,13 +137,10 @@ def delete_event(request, event_pk):
     return redirect('calendar', user_pk)
 
 @csrf_exempt
-
 def edit(request, event_pk):
     user = request.user
     user_pk = user.pk
 
-    #events = Event.objects.all
-    #events_ = Event.objects.filter(author = user)
     event = Event.objects.get(pk=event_pk)
     
     if request.method == "POST":

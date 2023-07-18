@@ -3,11 +3,14 @@ const e_m_c = document.querySelector(".event_modal_content"); //모달 내용 �
 const s_r_s = document.querySelector(".show_real_spend");
 
 function closeModal() {
-  modalBox.classList.add("hidden");
   e_m_c.innerHTML = "";
   s_r_s.innerHTML = "";
+
+  modalBox.classList.add("hidden");
   spendForm.classList.remove("hidden4");
+
   window.localStorage.removeItem("modal");
+  window.localStorage.removeItem("modalDay");
 }
 
 closeBtn.addEventListener("click", closeModal);
@@ -27,9 +30,11 @@ const modal2 = document.querySelector(".addEventModal");
 const openBtn2_ = document.querySelector(".addEventBtn1");
 const openBtn2_1 = document.querySelector(".addEventBtn2");
 const closeBtn2 = document.querySelector(".close2");
+const modalbox = document.querySelector(".modalbox");
 
 function closeAddEventModal() {
   modal2.classList.add("hidden2");
+  modalbox.classList.remove("hidden");
 }
 
 openBtn2_.addEventListener("click", () => {
@@ -64,27 +69,61 @@ const form = document.getElementById("event_form");
 
 form.addEventListener("submit", (event) => {
   const titleInput = document.getElementById("event_title");
+  const costInput = document.getElementById("event_cost");
 
-  if (titleInput.value.trim() === "") {
+  //할일만 안적은 경우
+  if (titleInput.value.trim() === "" && costInput.value.trim() != "") {
     event.preventDefault();
 
     alert("할 일을 입력해주세요.");
   }
+
+  //예상 지출 금액만 안적은 경우
+  if (titleInput.value.trim() != "" && costInput.value.trim() === "") {
+    event.preventDefault();
+
+    alert("예상 지출 금액을 입력해주세요");
+  }
+
+  //둘 다 안적은 경우
+  if (titleInput.value.trim() === "" && costInput.value.trim() === "") {
+    event.preventDefault();
+
+    alert("할 일과 예상 지출 금액을 입력해주세요!");
+  }
 });
 
-function openModalInLocalStroage() {
-  // LocalStroage에서 key가 modal인 정보가 있는지 확인한다
-  const key = window.localStorage.getItem("modal");
-  // 만약 있으면 그 정보로 모달을 생성하고
-  if (key) {
+//내용 없이 금액 추가시 alert창 띄움
+const spend_form = document.querySelector(".spend_form");
+
+spend_form.addEventListener("submit", (event) => {
+  const spendmoney = document.getElementById("real_spend");
+
+  if (spendmoney.value.trim() === "") {
+    event.preventDefault();
+
+    alert("이날 실제로 지출한 금액을 입력해주세요!");
   }
-  // 없으면 그냥 모달을 생성하지 않는다.
-}
+});
 
 //일정 보기 모달에서 바로 일정 추가하기 위한 버튼
 const openBtn3 = document.querySelector(".addEventBtn3");
 
 openBtn3.addEventListener("click", () => {
-  // modalBox.classList.add("hidden");
   modal2.classList.remove("hidden2");
+
+  //모달창에서 추가버튼 눌렀을 때 시작날짜, 끝날짜에 해당 모달 날짜 들어가게하기
+  let key_ = window.localStorage.getItem("modal");
+  let startAndFinishDate = key_.split("-");
+
+  const yearkey = startAndFinishDate[0];
+  const monthkey = startAndFinishDate[1].padStart(2, "0");
+  const datekey = startAndFinishDate[2].padStart(2, "0");
+  let y_m_dkey = `${yearkey}-${monthkey}-${datekey}`;
+
+  document.querySelector("#event_date").value = y_m_dkey;
+  document.querySelector("#event_finish_date").value = y_m_dkey;
+
+  console.log();
+  modalbox.classList.add("hidden");
 });
