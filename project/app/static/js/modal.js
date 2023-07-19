@@ -59,7 +59,6 @@ openBtn2_1.addEventListener("click", () => {
 
   document.querySelector("#event_date").value = yy_mm_dd;
   document.querySelector("#event_finish_date").value = yy_mm_dd;
-  console.log(yy_mm_dd);
 });
 
 closeBtn2.addEventListener("click", closeAddEventModal);
@@ -124,6 +123,5 @@ openBtn3.addEventListener("click", () => {
   document.querySelector("#event_date").value = y_m_dkey;
   document.querySelector("#event_finish_date").value = y_m_dkey;
 
-  console.log();
   modalbox.classList.add("hidden");
 });
