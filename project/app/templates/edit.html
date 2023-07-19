@@ -61,10 +61,23 @@
                     <textarea name="memo" id="event_memo_update" cols="30" rows="10" placeholder="메모"></textarea>
                 </div>
             </form>
-            <a id="delete" href="{% url 'delete_event' event.pk %}">이벤트 삭제</a>
+            <p id="delete">이벤트 삭제</p>
         </div>
     </div> 
 
+    <div class="modal_deletebox hidden8">
+        <div class="delete_background">
+        <div class="delete_modal_back">
+            <div class="modaldelete_content">
+                <p>정말로 삭제하시겠습니까?</p>
+                <div class="modaldelete_buttons">
+                    <button class="modaldelete_cancel" style="color:blue;">취소</button>
+                    <a class="modaldelete_confirm" href="{% url 'delete_event' event.pk %}" style="color:red;">삭제</a>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
 
 <script>
 //날짜, 내용, 금액 칸에 원래 value 들어가게 하기
@@ -96,6 +109,21 @@
         document.querySelector("#event_category_update").value = events_lists_[0].category;
         document.querySelector("#event_memo_update").value = events_lists_[0].memo;
     }
+
+    const deletebox = document.querySelector(".modal_deletebox");
+    const cancelbtn = document.querySelector(".modaldelete_cancel");
+    const deleted = document.getElementById("delete");
+
+    function open_deletemodal() {
+        deletebox.classList.remove("hidden8");
+    }
+
+    function close_deletemodal() {
+        deletebox.classList.add("hidden8");
+    }
+    
+    deleted.addEventListener("click", open_deletemodal);
+    cancelbtn.addEventListener("click", close_deletemodal);
 
 </script>
 
