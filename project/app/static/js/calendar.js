@@ -140,6 +140,8 @@ function buildCalendar() {
   const makeSum = costSum(firstDate, lastDate);
   const makeRealSum = costRealSum();
   const makeRatio = costRatio();
+
+  whereIWriteSpend();
 }
 
 // 날짜 선택
@@ -246,6 +248,8 @@ function costRatio() {
   if (ratio > 100) {
     ratio = 100;
     progressPercentElement.style.backgroundColor = "#FF6955";
+  } else {
+    progressPercentElement.style.backgroundColor = "#abe3ff";
   }
 
   progressPercentElement.style.width = `${ratio}%`;
