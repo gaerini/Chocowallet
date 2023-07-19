@@ -434,6 +434,16 @@ tbody tr td > div {
   color: red;
 }
 
+.divForCost span:first-child {
+  color: blue;
+  opacity: 0.8;
+}
+
+.divForCost span:last-child {
+  color: red;
+  opacity: 0.8;
+}
+
 /* 달력 클릭해서 들어가는 모달 끝 */
 
 /*hidden 속성 시작*/

@@ -110,6 +110,7 @@
                     입력
                 </button>
             </form>
+            
         </div>
     </div>
 </div>
@@ -219,8 +220,6 @@
     
     //
     function showEvent () {
-        (document.querySelector(".event_modal_content")).innerHTML = ""; //모달창에 가끔씩 이벤트 여러번 뜬다길래.. 이렇게 하면 사라질까하공,,
-        
         const key = window.localStorage.getItem("modal")
         let month_ = ''
         
