@@ -137,9 +137,11 @@ function buildCalendar() {
   if (currentMonth.length > 0) {
     const colorStart = eventColoring(currentMonth, month, lastDate);
   }
-  const makeSum = costSum();
+  const makeSum = costSum(firstDate, lastDate);
   const makeRealSum = costRealSum();
   const makeRatio = costRatio();
+
+  whereIWriteSpend();
 }
 
 // 날짜 선택
@@ -190,13 +192,30 @@ var sum = 0;
 var realsum = 0;
 const monthSpan = document.querySelector("#calMonth");
 
-function costSum() {
+function costSum(firstDate, lastDate) {
   sum = 0;
   events.forEach(function (obj) {
     const month = Number(monthSpan.innerText);
-    const eventDate = new Date(obj.finish_date);
-    if (month == eventDate.getMonth() + 1) {
+    const eventStartDate = new Date(obj.start_date);
+    const eventFinishDate = new Date(obj.finish_date);
+    if (month == eventStartDate.getMonth() + 1 && month == eventFinishDate.getMonth() + 1) {
       sum = sum + obj.cost;
+    }
+    else if(month == eventStartDate.getMonth() + 1 && month != eventFinishDate.getMonth() + 1){
+        let diff = Math.abs(eventStartDate.getTime() - eventFinishDate.getTime());
+        diff = Math.ceil(diff/(1000*60*60*24));
+        let term = Math.abs(eventStartDate.getTime() - lastDate.getTime());
+        term = Math.ceil(term/(1000*60*60*24));
+        sum = sum + Math.ceil(obj.cost/diff)*term;
+    }
+    else if (month != eventStartDate.getMonth() + 1 && month == eventFinishDate.getMonth() + 1){
+      let diff = Math.abs(eventStartDate.getTime() - eventFinishDate.getTime());
+      diff = Math.ceil(diff/(1000*60*60*24));
+      const newFirstDate = new Date(`${eventFinishDate.getFullYear()}-${month}-1`);
+      let term = Math.abs(eventFinishDate.getTime() - newFirstDate.getTime());
+      term = Math.ceil(term/(1000*60*60*24));
+      sum = sum + Math.ceil(obj.cost/diff)*term;
+      console.log(newFirstDate);
     }
   });
 
@@ -229,6 +248,8 @@ function costRatio() {
   if (ratio > 100) {
     ratio = 100;
     progressPercentElement.style.backgroundColor = "#FF6955";
+  } else {
+    progressPercentElement.style.backgroundColor = "#abe3ff";
   }
 
   progressPercentElement.style.width = `${ratio}%`;
@@ -255,7 +276,7 @@ function eventColoring(currentMonth, month, lastDate) {
         eventRowIdxStart = initCheckIdx;
       } else {
         while (checkEventStart.innerText != "") {
-          if (initCheckIdx >= 8) {
+          if (initCheckIdx >= 5) {
             alert("더 이상 이벤트를 추가할 수 없어요 ㅜㅜ");
             break;
           }
@@ -298,7 +319,7 @@ function eventColoring(currentMonth, month, lastDate) {
         console.log(eventRowIdxStart);
       } else {
         while (checkEventStart.style.backgroundColor != "") {
-          if (initCheckIdx >= 8) {
+          if (initCheckIdx >= 5) {
             alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
             break;
           }
@@ -320,7 +341,7 @@ function eventColoring(currentMonth, month, lastDate) {
         console.log(eventRowIdxFinish);
       } else {
         while (checkEventFinish.style.backgroundColor != "") {
-          if (initCheckIdx >= 8) {
+          if (initCheckIdx >= 5) {
             alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
             break;
           }
@@ -364,7 +385,7 @@ function eventColoring(currentMonth, month, lastDate) {
         console.log(eventRowIdxStart);
       } else {
         while (checkEventStart.style.backgroundColor != "") {
-          if (initCheckIdx >= 8) {
+          if (initCheckIdx >= 5) {
             alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
             break;
           }
@@ -386,7 +407,7 @@ function eventColoring(currentMonth, month, lastDate) {
         console.log(eventRowIdxFinish);
       } else {
         while (checkEventFinish.style.backgroundColor != "") {
-          if (initCheckIdx >= 8) {
+          if (initCheckIdx >= 5) {
             alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
             break;
           }
@@ -445,7 +466,7 @@ function eventColoring(currentMonth, month, lastDate) {
         console.log(eventRowIdxStart);
       } else {
         while (checkEventStart.style.backgroundColor != "") {
-          if (initCheckIdx >= 8) {
+          if (initCheckIdx >= 5) {
             alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
             break;
           }
@@ -466,7 +487,7 @@ function eventColoring(currentMonth, month, lastDate) {
         console.log(eventRowIdxFinish);
       } else {
         while (checkEventFinish.style.backgroundColor != "") {
-          if (initCheckIdx >= 8) {
+          if (initCheckIdx >= 5) {
             alert("이벤트를 더 이상 추가할 수 없습니다 ㅜㅜ");
             break;
           }
