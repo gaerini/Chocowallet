@@ -97,7 +97,7 @@
             </div>
             <div class="event_modal_content"></div>
             <div class="show_real_spend"></div>
-            <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
+            <form action="http://miyeolsa.pythonanywhere.com/spend/" method="post" class="spend_form">
                 {% csrf_token %}
                 <div>
                     <input type="number" name="spend" id="real_spend" placeholder="실제 지출 금액" />
