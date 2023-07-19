@@ -97,6 +97,7 @@
             </div>
             <div class="event_modal_content"></div>
             <div class="show_real_spend"></div>
+            <!-- <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form"> -->
             <form action="http://miyeolsa.pythonanywhere.com/spend/" method="post" class="spend_form">
                 {% csrf_token %}
                 <div>
@@ -251,9 +252,6 @@
             let s_day = (new Date (events_lists[i]['start_date'])).getDate(); //내가 작성한 일정의 시작 날짜
             let f_day = (new Date(events_lists[i]['finish_date'])).getDate();
 
-            console.log(events_lists[i].content)
-            console.log(month_[1],"월",s_month,"~",f_month);
-            console.log(month_[2],"날짜",s_day,"~",f_day);
 
             //연도 비교
             if (s_year <= Number(month_[0]) && Number(month_[0]) <= f_year ) {
@@ -518,6 +516,47 @@
         eventCost.style.borderLeftColor = selectedColor;
         eventMemo.style.borderLeftColor = selectedColor;
     });
+
+    //실제 지출 금액 적혀있는 날에 빨간 표시
+    function whereIWriteSpend() {
+        //며칠인지
+        let future_day = document.querySelectorAll(".futureDay");
+        let to_day = document.querySelector(".today");
+        let past_day = document.querySelectorAll(".pastDay");
+        //몇년인지
+        let present_year = document.getElementById("calYear").innerText; //2023
+        //몇월인지
+        let present_month = document.getElementById("calMonth").innerText; //07
+
+        let spends_lists = JSON.parse('{{ spends_list|escapejs }}');
+
+        //pastDay
+        for (let j=0; j<spends_lists.length; j++) {
+            for (let i = 0; i < past_day.length; i++) {
+                let y_m_d_ = present_year+present_month+past_day[i].innerText;
+                if (String(spends_lists[j].date) === y_m_d_){
+                   past_day[i].innerHTML = past_day[i].innerText + "★"
+                }
+            }
+        }
+        
+        //futureday
+        for (let j=0; j<spends_lists.length; j++) {
+            for (let i = 0; i < future_day.length; i++) {
+                let y_m_d_ = present_year+present_month+future_day[i].innerText;
+                if (String(spends_lists[j].date) === y_m_d_){
+                    future_day[i].innerHTML = future_day[i].innerText + "★"
+                }
+            }
+        }
+
+        //present
+        for (let j=0; j<spends_lists.length; j++) {
+            if (String(spends_lists[j].date) === present_year+present_month+to_day.innerText){
+                to_day.innerHTML = to_day.innerText+"★"
+            }
+        }
+    }
 
 </script>
 <script src="{% static 'js/calendar.js' %}"></script>
