@@ -17,8 +17,8 @@
                 <p>{{error}}</p>
                 {% endif %}
                 <div class='idpwInput'>
-                    <input type='text' name='id' id="아이디" placeholder="아이디">
-                    <input type='text' name='pw' id="비밀번호" placeholder="비밀번호">
+                    <input type='text' name='id' class="id" id="아이디" placeholder="아이디">
+                    <input type='text' name='pw' class="passward" id="비밀번호" placeholder="비밀번호">
                 </div>
                 <div class='loginBtn'>
                     <button type='submit' id="로그인">로그인</button>
@@ -32,4 +32,28 @@
             <a href="{% url 'signup' %}" id="회원가입">회원가입하러 가기</a>
         </div>
     </div>
+
+    <script>
+        //로그인 유지
+        const loginBtn = document.querySelector(".loginBtn");
+        
+        loginBtn.addEventListener("click", ()=> {
+            const id_ = document.querySelector(".id").value;
+            const passward_ = document.querySelector(".passward").value;
+            console.log(id_, passward_)
+            window.localStorage.setItem("id", id_);
+            window.localStorage.setItem("passward", passward_);
+
+        })
+    
+        window.onload = function () {        
+            const idkey = window.localStorage.getItem("id");
+            const passwardkey = window.localStorage.getItem("passward");
+            console.log(idkey,"랑", passwardkey)
+            if (idkey) {
+                document.querySelector(".id").value = idkey;
+                document.querySelector(".passward").value = passwardkey;
+            }
+        }
+    </script>
 {% endblock container %}
