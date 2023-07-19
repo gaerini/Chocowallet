@@ -140,6 +140,8 @@ function buildCalendar() {
   const makeSum = costSum();
   const makeRealSum = costRealSum();
   const makeRatio = costRatio();
+
+  whereIWriteSpend();
 }
 
 // 날짜 선택
