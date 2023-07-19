@@ -229,6 +229,8 @@ function costRatio() {
   if (ratio > 100) {
     ratio = 100;
     progressPercentElement.style.backgroundColor = "#FF6955";
+  } else {
+    progressPercentElement.style.backgroundColor = "#abe3ff";
   }
 
   progressPercentElement.style.width = `${ratio}%`;
