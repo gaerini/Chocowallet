@@ -41,7 +41,9 @@ def signup(request):
         )
         auth.login(request, new_user, backend ="django.contrib.auth.backends.ModelBackend")
 
-        return redirect('cover')
+        welcome = "가입되었습니다!"
+        return render(request, 'cover.html', {'welcome': welcome})
+    
     return render(request, 'registration/signup.html')
 
 def cover(request):

@@ -259,74 +259,111 @@
                     
                     //6~9월에 걸치는 이벤트면 7,8월 모달엔 그 이벤트가 항상 뜨게
                     if (s_month < Number(month_[1]) && Number(month_[1]) < f_month ) {
-                        let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
-                        let div_2 = document.createElement('div');
-                        let span_ = document.createElement('span');
-                        let aForEdit = document.createElement('a');
+                        let div_ = document.createElement('div');
 
-                        span_.innerText = events_lists[i].content;
+                        templates = `
+                            <a href="/edit/${events_lists[i].event_pk}/" class="aForEdit">
+                                <div>
+                                    <span class="todoEvent">${events_lists[i].content}</span>
+                                </div>
+                            </a>
+                        `
+                        div_.innerHTML = templates;
                         expectedCost += events_lists[i].cost;
-
-                        //이벤트 수정
-                        aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
-                        aForEdit.classList.add(`${events_lists[i].event_pk}`);
-                        aForEdit.classList.add("aForEdit");
-
-                        aForEdit.appendChild(div_2);
-                        div_.appendChild(aForEdit);
-                        div_2.appendChild(span_);
-                            
                         event_modal_content.appendChild(div_);
-                        span_.classList.add("todoEvent");
+                        
+                        // let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
+                        // let div_2 = document.createElement('div');
+                        // let span_ = document.createElement('span');
+                        // let aForEdit = document.createElement('a');
+
+                        // span_.innerText = events_lists[i].content;
+                        // expectedCost += events_lists[i].cost;
+
+                        // //이벤트 수정
+                        // aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
+                        // aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                        // aForEdit.classList.add("aForEdit");
+
+                        // aForEdit.appendChild(div_2);
+                        // div_.appendChild(aForEdit);
+                        // div_2.appendChild(span_);
+                        
+                        // event_modal_content.appendChild(div_);
+                        // span_.classList.add("todoEvent");
                     }
 
                     //달을 넘어가는 이벤트 6~8월에 걸치는 이벤트일때 6월(startmonth) 8월(finishmonth) 때 모달 계산하기
                     //6월 모달 계산(start month)
                     if ((s_month === Number(month_[1]) )) {
                         if (s_month === Number(month_[1]) && s_day <= Number(month_[2])) {
-                            let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
-                            let div_2 = document.createElement('div');
-                            let span_ = document.createElement('span');
-                            let aForEdit = document.createElement('a');
+                            // let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
+                            // let div_2 = document.createElement('div');
+                            // let span_ = document.createElement('span');
+                            // let aForEdit = document.createElement('a');
 
-                            span_.innerText = events_lists[i].content;
-                            expectedCost += events_lists[i].cost;
+                            // span_.innerText = events_lists[i].content;
+                            // expectedCost += events_lists[i].cost;
 
-                            //이벤트 수정
-                            aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
-                            aForEdit.classList.add(`${events_lists[i].event_pk}`);
-                            aForEdit.classList.add("aForEdit");
+                            // //이벤트 수정
+                            // aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
+                            // aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                            // aForEdit.classList.add("aForEdit");
 
-                            aForEdit.appendChild(div_2);
-                            div_.appendChild(aForEdit);
-                            div_2.appendChild(span_);
+                            // aForEdit.appendChild(div_2);
+                            // div_.appendChild(aForEdit);
+                            // div_2.appendChild(span_);
                             
+                            // event_modal_content.appendChild(div_);
+                            // span_.classList.add("todoEvent");
+                            let div_ = document.createElement('div');
+
+                            templates += `
+                                <a href="/edit/${events_lists[i].event_pk}/" class="aForEdit">
+                                    <div>
+                                        <span class="todoEvent">${events_lists[i].content}</span>
+                                    </div>
+                                </a>
+                            `
+                            div_.innerHTML = templates;
+                            expectedCost += events_lists[i].cost;
                             event_modal_content.appendChild(div_);
-                            span_.classList.add("todoEvent");
                         }
                     }
                     //8월모달 계산(finish month)
                     if (Number(month_[1]) === f_month ){
                         if (Number(month_[1]) === f_month && Number(month_[2]) <= f_day){
-                            let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
-                            let div_2 = document.createElement('div');
-                            let span_ = document.createElement('span');
-                            let aForEdit = document.createElement('a');
+                            // let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
+                            // let div_2 = document.createElement('div');
+                            // let span_ = document.createElement('span');
+                            // let aForEdit = document.createElement('a');
 
-                            span_.innerText = events_lists[i].content;
+                            // span_.innerText = events_lists[i].content;
+                            // expectedCost += events_lists[i].cost;
+
+                            // //이벤트 수정
+                            // aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
+                            // aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                            // aForEdit.classList.add("aForEdit");
+
+                            // aForEdit.appendChild(div_2);
+                            // div_.appendChild(aForEdit);
+                            // div_2.appendChild(span_);
+
+                            // event_modal_content.appendChild(div_);
+                            // span_.classList.add("todoEvent");
+                            let div_ = document.createElement('div');
+
+                            templates = `
+                                <a href="/edit/${events_lists[i].event_pk}/" class="aForEdit">
+                                    <div>
+                                        <span class="todoEvent">${events_lists[i].content}</span>
+                                    </div>
+                                </a>
+                            `
+                            div_.innerHTML = templates;
                             expectedCost += events_lists[i].cost;
-
-                            //이벤트 수정
-                            aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
-                            aForEdit.classList.add(`${events_lists[i].event_pk}`);
-                            aForEdit.classList.add("aForEdit");
-
-                            aForEdit.appendChild(div_2);
-                            div_.appendChild(aForEdit);
-                            div_2.appendChild(span_);
-                            
                             event_modal_content.appendChild(div_);
-                            span_.classList.add("todoEvent");
                         }
                     }
                 }
@@ -335,25 +372,36 @@
                 else if (s_month === f_month) {
                     if ((s_month === Number(month_[1])) && (Number(month_[1]) === f_month)) { //month비교
                         if ((s_day <= Number(month_[2])) && (Number(month_[2] <= f_day))){ //date비교
-                            let div_ = document.createElement('div'); 
-                            let div_2 = document.createElement('div');
-                            let span_ = document.createElement('span');
-                            let aForEdit = document.createElement('a');
+                            // let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
+                            // let div_2 = document.createElement('div');
+                            // let span_ = document.createElement('span');
+                            // let aForEdit = document.createElement('a');
 
-                            span_.innerText = events_lists[i].content;
+                            // span_.innerText = events_lists[i].content;
+                            // expectedCost += events_lists[i].cost;
+
+                            // //이벤트 수정
+                            // aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
+                            // aForEdit.classList.add(`${events_lists[i].event_pk}`);
+                            // aForEdit.classList.add("aForEdit");
+
+                            // aForEdit.appendChild(div_2);
+                            // div_.appendChild(aForEdit);
+                            // div_2.appendChild(span_);
+
+                            // event_modal_content.appendChild(div_);
+                            // span_.classList.add("todoEvent");
+                            let div_ = document.createElement('div');
+                            templates = `
+                                <a href="/edit/${events_lists[i].event_pk}/" class="aForEdit">
+                                    <div>
+                                        <span class="todoEvent">${events_lists[i].content}</span>
+                                    </div>
+                                </a>                            
+                            `
+                            div_.innerHTML = templates;
                             expectedCost += events_lists[i].cost;
-
-                            //이벤트 수정
-                            aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
-                            aForEdit.classList.add(`${events_lists[i].event_pk}`);
-                            aForEdit.classList.add("aForEdit");
-
-                            aForEdit.appendChild(div_2);
-                            div_.appendChild(aForEdit);
-                            div_2.appendChild(span_);
-                            
                             event_modal_content.appendChild(div_);
-                            span_.classList.add("todoEvent");
                         }
                     }
                 }
@@ -530,11 +578,13 @@
         let spends_lists = JSON.parse('{{ spends_list|escapejs }}');
 
         //pastDay
-        for (let j=0; j<spends_lists.length; j++) {
-            for (let i = 0; i < past_day.length; i++) {
-                let y_m_d_ = present_year+present_month+past_day[i].innerText;
-                if (String(spends_lists[j].date) === y_m_d_){
-                   past_day[i].innerHTML = past_day[i].innerText + "★"
+        if (past_day) {
+            for (let j=0; j<spends_lists.length; j++) {
+                for (let i = 0; i < past_day.length; i++) {
+                    let y_m_d_ = present_year+present_month+past_day[i].innerText;
+                    if (String(spends_lists[j].date) === y_m_d_){
+                    past_day[i].innerHTML = past_day[i].innerText + "★"
+                    }
                 }
             }
         }
@@ -550,9 +600,11 @@
         }
 
         //present
-        for (let j=0; j<spends_lists.length; j++) {
-            if (String(spends_lists[j].date) === present_year+present_month+to_day.innerText){
-                to_day.innerHTML = to_day.innerText+"★"
+        if (to_day) {
+            for (let j=0; j<spends_lists.length; j++) {
+                if (String(spends_lists[j].date) === present_year+present_month+to_day.innerText){
+                    to_day.innerHTML = to_day.innerText+"★"
+                }
             }
         }
     }
