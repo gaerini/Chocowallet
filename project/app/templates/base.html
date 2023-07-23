@@ -5,7 +5,7 @@
     {% providers_media_js %}
     {% load static %}
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0"> <!-- 사용자 input 시 확대, 축소 못 하게 -->
     <link rel="stylesheet" type="text/css" href="{% static 'baseStyle.css' %}">
     {% block css %}
     {% endblock css %}
@@ -31,3 +31,5 @@
     </div>
 </body>
 </html>
+
+<script src="{% static 'js/base.js' %}"></script>
