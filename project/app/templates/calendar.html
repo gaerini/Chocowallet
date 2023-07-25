@@ -46,17 +46,11 @@
         <button class = "eventmenuclose">
             🙉
         </button>
-        <button class = "addEventBtn1">
-            +
-        </button>
     </div>
     <div class="option2">
         <button class="future-amount"></button>
         <button class = "eventmenuopen">
             🙈
-        </button>
-        <button class = "addEventBtn2">
-            +
         </button>
     </div>
 </div>
@@ -510,18 +504,6 @@
       dateInput.focus();
     });
 
-    const eventCategoryInput = document.getElementById('event_category');
-    const eventTitleInput = document.getElementById('event_title');
-    const eventCost = document.getElementById('event_cost');
-    const eventMemo = document.getElementById('event_memo');
-
-    eventCategoryInput.addEventListener("input", function () {
-        const selectedColor = eventCategoryInput.value;
-        Input.style.borderLeftColor = selectedColor;
-        eventCost.style.borderLeftColor = selectedColor;
-        eventMemo.style.borderLeftColor = selectedColor;
-    });
-
     //실제 지출 금액 적혀있는 날에 빨간 표시
     function whereIWriteSpend() {
         //며칠인지
@@ -562,6 +544,16 @@
             }
         }
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const eventCategory = document.getElementById('event_category');
+        const eventMemo = document.getElementById('event_memo');
+    
+        eventCategory.addEventListener('input', function() {
+            eventMemo.style.borderLeftColor = eventCategory.value;
+        });
+    });
+
 
 </script>
 <script src="{% static 'js/calendar.js' %}"></script>

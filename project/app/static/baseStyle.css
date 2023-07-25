@@ -1,3 +1,15 @@
 body {
     margin: 0;
 }
+
+* {
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: none;
+    -webkit-border-radius: 0;
+}
+
+.my-element {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
