@@ -51,6 +51,7 @@
         </button>
     </div>
     <div class="option2">
+        <button class="future-amount"></button>
         <button class = "eventmenuopen">
             🙈
         </button>
@@ -97,13 +98,8 @@
             </div>
             <div class="event_modal_content"></div>
             <div class="show_real_spend"></div>
-<<<<<<< HEAD
             <!-- <form action="http://miyeolsa.pythonanywhere.com/spend/" method="post" class="spend_form"> -->
             <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
-=======
-            <!-- <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form"> -->
-            <form action="http://miyeolsa.pythonanywhere.com/spend/" method="post" class="spend_form">
->>>>>>> 541a66db5c35a2171d54f128d6dd72a4ade23fdb
                 {% csrf_token %}
                 <div>
                     <input type="number" name="spend" id="real_spend" placeholder="실제 지출 금액" />
@@ -197,7 +193,7 @@
             },
         {%endfor%}
         ];
-        const realspends = [
+    const realspends = [
         {% for realspend in realSpends %}
             {
                 date: "{{realspend.date}}",
@@ -255,7 +251,12 @@
             let f_month = (new Date (events_lists[i]['finish_date'])).getMonth()+1;
             let s_day = (new Date (events_lists[i]['start_date'])).getDate(); //내가 작성한 일정의 시작 날짜
             let f_day = (new Date(events_lists[i]['finish_date'])).getDate();
+            let s_time = (new Date (events_lists[i]['start_date'])).getTime();
+            let f_time = (new Date(events_lists[i]['finish_date'])).getTime();
 
+            let gapTime = Math.abs(s_time - f_time);
+            gapTime = Math.ceil(gapTime/(1000*60*60*24)) + 1;
+            console.log(gapTime);
 
             //연도 비교
             if (s_year <= Number(month_[0]) && Number(month_[0]) <= f_year ) {
@@ -270,7 +271,7 @@
                         let aForEdit = document.createElement('a');
 
                         span_.innerText = events_lists[i].content;
-                        expectedCost += events_lists[i].cost;
+                        expectedCost += Math.ceil(events_lists[i].cost/gapTime);
 
                         //이벤트 수정
                         aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
@@ -295,7 +296,7 @@
                             let aForEdit = document.createElement('a');
 
                             span_.innerText = events_lists[i].content;
-                            expectedCost += events_lists[i].cost;
+                            expectedCost += Math.ceil(events_lists[i].cost/gapTime);
 
                             //이벤트 수정
                             aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
@@ -319,7 +320,7 @@
                             let aForEdit = document.createElement('a');
 
                             span_.innerText = events_lists[i].content;
-                            expectedCost += events_lists[i].cost;
+                            expectedCost += Math.ceil(events_lists[i].cost/gapTime);
 
                             //이벤트 수정
                             aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
@@ -346,7 +347,7 @@
                             let aForEdit = document.createElement('a');
 
                             span_.innerText = events_lists[i].content;
-                            expectedCost += events_lists[i].cost;
+                            expectedCost += Math.ceil(events_lists[i].cost/gapTime);
 
                             //이벤트 수정
                             aForEdit.href = "/edit/" + events_lists[i].event_pk + "/";
