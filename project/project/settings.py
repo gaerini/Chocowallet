@@ -161,3 +161,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 #로그인유지
 ACCOUNT_SESSION_REMEMBER = True
+
+# settings.py
+
+

@@ -39,7 +39,7 @@
             </a>
         </button>        
         <button id="userguide">
-            <a href="https://typical-spectacles-572.notion.site/2be0f8cc68d94f98bd93e7ca1568e58e?pvs=4">
+            <a href="https://typical-spectacles-572.notion.site/8f643ae1f0f246c59d0f715425852d74?pvs=4">
                 <img src="{% static 'onlylogo.png' %}" alt="only logo"/>사용자 가이드
             </a>
         </button>
@@ -49,9 +49,7 @@
     </div>
     <div class="option2">
         <button class="future-amount"></button>
-        <button class = "eventmenuopen">
-            🙈
-        </button>
+        <button class = "eventmenuopen">🙈</button>
     </div>
 </div>
 
@@ -548,11 +546,18 @@
     document.addEventListener("DOMContentLoaded", function() {
         const eventCategory = document.getElementById('event_category');
         const eventMemo = document.getElementById('event_memo');
-    
+        const eventCost = document.getElementById('event_cost');
+        const eventTitle = document.getElementById('event_title');
+        
         eventCategory.addEventListener('input', function() {
             eventMemo.style.borderLeftColor = eventCategory.value;
+            eventCost.style.borderLeftColor = eventCategory.value;
+            eventTitle.style.borderLeftColor = eventCategory.value;
         });
     });
+
+       
+    
 
 
 </script>

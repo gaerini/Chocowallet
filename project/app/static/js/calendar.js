@@ -558,3 +558,4 @@ function dayNumToChar(dayNum) {
     return "토";
   }
 }
+
