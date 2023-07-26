@@ -30,7 +30,7 @@ a {
 
 /*테이블 해드 부분 시작*/
 #monthmenubar {
-  width: 93vw; height: 10vh;
+  width: 93vw; height: 8vh;
   font-size: calc(2vw + 2vh); font-weight: bold;
   display: flex;
   align-items: center;
@@ -68,7 +68,7 @@ thead > #weekday > td {
 
 .line {
   position: relative;
-  top: 14.5vh;
+  top: 12.5vh;
   background-color: rgb(48, 47, 47);
   height: 2px; width: 92vw;
   left: 4vw; right: 4vw;
@@ -111,8 +111,8 @@ tbody tr td > div {
 /*옵션 부분 시작*/
 .momdiv3, .option2, .option1 {
   position: fixed;
-  bottom: 23vh;
-  right: 5vw;
+  bottom: 17vh;
+  right: 3vw;
   display: flex;
 }
 
@@ -178,7 +178,7 @@ tbody tr td > div {
 }
 
 .progress {
-  margin: 2vh 7.5vw 1vh 7.5vw;
+  margin: 1vh 7.5vw 1vh 7.5vw;
   height: 5vh;
   position: relative;
 }
@@ -204,13 +204,13 @@ tbody tr td > div {
   display: flex;
   flex-direction: column;
   width: 85vw;
-  margin: 0vh 7.5vw 3vh 7.5vw;
-  height: 10vh;
+  margin: 0vh 7.5vw 0.5vh 7.5vw;
+  height: 8vh;
 }
 
 .expected_cost,
 .spent_cost {
-  margin: 1vh 0vh 1vh 0vh;
+  margin: 0vh 0vh 1vh 0vh;
   display: flex;
   justify-content: space-between;
   text-align: center;
@@ -637,3 +637,10 @@ input[type="color"]::-webkit-color-swatch {
 
 /* 새로운 일정 추가하기 끝*/
 
+.option2 {
+  background-color: white;
+}
+
+.momdiv2 {
+  background-color: white;
+}
