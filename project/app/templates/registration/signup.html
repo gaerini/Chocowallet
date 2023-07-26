@@ -7,18 +7,21 @@
 
 {% block container %}
 <div class='signup'>
-    <form method='POST'>
+    <form method='POST' id="signform">
         <img id="signup_회원가입로고" src="{% static 'chocwallet_signuplogo.png' %}"/>
         {% csrf_token %}
         {% if error %}
         <p>{{error}}</p>
         {% endif %}
+        <div>
+            <p>회원가입</p>
+        </div>
         <div class='idpwInput'>
             <input type='text' name='id' id="아이디" placeholder="아이디">
             <input type='text' name='pw' id="비밀번호" placeholder="비밀번호">
         </div>
         <div class='SignBtn'>
-            <button type='submit' id="signup_회원가입" style="color: black";>회원가입</button>
+            <button type='submit' id="signup_회원가입" style="color: black";>가입하기</button>
         </div>
     </form>
 </div>
@@ -29,6 +32,20 @@
     <span> 또는 </span>
 </div>
 <div class="button">
-    <a href="{% url 'cover' %}" id="뒤로">뒤로가기</a>
+    <a href="{% url 'cover' %}" id="뒤로">로그인 하러가기</a>
 </div>
+<script>
+const signform = document.getElementById("signform");
+
+signform.addEventListener("submit", (event) => {
+    const idInput = document.getElementById("아이디");
+    const passInput = document.getElementById("비밀번호");
+
+    if (idInput.value.trim() === "" || passInput.value.trim() === "") {
+    event.preventDefault();
+
+    alert("아이디와 비밀번호를 정확히 입력해주세요");
+  }
+})
+</script>
 {% endblock container %}
