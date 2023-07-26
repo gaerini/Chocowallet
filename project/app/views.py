@@ -41,7 +41,9 @@ def signup(request):
         )
         auth.login(request, new_user, backend ="django.contrib.auth.backends.ModelBackend")
 
-        return redirect('cover')
+        welcome = "가입되었습니다!"
+        return render(request, 'cover.html', {'welcome': welcome})
+    
     return render(request, 'registration/signup.html')
 
 def cover(request):
@@ -99,7 +101,8 @@ def calendar(request, user_pk):
     spend_list_ = [spend.toDict() for spend in realSpends]
     spends_list = json.dumps(spend_list_)
     spendCount = json.dumps(realSpends.count())
-    print(spends_list)
+
+    print(events_list)
 
     return render(request, 'calendar.html', {"events":events, "events_list":events_list, "realSpends":realSpends, "spends_list":spends_list, "spendCount":spendCount, "first_thing":first_thing, "expected_cost":expected_cost, "sumForRealSpend":sumForRealSpend})
 

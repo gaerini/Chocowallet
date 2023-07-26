@@ -191,56 +191,69 @@ const monthSpan = document.querySelector("#calMonth");
 
 function costSum(today, lastDate) {
   sum = 0;
-  var futureSum = 0
+  var futureSum = 0;
   events.forEach(function (obj) {
     const month = Number(monthSpan.innerText);
     const eventStartDate = new Date(obj.start_date);
     const eventFinishDate = new Date(obj.finish_date);
-    const eventToday = today.getDate()
-    if (month == eventStartDate.getMonth() + 1 && month == eventFinishDate.getMonth() + 1) {
+    const eventToday = today.getDate();
+    if (
+      month == eventStartDate.getMonth() + 1 &&
+      month == eventFinishDate.getMonth() + 1
+    ) {
       sum = sum + obj.cost;
       if (eventToday <= eventStartDate.getDate()) {
         futureSum += obj.cost;
-      }
-      else if (eventToday > eventStartDate.getDate() && eventToday <= eventFinishDate.getDate()) {
+      } else if (
+        eventToday > eventStartDate.getDate() &&
+        eventToday <= eventFinishDate.getDate()
+      ) {
         let dayNum = eventFinishDate.getDate() - eventToday + 1;
-        let diff = Math.abs(eventStartDate.getTime() - eventFinishDate.getTime());
-        diff = Math.ceil(diff/(1000*60*60*24)) + 1;
-        futureSum = futureSum + Math.ceil(obj.cost/diff)*dayNum;
+        let diff = Math.abs(
+          eventStartDate.getTime() - eventFinishDate.getTime()
+        );
+        diff = Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
+        futureSum = futureSum + Math.ceil(obj.cost / diff) * dayNum;
       }
-    }
-    else if(month == eventStartDate.getMonth() + 1 && month != eventFinishDate.getMonth() + 1){
-      console.log('시작' + eventStartDate.getDate())
-      console.log('끝' + eventFinishDate.getDate())
+    } else if (
+      month == eventStartDate.getMonth() + 1 &&
+      month != eventFinishDate.getMonth() + 1
+    ) {
+      console.log("시작" + eventStartDate.getDate());
+      console.log("끝" + eventFinishDate.getDate());
       let diff = Math.abs(eventStartDate.getTime() - eventFinishDate.getTime());
-      diff = Math.ceil(diff/(1000*60*60*24)) + 1;
+      diff = Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
       let term = Math.abs(eventStartDate.getTime() - lastDate.getTime());
-      term = Math.ceil(term/(1000*60*60*24)) + 1;
-      sum = sum + Math.ceil(obj.cost/diff)*term;
+      term = Math.ceil(term / (1000 * 60 * 60 * 24)) + 1;
+      sum = sum + Math.ceil(obj.cost / diff) * term;
       if (eventToday <= eventStartDate.getDate()) {
         // let dayNum = term - (eventToday - eventStartDate.getDate());
         console.log(diff);
         console.log(term);
         // console.log(dayNum);
-        futureSum = futureSum + Math.ceil(obj.cost/diff)*term;
-      }
-      else if (eventToday > eventStartDate.getDate()) {
+        futureSum = futureSum + Math.ceil(obj.cost / diff) * term;
+      } else if (eventToday > eventStartDate.getDate()) {
         let dayNum = term - (eventToday - eventStartDate.getDate());
-        futureSum = futureSum + Math.ceil(obj.cost/diff)*dayNum;
+        futureSum = futureSum + Math.ceil(obj.cost / diff) * dayNum;
       }
-    }
-    else if (month != eventStartDate.getMonth() + 1 && month == eventFinishDate.getMonth() + 1){
+    } else if (
+      month != eventStartDate.getMonth() + 1 &&
+      month == eventFinishDate.getMonth() + 1
+    ) {
       let diff = Math.abs(eventStartDate.getTime() - eventFinishDate.getTime());
-      diff = Math.ceil(diff/(1000*60*60*24)) + 1;
-      const newFirstDate = new Date(`${eventFinishDate.getFullYear()}-${month}-1`);
+      diff = Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
+      const newFirstDate = new Date(
+        `${eventFinishDate.getFullYear()}-${month}-1`
+      );
       let term = Math.abs(eventFinishDate.getTime() - newFirstDate.getTime());
-      term = Math.ceil(term/(1000*60*60*24)) + 1;
-      sum = sum + Math.ceil(obj.cost/diff)*term;
+      term = Math.ceil(term / (1000 * 60 * 60 * 24)) + 1;
+      sum = sum + Math.ceil(obj.cost / diff) * term;
       if (eventToday <= eventFinishDate.getDate()) {
         let dayNum = eventFinishDate.getDate() - eventToday + 1;
-        futureSum = futureSum + Math.ceil(obj.cost/diff)*dayNum;
+        futureSum = futureSum + Math.ceil(obj.cost / diff) * dayNum;
       }
-  }});
+    }
+  });
 
   const expectedCost = document.querySelector("#expected_cost");
   const futureAmount = document.querySelector(".future-amount");
@@ -558,4 +571,3 @@ function dayNumToChar(dayNum) {
     return "토";
   }
 }
-
