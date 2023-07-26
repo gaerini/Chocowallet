@@ -124,6 +124,27 @@
     deleted.addEventListener("click", open_deletemodal);
     cancelbtn.addEventListener("click", close_deletemodal);
 
+    document.addEventListener("DOMContentLoaded", function() {
+        const eventCategory = document.getElementById('event_category_update');
+        const eventMemo = document.getElementById('event_memo_update');
+        const eventCost = document.getElementById('event_cost_update');
+        const eventContentUpdate = document.getElementById('event_content_update');
+        
+        function applyBorderColor() {
+            eventMemo.style.borderLeftColor = eventCategory.value;
+            eventCost.style.borderLeftColor = eventCategory.value;
+            eventContentUpdate.style.borderLeftColor = eventCategory.value;
+        }
+        
+        function delayedApplyBorderColor() {
+            setTimeout(applyBorderColor, 100); // 1초(1000ms) 후에 applyBorderColor 함수 실행
+        }
+
+        delayedApplyBorderColor();
+        
+        eventCategory.addEventListener('input', applyBorderColor);
+    });
+
 </script>
 
 {% endblock container %}

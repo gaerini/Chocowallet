@@ -27,8 +27,8 @@ tbody_.addEventListener("click", showEvent);
 
 //일정 추가하기 모달
 const modal2 = document.querySelector(".addEventModal");
-const openBtn2_ = document.querySelector(".addEventBtn1");
-const openBtn2_1 = document.querySelector(".addEventBtn2");
+// const openBtn2_ = document.querySelector(".addEventBtn1");
+// const openBtn2_1 = document.querySelector(".addEventBtn2");
 const closeBtn2 = document.querySelector(".close2");
 const modalbox = document.querySelector(".modalbox");
 
@@ -37,29 +37,30 @@ function closeAddEventModal() {
   modalbox.classList.remove("hidden");
 }
 
-openBtn2_.addEventListener("click", () => {
-  modal2.classList.remove("hidden2");
-});
+// openBtn2_.addEventListener("click", () => {
+//   modal2.classList.remove("hidden2");
+// });
 
-openBtn2_1.addEventListener("click", () => {
-  //모달열기
-  modal2.classList.remove("hidden2");
-  //시작 날짜, 끝날짜에 오늘 날짜 들어가게하기
-  const _date = new Date();
-  const year__ = _date.getFullYear();
-  const month__ = _date.getMonth() + 1;
-  const date__ = _date.getDate();
+// openBtn2_1.addEventListener("click", () => {
+//   //모달열기
+//   modal2.classList.remove("hidden2");
+//   //시작 날짜, 끝날짜에 오늘 날짜 들어가게하기
+//   const _date = new Date();
+//   const year__ = _date.getFullYear();
+//   const month__ = _date.getMonth() + 1;
+//   const date__ = _date.getDate();
 
-  const yy_mm_dd =
-    year__ +
-    "-" +
-    ("00" + month__.toString()).slice(-2) +
-    "-" +
-    ("00" + date__.toString()).slice(-2);
+//   const yy_mm_dd =
+//     year__ +
+//     "-" +
+//     ("00" + month__.toString()).slice(-2) +
+//     "-" +
+//     ("00" + date__.toString()).slice(-2);
 
-  document.querySelector("#event_date").value = yy_mm_dd;
-  document.querySelector("#event_finish_date").value = yy_mm_dd;
-});
+//   document.querySelector("#event_date").value = yy_mm_dd;
+//   document.querySelector("#event_finish_date").value = yy_mm_dd;
+//   console.log(yy_mm_dd);
+// });
 
 closeBtn2.addEventListener("click", closeAddEventModal);
 
@@ -69,6 +70,10 @@ const form = document.getElementById("event_form");
 form.addEventListener("submit", (event) => {
   const titleInput = document.getElementById("event_title");
   const costInput = document.getElementById("event_cost");
+  const eventCategory = document.getElementById('event_category'); 
+
+  const aForEdit = document.getElementById('aForEdit');
+  aForEdit.style.borderLeftColor = eventCategory.value;
 
   //할일만 안적은 경우
   if (titleInput.value.trim() === "" && costInput.value.trim() != "") {
@@ -124,4 +129,5 @@ openBtn3.addEventListener("click", () => {
   document.querySelector("#event_finish_date").value = y_m_dkey;
 
   modalbox.classList.add("hidden");
+
 });

@@ -118,7 +118,7 @@ tbody tr td > div {
 
 .momdiv3 button {
   all: unset;
-  width: calc(3.5vw + 3.5vh);
+  width: auto;
   height: calc(3.5vw + 3.5vh);
   font-weight: 900;
   border: 1px solid rgba(0,0,0,0.15);
@@ -132,6 +132,14 @@ tbody tr td > div {
 
 .momdiv3 #logout {
   width: 17vw;
+}
+
+.option2 > .future-amount {
+  font-size: calc(1.2vw + 1.2vh);
+  align-items: center;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  min-width: calc(3.5vw + 3.5vh);
 }
 
 .momdiv3 a {
@@ -157,7 +165,7 @@ tbody tr td > div {
   z-index: 0;
   position: fixed;
   bottom: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  border-top: 1px solid rgba(171,227,255,0.75);
 }
 
 .progress {
