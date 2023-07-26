@@ -70,10 +70,6 @@ const form = document.getElementById("event_form");
 form.addEventListener("submit", (event) => {
   const titleInput = document.getElementById("event_title");
   const costInput = document.getElementById("event_cost");
-  const eventCategory = document.getElementById('event_category'); 
-
-  const aForEdit = document.getElementById('aForEdit');
-  aForEdit.style.borderLeftColor = eventCategory.value;
 
   //할일만 안적은 경우
   if (titleInput.value.trim() === "" && costInput.value.trim() != "") {

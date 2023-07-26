@@ -137,10 +137,19 @@ tbody tr td > div {
 .option2 > .future-amount {
   font-size: calc(1.2vw + 1.2vh);
   align-items: center;
-  padding-left: 1vw;
-  padding-right: 1vw;
+  padding-left: 2vw;
+  padding-right: 2vw;
   min-width: calc(3.5vw + 3.5vh);
 }
+
+.option2 > .eventmenuopen {
+  min-width: 10vw;
+}
+
+.option1 > .eventmenuclose {
+  min-width: 10vw;
+}
+
 
 .momdiv3 a {
   all: unset;
