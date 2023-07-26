@@ -23,7 +23,8 @@ class Event(models.Model):
             'finish_date': self.finish_date.isoformat(),
             'cost' : self.cost,
             'event_pk': self.pk,
-            'memo' : self.memo
+            'memo' : self.memo,
+            'category': self.category,
         }
 
 class Spend(models.Model):

@@ -17,8 +17,8 @@
                 <p>{{error}}</p>
                 {% endif %}
                 <div class='idpwInput'>
-                    <input class="id" type='text' name='id' id="아이디" placeholder="아이디">
-                    <input class="passward" type='text' name='pw' id="비밀번호" placeholder="비밀번호">
+                    <input type='text' name='id' class="id" id="아이디" placeholder="아이디">
+                    <input type='text' name='pw' class="passward" id="비밀번호" placeholder="비밀번호">
                 </div>
                 <div class='loginBtn'>
                     <button type='submit' id="로그인">로그인</button>
@@ -32,6 +32,7 @@
             <a href="{% url 'signup' %}" id="회원가입">회원가입하러 가기</a>
         </div>
     </div>
+
     <script>
         //로그인 유지
         const loginBtn = document.querySelector(".loginBtn");
