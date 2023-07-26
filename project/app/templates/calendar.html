@@ -39,7 +39,7 @@
             </a>
         </button>        
         <button id="userguide">
-            <a href="https://typical-spectacles-572.notion.site/2be0f8cc68d94f98bd93e7ca1568e58e?pvs=4">
+            <a href="https://typical-spectacles-572.notion.site/8f643ae1f0f246c59d0f715425852d74?pvs=4">
                 <img src="{% static 'onlylogo.png' %}" alt="only logo"/>사용자 가이드
             </a>
         </button>
@@ -48,9 +48,8 @@
         </button>
     </div>
     <div class="option2">
-        <button class = "eventmenuopen">
-            🙈
-        </button>
+        <button class="future-amount"></button>
+        <button class = "eventmenuopen">🙈</button>
     </div>
 </div>
 
@@ -91,8 +90,8 @@
             </div>
             <div class="event_modal_content"></div>
             <div class="show_real_spend"></div>
-            <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
             <!-- <form action="http://miyeolsa.pythonanywhere.com/spend/" method="post" class="spend_form"> -->
+            <form action="http://127.0.0.1:8000/spend/" method="post" class="spend_form">
                 {% csrf_token %}
                 <div>
                     <input type="number" name="spend" id="real_spend" placeholder="실제 지출 금액" />
@@ -186,7 +185,7 @@
             },
         {%endfor%}
         ];
-        const realspends = [
+    const realspends = [
         {% for realspend in realSpends %}
             {
                 date: "{{realspend.date}}",
@@ -244,7 +243,12 @@
             let f_month = (new Date (events_lists[i]['finish_date'])).getMonth()+1;
             let s_day = (new Date (events_lists[i]['start_date'])).getDate(); //내가 작성한 일정의 시작 날짜
             let f_day = (new Date(events_lists[i]['finish_date'])).getDate();
+            let s_time = (new Date (events_lists[i]['start_date'])).getTime();
+            let f_time = (new Date(events_lists[i]['finish_date'])).getTime();
 
+            let gapTime = Math.abs(s_time - f_time);
+            gapTime = Math.ceil(gapTime/(1000*60*60*24)) + 1;
+            console.log(gapTime);
 
             //연도 비교
             if (s_year <= Number(month_[0]) && Number(month_[0]) <= f_year ) {
@@ -263,7 +267,7 @@
                             </a>
                         `
                         div_.innerHTML = templates;
-                        expectedCost += events_lists[i].cost;
+                        expectedCost += Math.ceil(events_lists[i].cost/gapTime);
                         event_modal_content.appendChild(div_);
                         
                         // let div_ = document.createElement('div'); // modal에 event 이름, 금액, 삭제 버튼 감싸는 div tag
@@ -301,7 +305,7 @@
                                 </a>
                             `
                             div_.innerHTML = templates;
-                            expectedCost += events_lists[i].cost;
+                            expectedCost += Math.ceil(events_lists[i].cost/gapTime);
                             event_modal_content.appendChild(div_);
 
                         }
@@ -320,7 +324,7 @@
                                 </a>
                             `
                             div_.innerHTML = templates;
-                            expectedCost += events_lists[i].cost;
+                            expectedCost += Math.ceil(events_lists[i].cost/gapTime);
                             event_modal_content.appendChild(div_);
                         }
                     }
@@ -340,7 +344,7 @@
                                 </a>                            
                             `
                             div_.innerHTML = templates;
-                            expectedCost += events_lists[i].cost;
+                            expectedCost += Math.ceil(events_lists[i].cost/gapTime);
                             event_modal_content.appendChild(div_);
                         }
                     }
@@ -540,11 +544,18 @@
     document.addEventListener("DOMContentLoaded", function() {
         const eventCategory = document.getElementById('event_category');
         const eventMemo = document.getElementById('event_memo');
-    
+        const eventCost = document.getElementById('event_cost');
+        const eventTitle = document.getElementById('event_title');
+        
         eventCategory.addEventListener('input', function() {
             eventMemo.style.borderLeftColor = eventCategory.value;
+            eventCost.style.borderLeftColor = eventCategory.value;
+            eventTitle.style.borderLeftColor = eventCategory.value;
         });
     });
+
+       
+    
 
 
 </script>

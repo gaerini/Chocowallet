@@ -50,7 +50,6 @@ function buildCalendar() {
       }
     }
   }
-  console.log(currentMonth);
 
   while (tbody_Calendar.rows.length > 0) {
     // 이전 출력결과가 남아있는 경우 초기화
@@ -85,7 +84,6 @@ function buildCalendar() {
     }
 
     if (lastDayOfMonth <= 6 && nowDay.getDate() == lastDate.getDate()) {
-      //console.log("go!");
       for (let fillDay = 0; fillDay < 6 - lastDayOfMonth; fillDay++) {
         let newColumn = nowRow.insertCell();
       }
@@ -104,7 +102,6 @@ function buildCalendar() {
       // 지난날인 경우
       newDIV.className = "pastDay";
       newDIV.onclick = function () {
-        //console.log(nowDay);
         modalDate.innerHTML = `${year}-${modal_Month + 1}-${modal_Date}`;
         modalDay.innerHTML = `(${dayNumToChar(dayNum)})`;
         modalBox.classList.remove("hidden");
@@ -137,7 +134,7 @@ function buildCalendar() {
   if (currentMonth.length > 0) {
     const colorStart = eventColoring(currentMonth, month, lastDate);
   }
-  const makeSum = costSum(firstDate, lastDate);
+  const makeSum = costSum(today, lastDate);
   const makeRealSum = costRealSum();
   const makeRatio = costRatio();
 
@@ -192,45 +189,77 @@ var sum = 0;
 var realsum = 0;
 const monthSpan = document.querySelector("#calMonth");
 
-function costSum(firstDate, lastDate) {
+function costSum(today, lastDate) {
   sum = 0;
+  var futureSum = 0;
   events.forEach(function (obj) {
     const month = Number(monthSpan.innerText);
     const eventStartDate = new Date(obj.start_date);
     const eventFinishDate = new Date(obj.finish_date);
+    const eventToday = today.getDate();
     if (
       month == eventStartDate.getMonth() + 1 &&
       month == eventFinishDate.getMonth() + 1
     ) {
       sum = sum + obj.cost;
+      if (eventToday <= eventStartDate.getDate()) {
+        futureSum += obj.cost;
+      } else if (
+        eventToday > eventStartDate.getDate() &&
+        eventToday <= eventFinishDate.getDate()
+      ) {
+        let dayNum = eventFinishDate.getDate() - eventToday + 1;
+        let diff = Math.abs(
+          eventStartDate.getTime() - eventFinishDate.getTime()
+        );
+        diff = Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
+        futureSum = futureSum + Math.ceil(obj.cost / diff) * dayNum;
+      }
     } else if (
       month == eventStartDate.getMonth() + 1 &&
       month != eventFinishDate.getMonth() + 1
     ) {
+      console.log("시작" + eventStartDate.getDate());
+      console.log("끝" + eventFinishDate.getDate());
       let diff = Math.abs(eventStartDate.getTime() - eventFinishDate.getTime());
-      diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      diff = Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
       let term = Math.abs(eventStartDate.getTime() - lastDate.getTime());
-      term = Math.ceil(term / (1000 * 60 * 60 * 24));
+      term = Math.ceil(term / (1000 * 60 * 60 * 24)) + 1;
       sum = sum + Math.ceil(obj.cost / diff) * term;
+      if (eventToday <= eventStartDate.getDate()) {
+        // let dayNum = term - (eventToday - eventStartDate.getDate());
+        console.log(diff);
+        console.log(term);
+        // console.log(dayNum);
+        futureSum = futureSum + Math.ceil(obj.cost / diff) * term;
+      } else if (eventToday > eventStartDate.getDate()) {
+        let dayNum = term - (eventToday - eventStartDate.getDate());
+        futureSum = futureSum + Math.ceil(obj.cost / diff) * dayNum;
+      }
     } else if (
       month != eventStartDate.getMonth() + 1 &&
       month == eventFinishDate.getMonth() + 1
     ) {
       let diff = Math.abs(eventStartDate.getTime() - eventFinishDate.getTime());
-      diff = Math.ceil(diff / (1000 * 60 * 60 * 24));
+      diff = Math.ceil(diff / (1000 * 60 * 60 * 24)) + 1;
       const newFirstDate = new Date(
         `${eventFinishDate.getFullYear()}-${month}-1`
       );
       let term = Math.abs(eventFinishDate.getTime() - newFirstDate.getTime());
-      term = Math.ceil(term / (1000 * 60 * 60 * 24));
+      term = Math.ceil(term / (1000 * 60 * 60 * 24)) + 1;
       sum = sum + Math.ceil(obj.cost / diff) * term;
-      //console.log(newFirstDate);
+      if (eventToday <= eventFinishDate.getDate()) {
+        let dayNum = eventFinishDate.getDate() - eventToday + 1;
+        futureSum = futureSum + Math.ceil(obj.cost / diff) * dayNum;
+      }
     }
   });
 
   const expectedCost = document.querySelector("#expected_cost");
+  const futureAmount = document.querySelector(".future-amount");
 
   expectedCost.innerText = sum.toLocaleString() + "원";
+  futureAmount.innerText = futureSum.toLocaleString() + "원";
 }
 
 function costRealSum() {
@@ -266,7 +295,7 @@ function costRatio() {
 
 function eventColoring(currentMonth, month, lastDate) {
   for (let i = 0; i < currentMonth.length; i++) {
-    //console.log(currentMonth[i].start_date.getMonth());
+    // console.log(currentMonth[i].start_date.getMonth());
     var eventRowIdxStart = 0;
     var eventRowIdxFinish = 0;
     var eventRowIdx = 0;
@@ -303,7 +332,7 @@ function eventColoring(currentMonth, month, lastDate) {
       currentMonth[i].finish_date.getMonth() == month &&
       currentMonth[i].start_date.getMonth() == month
     ) {
-      //console.log(currentMonth[i].detail);
+      // console.log(currentMonth[i].detail);
       const writeEventDay = parseInt(
         (currentMonth[i].start_date.getDate() +
           currentMonth[i].finish_date.getDate()) /
@@ -321,11 +350,8 @@ function eventColoring(currentMonth, month, lastDate) {
         initCheckIdx.toString() +
           currentMonth[i].finish_date.getDate().toString()
       );
-      //console.log(checkEventStart.innerText);
-      //console.log(checkEventFinish.innerText);
       if (checkEventStart.style.backgroundColor == "") {
         eventRowIdxStart = initCheckIdx;
-        //console.log(eventRowIdxStart);
       } else {
         while (checkEventStart.style.backgroundColor != "") {
           if (initCheckIdx >= 5) {
@@ -337,17 +363,13 @@ function eventColoring(currentMonth, month, lastDate) {
               currentMonth[i].start_date.getDate().toString()
           );
           initCheckIdx++;
-          //console.log(checkEventStart.style.backgroundColor);
-          //console.log(initCheckIdx - 1);
         }
         eventRowIdxStart = initCheckIdx - 1;
-        //console.log(eventRowIdxStart);
       }
 
       initCheckIdx = 0;
       if (checkEventFinish.style.backgroundColor == "") {
         eventRowIdx = initCheckIdx;
-        //console.log(eventRowIdxFinish);
       } else {
         while (checkEventFinish.style.backgroundColor != "") {
           if (initCheckIdx >= 5) {
@@ -359,10 +381,8 @@ function eventColoring(currentMonth, month, lastDate) {
               currentMonth[i].finish_date.getDate().toString()
           );
           initCheckIdx++;
-          //onsole.log(initCheckIdx - 1);
         }
         eventRowIdxFinish = initCheckIdx - 1;
-        //console.log(eventRowIdxFinish);
       }
 
       eventRowIdx = Math.max(eventRowIdxStart, eventRowIdxFinish);
@@ -372,7 +392,6 @@ function eventColoring(currentMonth, month, lastDate) {
       currentMonth[i].finish_date.getMonth() == month + 1 &&
       currentMonth[i].start_date.getMonth() == month
     ) {
-      //console.log(currentMonth[i].detail);
       const writeEventDay = parseInt(
         (currentMonth[i].start_date.getDate() + lastDate.getDate()) / 2
       );
@@ -387,11 +406,8 @@ function eventColoring(currentMonth, month, lastDate) {
       var checkEventFinish = document.getElementById(
         initCheckIdx.toString() + lastDate.getDate().toString()
       );
-      //console.log(checkEventStart.innerText);
-      //console.log(checkEventFinish.innerText);
       if (checkEventStart.style.backgroundColor == "") {
         eventRowIdxStart = initCheckIdx;
-        //console.log(eventRowIdxStart);
       } else {
         while (checkEventStart.style.backgroundColor != "") {
           if (initCheckIdx >= 5) {
@@ -403,17 +419,13 @@ function eventColoring(currentMonth, month, lastDate) {
               currentMonth[i].start_date.getDate().toString()
           );
           initCheckIdx++;
-          //console.log(checkEventStart.style.backgroundColor);
-          //console.log(initCheckIdx - 1);
         }
         eventRowIdxStart = initCheckIdx - 1;
-        //console.log(eventRowIdxStart);
       }
 
       initCheckIdx = 0;
       if (checkEventFinish.style.backgroundColor == "") {
         eventRowIdx = initCheckIdx;
-        //console.log(eventRowIdxFinish);
       } else {
         while (checkEventFinish.style.backgroundColor != "") {
           if (initCheckIdx >= 5) {
@@ -424,10 +436,8 @@ function eventColoring(currentMonth, month, lastDate) {
             initCheckIdx.toString() + lastDate.getDate().toString()
           );
           initCheckIdx++;
-          //console.log(initCheckIdx - 1);
         }
         eventRowIdxFinish = initCheckIdx - 1;
-        //console.log(eventRowIdxFinish);
       }
 
       eventRowIdx = Math.max(eventRowIdxStart, eventRowIdxFinish);
@@ -453,7 +463,6 @@ function eventColoring(currentMonth, month, lastDate) {
       currentMonth[i].finish_date.getMonth() == month &&
       currentMonth[i].start_date.getMonth() == month - 1
     ) {
-      //console.log(currentMonth[i].detail);
       const writeEventDay = parseInt(
         (1 + currentMonth[i].finish_date.getDate()) / 2
       );
@@ -468,11 +477,8 @@ function eventColoring(currentMonth, month, lastDate) {
         initCheckIdx.toString() +
           currentMonth[i].finish_date.getDate().toString()
       );
-      //console.log(checkEventStart.innerText);
-      //console.log(checkEventFinish.innerText);
       if (checkEventStart.style.backgroundColor == "") {
         eventRowIdxStart = initCheckIdx;
-        //console.log(eventRowIdxStart);
       } else {
         while (checkEventStart.style.backgroundColor != "") {
           if (initCheckIdx >= 5) {
@@ -483,17 +489,13 @@ function eventColoring(currentMonth, month, lastDate) {
             initCheckIdx.toString() + "1"
           );
           initCheckIdx++;
-          //console.log(checkEventStart.style.backgroundColor);
-          //console.log(initCheckIdx - 1);
         }
         eventRowIdxStart = initCheckIdx - 1;
-        //console.log(eventRowIdxStart);
       }
 
       initCheckIdx = 0;
       if (checkEventFinish.style.backgroundColor == "") {
         eventRowIdx = initCheckIdx;
-        //console.log(eventRowIdxFinish);
       } else {
         while (checkEventFinish.style.backgroundColor != "") {
           if (initCheckIdx >= 5) {
@@ -505,10 +507,8 @@ function eventColoring(currentMonth, month, lastDate) {
               currentMonth[i].finish_date.getDate().toString()
           );
           initCheckIdx++;
-          //console.log(initCheckIdx - 1);
         }
         eventRowIdxFinish = initCheckIdx - 1;
-        //console.log(eventRowIdxFinish);
       }
 
       eventRowIdx = Math.max(eventRowIdxStart, eventRowIdxFinish);
