@@ -7,7 +7,7 @@
 
 {% block container %}
 <div class='signup'>
-    <form method='POST'>
+    <form method='POST' id="signform">
         <img id="signup_회원가입로고" src="{% static 'chocwallet_signuplogo.png' %}"/>
         {% csrf_token %}
         {% if error %}
@@ -34,4 +34,18 @@
 <div class="button">
     <a href="{% url 'cover' %}" id="뒤로">로그인 하러가기</a>
 </div>
+<script>
+const signform = document.getElementById("signform");
+
+signform.addEventListener("submit", (event) => {
+    const idInput = document.getElementById("아이디");
+    const passInput = document.getElementById("비밀번호");
+
+    if (idInput.value.trim() === "" || passInput.value.trim() === "") {
+    event.preventDefault();
+
+    alert("아이디와 비밀번호를 정확히 입력해주세요");
+  }
+})
+</script>
 {% endblock container %}
