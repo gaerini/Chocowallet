@@ -259,7 +259,7 @@ function costSum(today, lastDate) {
   const futureAmount = document.querySelector(".future-amount");
 
   expectedCost.innerText = sum.toLocaleString() + "원";
-  futureAmount.innerText = futureSum.toLocaleString() + "원";
+  futureAmount.innerText = '앞으로 ' + futureSum.toLocaleString() + "원 쓸거당~!";
 }
 
 function costRealSum() {
