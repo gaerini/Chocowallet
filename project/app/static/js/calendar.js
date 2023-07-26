@@ -79,7 +79,7 @@ function buildCalendar() {
       let testEvent = document.createElement("div");
       testEvent.setAttribute("id", _ + nowDay.getDate().toString());
 
-      testEvent.style.height = "1.8vh";
+      testEvent.style.height = "1.6vh";
       nowColumn.appendChild(testEvent);
     }
 
